@@ -1,3 +1,3 @@
-class FighterController < ActionController::Base
+class FighterController < ApplicationController
 
 end

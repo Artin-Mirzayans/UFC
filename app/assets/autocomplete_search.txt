@@ -1,0 +1,9 @@
+<div data-controller="events">
+  <%= form_with url: "/create_event/search", format: :turbo_stream, method: :post, data: { "events-target": "searchForm" } do |form| %>
+    <%= form.label :search_query, "Search for:" %>
+    <%= form.text_field :search_query, data: { "events-target": "searchInput", action: "input->events#search" }  %>
+  <% end %>
+
+  Results:
+  <div data-events-target="results" id="search_results"></div>
+</div>

@@ -1,2 +1,9 @@
 <h1>Create Event</h1>
 
+<%= form_with do |form| %>
+  <%= form.text_area :name, size: "35x1" %>
+  <br>
+  <%= form.date_field :date %>
+
+
+<% end %>
