@@ -4,19 +4,24 @@ class EventsController < ApplicationController
     end
 
     def new
-      if params[:search_query].present?
-        @fighters = Fighter.where("name ilike ?", "%#{params[:search_query]}%")
-      else
-        @fighters = Fighter.all.limit(5)
-      end
-  
-      respond_to do |format|
-        if params[:search_query].present?
-          format.turbo_stream { render turbo_stream: turbo_stream.update('search_results', partial: 'events/search_result') }
-        else
-          format.html { render :new }
+        @event = Event.new
+
+    end
+
+    def create
+        @event = Event.new(event_params)
+        if @event.save
+          redirect_to root_path
+
+        else 
+        render :new
+         
         end
-      end
+    end
+
+    private
+    def event_params
+      params.require(:event).permit(:name, :date)
     end
 
 end

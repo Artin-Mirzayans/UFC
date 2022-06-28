@@ -1,9 +1,9 @@
-<h1>Create Event</h1>
+<h1>Add Event</h1>
 
-<%= form_with do |form| %>
+<%= form_with model: @event, url: "/add_event", method: :post do |form| %>
   <%= form.text_area :name, size: "35x1" %>
-  <br>
+  <br><br>
   <%= form.date_field :date %>
-
-
+  <br><br>
+  <%= form.submit "Add Event" %>
 <% end %>
