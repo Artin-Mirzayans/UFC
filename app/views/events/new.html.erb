@@ -1,9 +1,20 @@
 <h1>Add Event</h1>
 
-<%= form_with model: @event, url: "/add_event", method: :post do |form| %>
+<%= form_with model: @event, url: "/add_event", data: { turbo:false }, method: :post do |form| %>
+    <% if @event.errors.any?%>
+        <% @event.errors.full_messages.each do |message|%>
+        <div><%= message%></div>
+        <% end %>
+    <% end %>
+
+  <%= form.label :name, "Name: " %>
   <%= form.text_area :name, size: "35x1" %>
-  <br><br>
+  <br>
+  <%= form.label :location, "Location: " %>
+  <%= form.text_area :location, size: "35x1" %>
+  <br>
+  <%= form.label :date, "Date: " %>
   <%= form.date_field :date %>
-  <br><br>
+  <br>
   <%= form.submit "Add Event" %>
 <% end %>
