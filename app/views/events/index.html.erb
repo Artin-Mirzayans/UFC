@@ -3,10 +3,13 @@
 <h1>Home</h1>
 
 <% if current_user %>
-<p><%=current_user.email%></p>
-<%= button_to("Add Event", new_event_path, method: :get) %>
-<%= button_to("Log Out", destroy_user_session_path, method: :delete) %>
-
+  <% @event.each do |event| %>
+  <div class="event-name">
+  <%= link_to event do %>
+    <%= event.name %>
+    </div>
+  <% end %>
+<% end %>
 
 <% else %>
     <p>You are not signed in.</p>

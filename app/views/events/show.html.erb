@@ -1,0 +1,14 @@
+<div>
+<%= @event.name%>
+<br>
+<%= @event.location %>
+<br>
+<%= @event.date %>
+</div>
+
+<%if current_user.role == 'moderator'%>
+    <p>HI I AM MODERATOR</p>
+    
+
+<%end%>
+
