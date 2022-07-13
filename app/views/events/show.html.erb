@@ -9,6 +9,16 @@
 <%if current_user.role == 'moderator'%>
     <p>HI I AM MODERATOR</p>
     
+    <div id="options" data-controller="events">
+  <h1>Toggle Visibility</h1>
+  
+  <button data-action="events#showTargets">Show All Elements</button>
+  <button data-action="events#hideTargets">Hide All Elements</button>
+  <button data-action="events#toggleTargets">Toggle Element Visibility</button>
+    
+  <p data-events-target="hideable" hidden>The Flamboyent Thing #1<p/>
+  <p data-events-target="hideable" hidden>The Slightly Stealthy Thing #2<p/>
+</div>
 
 <%end%>
 

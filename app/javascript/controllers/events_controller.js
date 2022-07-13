@@ -3,7 +3,7 @@ import { Controller } from "@hotwired/stimulus"
 // Connects to data-controller="events"
 export default class extends Controller {
   // DEFINES WHAT HTML TAGS WE NEED TO TARGET SO WE CAN READ/UPDATE/MODIFY THEM
-  static targets = [ "searchInput", "searchForm", "results" ]
+  static targets = [ "searchInput", "searchForm", "results", "hideable" ]
 
   // Initialize method, happens on load
   connect() {
@@ -18,4 +18,23 @@ export default class extends Controller {
       this.resultsTarget.textContent = ""
     }
   }
-}
+
+  showTargets() {
+    this.hideableTargets.forEach(el => {
+      el.hidden = false
+    });
+  }
+
+  hideTargets() {
+    this.hideableTargets.forEach(el => {
+      el.hidden = true
+    });
+  }
+
+  toggleTargets() {
+    this.hideableTargets.forEach((el) => {
+      el.hidden = !el.hidden
+    });
+  }
+  
+} // class
