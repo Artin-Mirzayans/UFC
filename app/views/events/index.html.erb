@@ -4,9 +4,9 @@
 
 <% if current_user %>
   <% @event.each do |event| %>
-  <div class="event-name">
-  <%= link_to event do %>
-    <%= event.name %>
+    <div class="event-name">
+      <%= link_to event_path(event.id) do %>
+      <%= event.name %>
     </div>
   <% end %>
 <% end %>
