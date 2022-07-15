@@ -20,7 +20,17 @@
   <p data-events-target="hideable" hidden>The Slightly Stealthy Thing #2<p/>
 </div>
 
-<%= link_to "Add Fight", new_fight_path%>
+<%= button_to('Add Fight', new_fight_path, method: "get") %>
 
 <%end%>
+
+<% @fights.each do |fight| %>
+    <div class="fight-name">
+      <%= fight.f1 %> vs <%= fight.f2 %>
+      <%= button_to('Update', edit_fight_path(@event.id, fight.id),
+          method: "get") %>
+      <%= button_to('Delete', delete_fight_path(fight.id),
+          method: "delete") %>
+    </div>
+  <% end %>
 

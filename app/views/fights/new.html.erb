@@ -12,3 +12,13 @@
   <br>
   <%= form.submit "Add Fight" %>
 <% end %>
+
+<div data-controller="fights">
+  <%= form_with url: search_fight_path(@event_id), format: :turbo_stream, method: :post, data: { "fights-target": "searchForm" } do |form| %>
+    <%= form.label :search_query, "Search for:" %>
+    <%= form.text_field :search_query, data: { "fights-target": "searchInput", action: "input->fights#search" }  %>
+  <% end %>
+
+  Results:
+  <div data-events-target="results" id="search_results"></div>
+</div>

@@ -1,6 +1,6 @@
 <h1>Add Event</h1>
 
-<%= form_with model: @event, url: "/add_event", data: { turbo:false }, method: :post do |form| %>
+<%= form_with model: @event, url: "/event/add", data: { turbo:false }, method: :post do |form| %>
     <% if @event.errors.any?%>
         <% @event.errors.full_messages.each do |message|%>
         <div><%= message%></div>

@@ -11,7 +11,6 @@ class EventsController < ApplicationController
 
     def create
       @event = Event.new(event_params)
-      print params
 
       if @event.save 
         redirect_to root_path
@@ -28,6 +27,7 @@ class EventsController < ApplicationController
 
     def show
       @event = Event.find(params[:event_id])
+      @fights = @event.fights
     end
 
 
