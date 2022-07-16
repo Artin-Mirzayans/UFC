@@ -10,11 +10,13 @@ Rails.application.routes.draw do
   post "/event/:event_id/fights/add", to: "fights#create", as: :create_fight
   post "/event/:event_id/fights/search", to: "fights#search", as: :search_fight
 
+  post "event/:event_id/fight/:fight_id/up", to: "fights#up", as: :fight_up
+  post "event/:event_id/fight/:fight_id/down", to: "fights#down", as: :fight_down
 
   get "/event/:event_id/fight/:fight_id/update", to: "fights#edit", as: :edit_fight
   patch "/event/:event_id/fight/:fight_id/update", to: "fights#update", as: :update_fight
 
-  delete "fight/:fight_id/delete/", to: "fights#destroy", as: :delete_fight
+  delete "fight/:fight_id/delete", to: "fights#destroy", as: :delete_fight
 
   devise_for :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

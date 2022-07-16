@@ -1,0 +1,15 @@
+<div id="fights">
+    <% @fights.each do |fight| %>
+        <div class="<%= dom_id fight %>">
+        <br>
+            <%= fight.f1 %> vs <%= fight.f2 %>
+                <% if current_user.role == 'moderator' %>
+                    <%= button_to('Up', fight_up_path(@event.id, fight.id), method: "post") %>
+                    <%= button_to('Down', fight_down_path(@event.id, fight.id), method: "post") %>
+                    <%= button_to('Update', edit_fight_path(@event.id, fight.id), method: "get") %>
+                    <%= button_to('Delete', delete_fight_path(fight.id), method: "delete") %>
+                <% end %>
+        </div>
+    <% end %>
+</div>
+

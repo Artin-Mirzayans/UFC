@@ -1,5 +1,5 @@
 class Event < ApplicationRecord
-  has_many :fights
+  has_many :fights, -> {order(position: :asc)}
   validates :name, presence: true
   validates :location, presence: true
   validates :date, presence: true

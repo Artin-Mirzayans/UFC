@@ -30,6 +30,11 @@ class EventsController < ApplicationController
       @fights = @event.fights
     end
 
+    private
+    def event_params
+      params.require(:event).permit(:name, :location, :date)
+    end
+
 
 end
 
