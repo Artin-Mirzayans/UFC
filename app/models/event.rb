@@ -3,10 +3,12 @@ class Event < ApplicationRecord
   validates :name, presence: true
   validates :location, presence: true
   validates :date, presence: true
+
+  enum role: [:upcoming, :inprogress, :concluded]
   after_initialize :set_default_status, :if => :new_record?
 
 def set_default_status
-  self.status ||= "Upcoming"
+  self.status ||= :upcoming
 end
 
 end

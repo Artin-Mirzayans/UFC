@@ -11,9 +11,10 @@ class FightsController < ApplicationController
       @fight = @event.fights.new(fight_params)
 
       if @fight.save
-        redirect_to event_path(params[:event_id])
+        redirect_to @event
       
       else
+        @event_id = params[:event_id]
         render :new
 
       end
@@ -75,10 +76,11 @@ class FightsController < ApplicationController
   end
 
   def update
+    @event = Event.find(params[:event_id])
     @fight = Fight.find(params[:fight_id])
 
     if @fight.update(fight_params)
-      redirect_to event_path(params[:event_id])
+      redirect_to @event
     else
       render :edit, status: :unprocessable_entity
     end
@@ -86,9 +88,11 @@ class FightsController < ApplicationController
 
   def destroy
     @fight = Fight.find(params[:fight_id])
+    @event = Event.find(@fight.event_id)
+
     @fight.destroy
 
-    redirect_to event_path(params[:event_id])
+    redirect_to @event
   end
 
   private

@@ -7,10 +7,12 @@
 <br><br>
 
 <%if current_user.role == 'moderator'%>
-    <%= button_to('Add Fight', new_fight_path, method: "get") %>
+    <%= button_to('Add Fight', new_fight_path(@event.id), method: "get") %>
 <%end%>
 
 <br>
+
+
 
 <%= render partial: "fights/fight"%>
 
