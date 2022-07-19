@@ -3,8 +3,9 @@ class Event < ApplicationRecord
   validates :name, presence: true
   validates :location, presence: true
   validates :date, presence: true
+  validates :category, presence: true
 
-  enum role: [:upcoming, :inprogress, :concluded]
+  enum status: [:upcoming, :inprogress, :concluded]
   after_initialize :set_default_status, :if => :new_record?
 
 def set_default_status

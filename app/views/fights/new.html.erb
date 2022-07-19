@@ -1,6 +1,6 @@
 <h1>Add Fight</h1>
 
-<%= form_with model: @fight, url: create_fight_path(@event_id), method: :post do |form| %>
+<%= form_with model: @fight, url: create_fight_path(@event.id), method: :post do |form| %>
   <%= form.label :f1, "Fighter 1: "%>
   <%= form.text_area :f1, size: "35x1" %>
   <br>
@@ -8,13 +8,18 @@
   <%= form.text_area :f2, size: "35x1" %>
   <br>
   <%= form.label :placement, "Placement: "%>
-  <%= form.select :placement, Fight.placements.keys.to_a %>
+  <% if @event.category == "PPV" %>
+    <%= form.select :placement, [["Main Card", "MAINCARD"], ["Prelims", "PRELIMS"], ["Early Prelims", "EARLY PRELIMS"]] %>
+  <% else %>
+    <%= form.select :placement, [["Main Card", "MAINCARD"], ["Prelims", "PRELIMS"]] %>
+  <% end %>
   <br>
   <%= form.submit "Add Fight" %>
 <% end %>
 
+<br><br><br>
 <div data-controller="fights">
-  <%= form_with url: search_fight_path(@event_id), format: :turbo_stream, method: :post, data: { "fights-target": "searchForm" } do |form| %>
+  <%= form_with url: search_fight_path(@event.id), format: :turbo_stream, method: :post, data: { "fights-target": "searchForm" } do |form| %>
     <%= form.label :search_query, "Search for:" %>
     <%= form.text_field :search_query, data: { "fights-target": "searchInput", action: "input->fights#search" }  %>
   <% end %>

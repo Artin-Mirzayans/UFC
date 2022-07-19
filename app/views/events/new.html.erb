@@ -16,5 +16,10 @@
   <%= form.label :date, "Date: " %>
   <%= form.date_field :date %>
   <br>
+  <%= form.radio_button(:category, "FN") %>
+  <%= form.label(:FN, "FN") %>
+  <%= form.radio_button(:category, "PPV") %>
+  <%= form.label(:PPV, "PPV") %>
+<br>
   <%= form.submit "Add Event" %>
 <% end %>

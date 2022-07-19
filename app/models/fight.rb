@@ -5,5 +5,5 @@ class Fight < ApplicationRecord
     validates :f2, presence: true
     validates :placement, presence: true
 
-    enum placement: [:MainCard, :Prelims, :EarlyPrelims]
+    enum placement: [:MAINCARD, :PRELIMS, :EARLYPRELIMS]
   end

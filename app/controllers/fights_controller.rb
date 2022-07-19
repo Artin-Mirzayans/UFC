@@ -2,7 +2,7 @@ class FightsController < ApplicationController
 
   def new
       @fight = Fight.new
-      @event_id = params[:event_id]
+      @event = Event.find(params[:event_id])
   end
 
   def create
