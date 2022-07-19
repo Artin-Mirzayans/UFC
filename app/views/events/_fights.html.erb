@@ -1,4 +1,7 @@
 <div id="fights">
+<%= button_to('MAIN CARD', main_card_path(@event.id), method: "post") %>
+<%= button_to('PRELIMS', prelims_card_path(@event.id), method: "post") %>
+
     <% @fights.each do |fight| %>
         <div class="<%= dom_id fight %>">
         <br>

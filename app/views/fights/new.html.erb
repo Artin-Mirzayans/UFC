@@ -1,11 +1,14 @@
 <h1>Add Fight</h1>
 
 <%= form_with model: @fight, url: create_fight_path(@event_id), method: :post do |form| %>
-  <%= form.label :f1, "Fighter 1: " %>
+  <%= form.label :f1, "Fighter 1: "%>
   <%= form.text_area :f1, size: "35x1" %>
   <br>
-  <%= form.label :f2, "Fighter 2: " %>
+  <%= form.label :f2, "Fighter 2: "%>
   <%= form.text_area :f2, size: "35x1" %>
+  <br>
+  <%= form.label :placement, "Placement: "%>
+  <%= form.select :placement, Fight.placements.keys.to_a %>
   <br>
   <%= form.submit "Add Fight" %>
 <% end %>

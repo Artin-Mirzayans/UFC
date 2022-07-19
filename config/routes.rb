@@ -1,10 +1,15 @@
 Rails.application.routes.draw do
   root 'events#index'
+  
   get "/event/add", to: "events#new", as: :new_event
   post "/event/add", to: "events#create"
   
   get "/event/:event_id", to: "events#show", as: :event
   get "/event/:event_id", to: "events#update"
+
+  post "event/:event_id/main", to: "events#main", as: :main_card
+  post "event/:event_id/prelims", to: "events#prelims", as: :prelims_card
+  post "event/:event_id//early", to: "events#early", as: :early_prelims_card
 
   get "/event/:event_id/fights/add", to: "fights#new", as: :new_fight
   post "/event/:event_id/fights/add", to: "fights#create", as: :create_fight

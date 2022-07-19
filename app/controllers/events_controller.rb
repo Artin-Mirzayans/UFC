@@ -27,7 +27,28 @@ class EventsController < ApplicationController
 
     def show
       @event = Event.find(params[:event_id])
-      @fights = @event.fights
+      
+      @fights = @event.fights.where(placement: 0)
+    end
+
+    def main
+      @event = Event.find(params[:event_id])
+  
+      @fights = @event.fights.where(placement: 0)
+  
+      respond_to do |format|
+        format.turbo_stream
+      end
+    end
+
+    def prelims
+      @event = Event.find(params[:event_id])
+  
+      @fights = @event.fights.where(placement: 1)
+  
+      respond_to do |format|
+        format.turbo_stream
+        end
     end
 
     private

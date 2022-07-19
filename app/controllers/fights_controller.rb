@@ -3,7 +3,7 @@ class FightsController < ApplicationController
   def new
       @fight = Fight.new
       @event_id = params[:event_id]
-    end
+  end
 
   def create
 
@@ -36,6 +36,7 @@ class FightsController < ApplicationController
     end
   end
 
+
   def up
     @fight = Fight.find(params[:fight_id])
     @event = Event.find(params[:event_id])
@@ -45,11 +46,8 @@ class FightsController < ApplicationController
     @fight.move_higher
 
     respond_to do |format|
-      format.turbo_stream do
-        render turbo_stream: turbo_stream.update(:fights, partial: "fights/fight")
-      end
+      format.turbo_stream
     end
-
   end
 
   def down
@@ -61,12 +59,9 @@ class FightsController < ApplicationController
     @fight.move_lower
 
     respond_to do |format|
-      format.turbo_stream do
-        render turbo_stream: turbo_stream.update(:fights, partial: "fights/fight")
-      end
+      format.turbo_stream
     end
   end
-
 
   def edit
     @fight = Fight.find(params[:fight_id])
@@ -97,7 +92,7 @@ class FightsController < ApplicationController
 
   private
   def fight_params
-    params.require(:fight).permit(:f1, :f2)
+    params.require(:fight).permit(:f1, :f2, :placement)
   end
 
 end
