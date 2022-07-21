@@ -6,9 +6,12 @@
 <%= @event.date %>
 <br><br>
 
-<%if current_user.role == 'moderator'%>
+<% if current_user.role == 'moderator' || current_user.role == 'admin' %>
+    <%= button_to('Edit Event', edit_event_path(@event.id), method: "get") %>
     <%= button_to('Add Fight', new_fight_path(@event.id), method: "get") %>
-<%end%>
+<% end %>
+
+
 
 <br>
 

@@ -1,8 +1,5 @@
 class EventsController < ApplicationController
-    
-    def index
-      @event = Event.all
-    end
+  before_action :authorize_modoradmin!, except: [:index, :show]
 
     def new
       @event = Event.new
@@ -21,8 +18,8 @@ class EventsController < ApplicationController
       end
     end
 
-    def update
-
+    def index
+      @event = Event.all
     end
 
     def show
@@ -49,6 +46,38 @@ class EventsController < ApplicationController
       respond_to do |format|
         format.turbo_stream
         end
+    end
+
+    def early
+      @event = Event.find(params[:event_id])
+  
+      @fights = @event.fights.where(placement: 2)
+  
+      respond_to do |format|
+        format.turbo_stream
+        end
+    end
+
+    def edit
+      @event = Event.find(params[:event_id])
+    end
+  
+    def update
+      @event = Event.find(params[:event_id])
+  
+      if @event.update(event_params)
+        redirect_to @event
+      else
+        render :edit, status: :unprocessable_entity
+      end
+    end
+
+    def destroy
+      @event = Event.find(@fight.event_id)
+  
+      @event.destroy
+  
+      redirect_to root_path
     end
 
     private

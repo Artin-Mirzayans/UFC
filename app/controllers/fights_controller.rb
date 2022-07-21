@@ -1,12 +1,12 @@
 class FightsController < ApplicationController
-
+  before_action :authorize_modoradmin!, except: [:destroy]
+  before_action :authorize_admin!, only: [:destroy]
   def new
       @fight = Fight.new
       @event = Event.find(params[:event_id])
   end
 
   def create
-
       @event = Event.find(params[:event_id])
       @fight = @event.fights.new(fight_params)
 
@@ -16,7 +16,6 @@ class FightsController < ApplicationController
       else
         @event_id = params[:event_id]
         render :new
-
       end
   end
 
@@ -35,7 +34,6 @@ class FightsController < ApplicationController
       end
     end
   end
-
 
   def up
     @fight = Fight.find(params[:fight_id])

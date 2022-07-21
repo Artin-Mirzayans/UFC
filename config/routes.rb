@@ -5,7 +5,9 @@ Rails.application.routes.draw do
   post "/event/add", to: "events#create"
   
   get "/event/:event_id", to: "events#show", as: :event
-  get "/event/:event_id", to: "events#update"
+
+  get "/event/:event_id/update", to: "events#edit", as: :edit_event
+  patch "/event/:event_id/update", to: "events#update", as: :update_event
 
   post "event/:event_id/main", to: "events#main", as: :main_card
   post "event/:event_id/prelims", to: "events#prelims", as: :prelims_card
