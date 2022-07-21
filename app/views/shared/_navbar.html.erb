@@ -1,6 +1,6 @@
 <ul>
   <li><%= link_to 'Home', root_path %></li>
-  <% if ismodoradmin? %>
+  <% if is_admin_or_mod? %>
   <li><%= link_to 'Add Event', new_event_path %></li>
   <% end %>
   <li><%=current_user.email%></li>

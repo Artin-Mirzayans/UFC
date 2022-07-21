@@ -11,7 +11,9 @@ Rails.application.routes.draw do
 
   post "event/:event_id/main", to: "events#main", as: :main_card
   post "event/:event_id/prelims", to: "events#prelims", as: :prelims_card
-  post "event/:event_id//early", to: "events#early", as: :early_prelims_card
+  post "event/:event_id/early", to: "events#early", as: :early_prelims_card
+
+  delete "event/:event_id/delete", to: "events#destroy", as: :delete_event
 
   get "/event/:event_id/fights/add", to: "fights#new", as: :new_fight
   post "/event/:event_id/fights/add", to: "fights#create", as: :create_fight

@@ -1,9 +1,10 @@
 class FightsController < ApplicationController
-  before_action :authorize_modoradmin!, except: [:destroy]
+  before_action :authorize_admin_or_mod!, except: [:destroy]
   before_action :authorize_admin!, only: [:destroy]
   def new
-      @fight = Fight.new
       @event = Event.find(params[:event_id])
+
+      @fight = Fight.new
   end
 
   def create
@@ -14,9 +15,24 @@ class FightsController < ApplicationController
         redirect_to @event
       
       else
-        @event_id = params[:event_id]
         render :new
       end
+  end
+
+  def edit
+    @event = Event.find(params[:event_id])
+    @fight = @event.fights.find(params[:fight_id])
+  end
+
+  def update
+    @event = Event.find(params[:event_id])
+    @fight = @event.fights.find(params[:fight_id])
+
+    if @fight.update(fight_params)
+      redirect_to @event
+    else
+      render :edit, status: :unprocessable_entity
+    end
   end
 
   def search
@@ -39,9 +55,9 @@ class FightsController < ApplicationController
     @fight = Fight.find(params[:fight_id])
     @event = Event.find(params[:event_id])
 
-    @fights = @event.fights
-
     @fight.move_higher
+
+    @fights = @event.fights.where(placement: @fight.placement)
 
     respond_to do |format|
       format.turbo_stream
@@ -52,30 +68,13 @@ class FightsController < ApplicationController
     @fight = Fight.find(params[:fight_id])
     @event = Event.find(params[:event_id])
 
-    @fights = @event.fights
-
+    
     @fight.move_lower
+
+    @fights = @event.fights.where(placement: @fight.placement)
 
     respond_to do |format|
       format.turbo_stream
-    end
-  end
-
-  def edit
-    @fight = Fight.find(params[:fight_id])
-    
-    @event_id = params[:event_id]
-    @fight_id = params[:fight_id]
-  end
-
-  def update
-    @event = Event.find(params[:event_id])
-    @fight = Fight.find(params[:fight_id])
-
-    if @fight.update(fight_params)
-      redirect_to @event
-    else
-      render :edit, status: :unprocessable_entity
     end
   end
 

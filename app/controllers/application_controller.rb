@@ -1,26 +1,26 @@
 class ApplicationController < ActionController::Base
     before_action :authenticate_user!
 
-    helper_method :ismodoradmin?, :isadmin?
+    helper_method :is_admin_or_mod?, :is_admin?
 
-    def ismodoradmin?
-        current_user.moderator? || current_user.admin?
-    end
 
-    def isadmin?
+    def is_admin?
         current_user.admin?
     end
 
-    def authorize_modoradmin!
-        if !ismodoradmin?
-            redirect_to root_path
-        end
+    def is_admin_or_mod?
+        is_admin? || current_user.moderator?
     end
 
+
     def authorize_admin!
-        if isadmin?
-            redirect_to root_path
-        end
+        redirect_to root_path unless is_admin?
     end
+
+    def authorize_admin_or_mod!
+        redirect_to root_path unless is_admin_or_mod?
+    end
+
+
 
 end

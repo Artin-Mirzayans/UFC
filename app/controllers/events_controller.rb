@@ -1,9 +1,8 @@
 class EventsController < ApplicationController
-  before_action :authorize_modoradmin!, except: [:index, :show]
+  before_action :authorize_admin_or_mod!, except: [:index, :show, :main, :prelims, :early]
 
     def new
       @event = Event.new
-
     end
 
     def create
@@ -11,10 +10,8 @@ class EventsController < ApplicationController
 
       if @event.save 
         redirect_to root_path
-
       else
-        render :new
-         
+        render :new 
       end
     end
 
@@ -73,11 +70,17 @@ class EventsController < ApplicationController
     end
 
     def destroy
-      @event = Event.find(@fight.event_id)
+      @event = Event.find(params[:event_id])
   
+      destroy_fights
       @event.destroy
+
   
       redirect_to root_path
+    end
+
+    def destroy_fights
+      @event.fights.destroy_all
     end
 
     private

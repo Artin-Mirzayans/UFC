@@ -9,7 +9,7 @@
   <br>
   <%= form.label :placement, "Placement: "%>
   <% if @event.category == "PPV" %>
-    <%= form.select :placement, [["Main Card", "MAINCARD"], ["Prelims", "PRELIMS"], ["Early Prelims", "EARLY PRELIMS"]] %>
+    <%= form.select :placement, [["Main Card", "MAINCARD"], ["Prelims", "PRELIMS"], ["Early Prelims", "EARLYPRELIMS"]] %>
   <% else %>
     <%= form.select :placement, [["Main Card", "MAINCARD"], ["Prelims", "PRELIMS"]] %>
   <% end %>
