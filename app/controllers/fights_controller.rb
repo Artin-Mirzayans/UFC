@@ -35,22 +35,6 @@ class FightsController < ApplicationController
     end
   end
 
-  def search
-    if params[:search_query].present?
-      @fighters = Fighter.where("name ilike ?", "%#{params[:search_query]}%").limit(10)
-    else
-      @fighters = Fighter.all.limit(5)
-    end
-
-    respond_to do |format|
-      if params[:search_query].present?
-        format.turbo_stream { render turbo_stream: turbo_stream.update('search_results', partial: 'fights/search_result') }
-      else
-        format.html { render :new }
-      end
-    end
-  end
-
   def up
     @fight = Fight.find(params[:fight_id])
     @event = Event.find(params[:event_id])
@@ -89,7 +73,7 @@ class FightsController < ApplicationController
 
   private
   def fight_params
-    params.require(:fight).permit(:f1, :f2, :placement)
+    params.require(:fight).permit(:red, :blue, :placement)
   end
 
 end

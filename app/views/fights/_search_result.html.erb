@@ -1,4 +1,4 @@
 <% @fighters.each do |fighter| %>
-  <%= fighter.name %>
+  <button data-action="fights#select"><%= fighter.name %></button>
   <br>
 <% end %>

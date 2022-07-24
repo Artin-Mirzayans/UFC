@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+
+# Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html  
+
+  devise_for :users
+
   root 'events#index'
   
   get "/event/add", to: "events#new", as: :new_event
@@ -9,27 +14,23 @@ Rails.application.routes.draw do
   get "/event/:event_id/update", to: "events#edit", as: :edit_event
   patch "/event/:event_id/update", to: "events#update", as: :update_event
 
-  post "event/:event_id/main", to: "events#main", as: :main_card
-  post "event/:event_id/prelims", to: "events#prelims", as: :prelims_card
-  post "event/:event_id/early", to: "events#early", as: :early_prelims_card
+  post "/event/:event_id/main", to: "events#main", as: :main_card
+  post "/event/:event_id/prelims", to: "events#prelims", as: :prelims_card
+  post "/event/:event_id/early", to: "events#early", as: :early_prelims_card
 
-  delete "event/:event_id/delete", to: "events#destroy", as: :delete_event
+  delete "/event/:event_id/delete", to: "events#destroy", as: :delete_event
 
   get "/event/:event_id/fights/add", to: "fights#new", as: :new_fight
   post "/event/:event_id/fights/add", to: "fights#create", as: :create_fight
-  post "/event/:event_id/fights/search", to: "fights#search", as: :search_fight
 
-  post "event/:event_id/fight/:fight_id/up", to: "fights#up", as: :fight_up
-  post "event/:event_id/fight/:fight_id/down", to: "fights#down", as: :fight_down
+  post "/event/:event_id/fight/:fight_id/up", to: "fights#up", as: :fight_up
+  post "/event/:event_id/fight/:fight_id/down", to: "fights#down", as: :fight_down
 
   get "/event/:event_id/fight/:fight_id/update", to: "fights#edit", as: :edit_fight
   patch "/event/:event_id/fight/:fight_id/update", to: "fights#update", as: :update_fight
 
-  delete "fight/:fight_id/delete", to: "fights#destroy", as: :delete_fight
+  delete "/fight/:fight_id/delete", to: "fights#destroy", as: :delete_fight
 
-  devise_for :users
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  post "/event/:fight_id/fights/fighter/:corner/search/:name", to: "fighters#search"
 
-  # Defines the root path route ("/")
-  # root "articles#index"
 end
