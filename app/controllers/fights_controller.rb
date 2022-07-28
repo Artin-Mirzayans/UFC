@@ -9,12 +9,14 @@ class FightsController < ApplicationController
 
   def create
       @event = Event.find(params[:event_id])
-      @fight = @event.fights.new(fight_params)
+    
+      @fight = @event.fights.new(red: Fighter.find_by(name: fight_params[:red]), blue: Fighter.find_by(name: fight_params[:blue]), placement: fight_params[:placement])
 
       if @fight.save
         redirect_to @event
       
       else
+        print(@fight.errors.full_messages)
         render :new
       end
   end

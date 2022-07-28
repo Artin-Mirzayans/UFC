@@ -29,6 +29,8 @@ gem "jbuilder"
 
 gem 'acts_as_list'
 
+gem 'pry'
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
 

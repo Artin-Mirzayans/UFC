@@ -8,7 +8,7 @@
     <% @fights.each do |fight| %>
         <div class="<%= dom_id fight %>">
         <br>
-            <%= fight.red %> vs <%= fight.blue %>
+            <%= fight.red.name %> vs <%= fight.blue.name %>
                 <% if is_admin_or_mod? %>
                     <%= button_to('Up', fight_up_path(@event.id, fight.id), method: "post") %>
                     <%= button_to('Down', fight_down_path(@event.id, fight.id), method: "post") %>
