@@ -31,6 +31,7 @@ Rails.application.routes.draw do
 
   delete "/fight/:fight_id/delete", to: "fights#destroy", as: :delete_fight
 
-  post "/event/:fight_id/fights/fighter/:corner/search/:name", to: "fighters#search"
+  post "event/:event_id/fights/fighter/:corner/search/:name", to: "fighters#search"
 
+  post 'event/:event_id/fights/:fight_id/fighter/:fighter_id', to: "predictions#submit_method", as: :submit_method_prediction
 end

@@ -1,18 +1,10 @@
 <h1>Edit Fight</h1>
-
-<%= form_with model: @fight, url: update_fight_path(@event.id, @fight.id), method: :patch do |form| %>
-  <%= form.label :red, "Red Corner: " %>
-  <%= form.text_area :red, size: "35x1" %>
-  <br>
-  <%= form.label :blue, "Blue Corner: " %>
-  <%= form.text_area :blue, size: "35x1" %>
-  <br>
-  <%= form.label :placement, "Placement: "%>
-  <% if @event.category == "PPV" %>
-    <%= form.select :placement, [["Main Card", "MAINCARD"], ["Prelims", "PRELIMS"], ["Early Prelims", "EARLYPRELIMS"]] %>
-  <% else %>
-    <%= form.select :placement, [["Main Card", "MAINCARD"], ["Prelims", "PRELIMS"]] %>
-  <% end %>
-  <br>
+  <%= form_with model: @fight, url: update_fight_path(@event.id), method: :patch do |form| %>
+    <% if @event.category == "PPV" %>
+      <%= form.select :placement, [["Main Card", "MAIN"], ["Prelims", "PRELIMS"], ["Early Prelims", "EARLY"]] %>
+    <% else %>
+      <%= form.select :placement, [["Main Card", "MAIN"], ["Prelims", "PRELIMS"]] %>
+    <% end %>
+    <br>
   <%= form.submit "Edit Fight" %>
 <% end %>

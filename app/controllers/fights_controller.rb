@@ -1,6 +1,5 @@
 class FightsController < ApplicationController
-  before_action :authorize_admin_or_mod!, except: [:destroy]
-  before_action :authorize_admin!, only: [:destroy]
+  before_action :authorize_admin_or_mod!
   def new
       @event = Event.find(params[:event_id])
 
@@ -30,7 +29,8 @@ class FightsController < ApplicationController
     @event = Event.find(params[:event_id])
     @fight = @event.fights.find(params[:fight_id])
 
-    if @fight.update(fight_params)
+
+    if @fight.update(red: Fighter.find_by(name: fight_params[:red]), blue: Fighter.find_by(name: fight_params[:blue]), placement: fight_params[:placement])
       redirect_to @event
     else
       render :edit, status: :unprocessable_entity
@@ -75,7 +75,7 @@ class FightsController < ApplicationController
 
   private
   def fight_params
-    params.require(:fight).permit(:red, :blue, :placement)
+    params.require(:fight).permit(:placement)
   end
 
 end

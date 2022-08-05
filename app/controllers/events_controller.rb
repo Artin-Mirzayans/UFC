@@ -1,5 +1,6 @@
 class EventsController < ApplicationController
-  before_action :authorize_admin_or_mod!, except: [:index, :show, :main, :prelims, :early]
+  before_action :authorize_admin_or_mod!, except: [:index, :show, :main, :prelims, :early, :destroy]
+  before_action :authorize_admin!, only: [:destroy]
 
     def new
       @event = Event.new
@@ -23,6 +24,8 @@ class EventsController < ApplicationController
       @event = Event.find(params[:event_id])
       
       @fights = @event.fights.where(placement: 0)
+
+      @method = Methodprediction.new
     end
 
     def main
@@ -85,7 +88,7 @@ class EventsController < ApplicationController
 
     private
     def event_params
-      params.require(:event).permit(:name, :location, :date, :category)
+      params.require(:event).permit(:name, :location, :date, :category, :status)
     end
 
 

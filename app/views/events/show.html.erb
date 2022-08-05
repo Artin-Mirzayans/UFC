@@ -1,3 +1,4 @@
+<%= stylesheet_link_tag params[:controller] %>
 <div>
 <%= @event.name%>
 <br>
@@ -13,7 +14,15 @@
 
 <% if is_admin_or_mod? %>
     <%= button_to('Edit Event', edit_event_path(@event.id), method: "get") %>
+    <br>
     <%= button_to('Add Fight', new_fight_path(@event.id), method: "get") %>
+<% end %>
+
+<%= button_to('MAIN CARD', main_card_path(@event.id), method: "post") %>
+<%= button_to('PRELIMS', prelims_card_path(@event.id), method: "post") %>
+
+<% if @event.category == "PPV" %>
+    <%= button_to('EARLY PRELIMS', early_prelims_card_path(@event.id), method: "post") %>
 <% end %>
 
 

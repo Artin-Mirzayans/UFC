@@ -1,21 +1,18 @@
 <div id="fights">
-<%= button_to('MAIN CARD', main_card_path(@event.id), method: "post") %>
-<%= button_to('PRELIMS', prelims_card_path(@event.id), method: "post") %>
-<% if @event.category == "PPV" %>
-    <%= button_to('EARLY PRELIMS', early_prelims_card_path(@event.id), method: "post") %>
-<% end %>
-
     <% @fights.each do |fight| %>
-        <div class="<%= dom_id fight %>">
-        <br>
-            <%= fight.red.name %> vs <%= fight.blue.name %>
-                <% if is_admin_or_mod? %>
-                    <%= button_to('Up', fight_up_path(@event.id, fight.id), method: "post") %>
-                    <%= button_to('Down', fight_down_path(@event.id, fight.id), method: "post") %>
-                    <%= button_to('Update', edit_fight_path(@event.id, fight.id), method: "get") %>
-                    <%= button_to('Delete', delete_fight_path(fight.id), method: "delete") %>
-                <% end %>
-        </div>
+
+    <div data-controller="events">
+    <%= fight.red.name %> vs <%= fight.blue.name %>
+        <%= render partial: "fights/prediction", locals: {red_prediction: fight.get_prediction(current_user, fight.red), blue_prediction: fight.get_prediction(current_user, fight.blue), fight: fight} %>
+            <br>
+
+        <% if is_admin_or_mod? %>
+            <%= button_to('Up', fight_up_path(@event.id, fight.id), method: "post") %>
+            <%= button_to('Down', fight_down_path(@event.id, fight.id), method: "post") %>
+            <%= button_to('Update', edit_fight_path(@event.id, fight.id), method: "get") %>
+            <%= button_to('Delete', delete_fight_path(fight.id), method: "delete") %>
+        <% end %>
+    <br>
+    </div>
     <% end %>
 </div>
-

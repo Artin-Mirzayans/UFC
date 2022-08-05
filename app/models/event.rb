@@ -5,11 +5,11 @@ class Event < ApplicationRecord
   validates :date, presence: true
   validates :category, presence: true
 
-  enum status: [:upcoming, :inprogress, :concluded]
+  enum status: [:UPCOMING, :INPROGRESS, :CONCLUDED]
   after_initialize :set_default_status, :if => :new_record?
 
 def set_default_status
-  self.status ||= :upcoming
+  self.status ||= :UPCOMING
 end
 
 end

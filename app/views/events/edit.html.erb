@@ -1,11 +1,6 @@
 <h1>Edit Event</h1>
 
-<%= form_with model: @event, url: update_event_path, data: { turbo:false }, method: :post do |form| %>
-    <% if @event.errors.any?%>
-        <% @event.errors.full_messages.each do |message|%>
-        <div><%= message%></div>
-        <% end %>
-    <% end %>
+<%= form_with model: @event, url: update_event_path, method: :patch do |form| %>
 
   <%= form.label :name, "Name: " %>
   <%= form.text_area :name, size: "35x1" %>
@@ -18,11 +13,19 @@
   <br>
 
   <%= form.radio_button(:category, "PPV") %>
-  <%= form.label(:category, "Pay-Per-View") %>
-  
-  <%= form.radio_button(:category, "FN") %>
-  <%= form.label(:category, "Fight Night") %>
+  <%= form.label(:category_ppv, "Pay-Per-View") %>
 
+  <%= form.radio_button(:category, "FN") %>
+  <%= form.label(:category_fn, "Fight Night") %>
+  <br>
+
+  <%= form.radio_button(:status, "UPCOMING") %>
+  <%= form.label(:status_upcoming, "Upcoming") %>
+  <%= form.radio_button(:status, "INPROGRESS") %>
+  <%= form.label(:status_inprogress, "In-Progress") %>
+  <%= form.radio_button(:status, "CONCLUDED") %>
+  <%= form.label(:status_concluded, "Concluded") %>
+  
 <br>
   <%= form.submit "Update Event" %>
 <% end %>

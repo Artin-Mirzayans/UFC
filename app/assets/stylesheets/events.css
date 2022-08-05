@@ -1,0 +1,38 @@
+div.event-name {
+  font-size: 24px;
+}
+
+.predictions {
+  margin: 10px;
+}
+
+.predictions button {
+  background-color: #c0c0c0;
+  color: rgb(255, 244, 244);
+  padding: 5px 10px;
+  font-family: sans-serif, Arial;
+  font-size: 16px;
+  border: 2px solid #444;
+  border-radius: 4px;
+}
+
+.predictions button:hover {
+  background-color: rgb(104, 104, 104);
+}
+
+.predictions button:active {
+  background-color: rgb(104, 104, 104);
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+.selected button {
+  background-color: rgb(104, 104, 104);
+  color: rgb(255, 244, 244);
+  padding: 5px 10px;
+  font-family: sans-serif, Arial;
+  font-size: 16px;
+  border: 2px solid #444;
+  border-radius: 4px;
+}
+

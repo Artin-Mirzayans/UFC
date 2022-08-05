@@ -10,8 +10,38 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
- *= require_tree .
  *= require_self
  */
+
+ body {
+    background-color: rgb(255, 196, 196);
+}
+
+  ul.navbar {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: rgb(187, 187, 187);
+  }
+  
+  li.navbar {
+    float: left;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+  }
+  
+  li.navbar a {
+    display: block;
+    color: white;
+    text-decoration: none;
+  }
+  
+  /* Change the link color to #111 (black) on hover */
+  li.navbar a:hover {
+    background-color: #111;
+  }
 
 

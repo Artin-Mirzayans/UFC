@@ -10,9 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_27_012241) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_30_191741) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "distancepredictions", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "fight_id"
+    t.boolean "distance"
+    t.float "line"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "events", force: :cascade do |t|
     t.string "name"
@@ -40,10 +49,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_27_012241) do
     t.integer "placement"
   end
 
-  create_table "predictions", force: :cascade do |t|
+  create_table "methodpredictions", force: :cascade do |t|
     t.integer "fight_id"
     t.integer "user_id"
-    t.integer "fighter"
+    t.integer "fighter_id"
     t.integer "method"
     t.float "line"
     t.datetime "created_at", null: false

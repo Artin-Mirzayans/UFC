@@ -3,7 +3,7 @@ import { Controller } from "@hotwired/stimulus"
 // Connects to data-controller="fights"
 export default class extends Controller {
   // DEFINES WHAT HTML TAGS WE NEED TO TARGET SO WE CAN READ/UPDATE/MODIFY THEM
-  static targets = [ "red_query", "blue_query", "red_results", "blue_results" ]
+  static targets = ["red_query", "blue_query", "red_results", "blue_results"]
 
   // Initialize method, happens on load
   connect() {
