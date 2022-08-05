@@ -3,25 +3,25 @@
         <%= form_with model: red_prediction, url: submit_method_prediction_path(@event.id, fight.id, fight.red.id), method: :post, data: {"events-target": "redMethodPredictionForm"}  do |form| %>
 
             <%= form.radio_button :method, "ANY", data: {"action": "click->events#red_method_submit"}%>
-            <%= form.label :method_any, "Any", data: {"action": "click->events#red_method_submit"} %>
+            <%= form.label :method_any, "Any" %>
             <%= form.radio_button :method, "KNOCKOUT", data: {"action": "click->events#red_method_submit"} %>
-            <%= form.label :method_knockout, "KO", data: {"action": "click->events#red_method_submit"} %>
+            <%= form.label :method_knockout, "KO" %>
             <%= form.radio_button :method, "SUBMISSION", data: {"action": "click->events#red_method_submit"} %>
-            <%= form.label :method_submission, "Sub", data: {"action": "click->events#red_method_submit"} %>
+            <%= form.label :method_submission, "Sub" %>
             <%= form.radio_button :method, "DECISION", data: {"action": "click->events#red_method_submit"} %>
-            <%= form.label :method_decision, "Decision", data: {"action": "click->events#red_method_submit"} %>
+            <%= form.label :method_decision, "Decision" %>
         <% end %>
 
         <%= form_with model: blue_prediction, url: submit_method_prediction_path(@event.id, fight.id, fight.blue.id), method: :post, data: {"events-target": "blueMethodPredictionForm"}  do |form| %>
 
             <%= form.radio_button :method, "ANY", data: {"action": "click->events#blue_method_submit"}%>
-            <%= form.label :method_any, "Any", data: {"action": "click->events#blue_method_submit"} %>
+            <%= form.label :method_any, "Any" %>
             <%= form.radio_button :method, "KNOCKOUT", data: {"action": "click->events#blue_method_submit"} %>
-            <%= form.label :method_knockout, "KO", data: {"action": "click->events#blue_method_submit"} %>
+            <%= form.label :method_knockout, "KO" %>
             <%= form.radio_button :method, "SUBMISSION", data: {"action": "click->events#blue_method_submit"} %>
-            <%= form.label :method_submission, "Sub", data: {"action": "click->events#blue_method_submit"} %>
+            <%= form.label :method_submission, "Sub" %>
             <%= form.radio_button :method, "DECISION", data: {"action": "click->events#blue_method_submit"} %>
-            <%= form.label :method_decision, "Decision", data: {"action": "click->events#blue_method_submit"} %>
+            <%= form.label :method_decision, "Decision" %>
         <% end %>
     </div>
 

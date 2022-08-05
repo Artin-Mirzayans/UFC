@@ -3,34 +3,34 @@ class PredictionsController < ApplicationController
         @event = Event.find(params[:event_id])
         @fight = Fight.find(params[:fight_id])
 
+        @fights = @event.fights.where(placement: @fight.placement)
+
         if @fight.methodpredictions.exists?(user_id: current_user.id)
-            puts "PREDICTION ALREADY EXISTS"
 
             @prediction = @fight.methodpredictions.find_by(user_id: current_user.id)
 
             if @prediction.update(fighter_id: params[:fighter_id], method: methodprediction_params[:method], line: 100)
-
-                respond_to do |format|
-                    format.turbo_stream
-                end
-
+                puts "Successful Prediction Update!"
             else 
-                puts "This did not update! Woopsy doo!"
+                puts @prediction.errors.messages
+            end
+
+            respond_to do |format|
+                format.turbo_stream
             end
 
             
         else
-            @prediction = @fight.methodpredictions.new(user_id: current_user.id, fighter_id: params[:fighter_id], method: methodprediction_params[:method], line: 100)
+            @prediction = @fight.methodpredictions.new(user_id: current_user.id, event_id: params[:event_id], fighter_id: params[:fighter_id], method: methodprediction_params[:method], line: 100)
 
             if @prediction.save
-
-                @fights = @event.fights.where(placement: @fight.placement)
-
-                respond_to do |format|
-                    format.turbo_stream 
-                end  
+                puts "New Prediction Created!"
             else 
                 puts "Oh poo! The prediction didn't save!"
+            end
+
+            respond_to do |format|
+                format.turbo_stream
             end
         end
     end
