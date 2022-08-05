@@ -27,5 +27,8 @@
 
 /public/assets
 
+#
+/lib/seed_csv/
+
 # Ignore master key for decrypting credentials and more.
 /config/master.key
