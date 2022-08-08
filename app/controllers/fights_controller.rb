@@ -68,9 +68,9 @@ class FightsController < ApplicationController
     @fight = Fight.find(params[:fight_id])
     @event = Event.find(@fight.event_id)
 
+    @fights = @event.fights.where(placement: @fight.placement)
+    
     @fight.destroy
-
-    redirect_to @event
   end
 
   private

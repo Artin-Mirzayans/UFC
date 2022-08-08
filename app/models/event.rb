@@ -1,5 +1,5 @@
 class Event < ApplicationRecord
-  has_many :fights, -> {order(position: :asc)}
+  has_many :fights, -> {order(position: :asc)}, dependent: :destroy
   has_many :methodpredictions
   validates :name, presence: true
   validates :location, presence: true

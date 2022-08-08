@@ -3,7 +3,7 @@ class Fight < ApplicationRecord
   belongs_to :red, class_name: "Fighter"
   belongs_to :blue, class_name: "Fighter"
 
-  has_many :methodpredictions
+  has_many :methodpredictions, dependent: :destroy
   has_many :distancepredictions
 
 

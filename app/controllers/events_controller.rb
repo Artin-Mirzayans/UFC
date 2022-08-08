@@ -74,16 +74,10 @@ class EventsController < ApplicationController
 
     def destroy
       @event = Event.find(params[:event_id])
-  
-      destroy_fights
+
       @event.destroy
 
-  
       redirect_to root_path
-    end
-
-    def destroy_fights
-      @event.fights.destroy_all
     end
 
     private
