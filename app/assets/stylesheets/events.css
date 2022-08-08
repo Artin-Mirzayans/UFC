@@ -2,6 +2,10 @@ div.event-name {
   font-size: 24px;
 }
 
+.predictions input[type="radio"]:disabled + label {
+  background-color: rgb(173, 173, 173)
+}
+
 .predictions input[type="radio"] {
   opacity: 0;
   position: fixed;
@@ -19,7 +23,7 @@ div.event-name {
 }
 
 .predictions label:hover {
-  background-color: #dfd;
+  background-color: rgb(74, 161, 243);
 }
 
 .predictions input[type="radio"]:focus + label {
@@ -27,6 +31,6 @@ div.event-name {
 }
 
 .predictions input[type="radio"]:checked + label {
-    background-color: #bfb;
-    border-color: #4c4;
+    background-color: rgb(39, 89, 224);
+    border-color: rgb(0, 0, 0);
 }

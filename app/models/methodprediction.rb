@@ -15,7 +15,7 @@ class Methodprediction < ApplicationRecord
     enum method: [:ANY, :KNOCKOUT, :SUBMISSION, :DECISION]
 
     def prediction_allowed
-        errors.add(:status, "Event is Locked.") unless self.event.status = "UPCOMING"
+        errors.add(:status, "Predictions are Locked.") unless self.event.status == "UPCOMING"
     end
 
 end

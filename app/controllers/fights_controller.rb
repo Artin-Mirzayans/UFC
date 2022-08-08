@@ -30,7 +30,7 @@ class FightsController < ApplicationController
     @fight = @event.fights.find(params[:fight_id])
 
 
-    if @fight.update(red: Fighter.find_by(name: fight_params[:red]), blue: Fighter.find_by(name: fight_params[:blue]), placement: fight_params[:placement])
+    if @fight.update(placement: fight_params[:placement])
       redirect_to @event
     else
       render :edit, status: :unprocessable_entity
@@ -75,7 +75,7 @@ class FightsController < ApplicationController
 
   private
   def fight_params
-    params.require(:fight).permit(:placement)
+    params.require(:fight).permit(:red, :blue, :placement)
   end
 
 end

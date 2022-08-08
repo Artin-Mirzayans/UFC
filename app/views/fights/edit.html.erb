@@ -6,5 +6,6 @@
       <%= form.select :placement, [["Main Card", "MAIN"], ["Prelims", "PRELIMS"]] %>
     <% end %>
     <br>
-  <%= form.submit "Edit Fight" %>
-<% end %>
+  <%= form.submit "Update" %>
+  <% end %>
+  <%= button_to "Back", @event, method: :get%>
