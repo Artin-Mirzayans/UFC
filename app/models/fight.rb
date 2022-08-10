@@ -7,7 +7,7 @@ class Fight < ApplicationRecord
   has_many :distancepredictions
 
 
-  acts_as_list scope: :event
+  acts_as_list scope: [:placement]
     validates :red, presence: true
     validates :blue, presence: true 
     validates :placement, presence: true

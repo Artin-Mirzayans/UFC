@@ -3,7 +3,7 @@
 <h1>Home</h1>
 
 <% if current_user %>
-  <% @event.each do |event| %>
+  <% @events.each do |event| %>
     <div class="event-name">
       <%= link_to event_path(event.id) do %>
       <%= event.name %>
