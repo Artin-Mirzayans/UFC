@@ -3,7 +3,7 @@
 
     <div data-controller="events">
     <%= fight.red.name %> vs <%= fight.blue.name %>
-        <%= render partial: "fights/prediction", locals: {red_prediction: fight.get_prediction(current_user, fight.red), blue_prediction: fight.get_prediction(current_user, fight.blue), fight: fight} %>
+        <%= render partial: "fights/prediction", locals: {red_prediction: fight.get_method_prediction(current_user, fight.red), distance_prediction: fight.get_distance_prediction(current_user, fight), blue_prediction: fight.get_method_prediction(current_user, fight.blue), fight: fight} %>
             <br>
 
         <% if is_admin_or_mod? %>

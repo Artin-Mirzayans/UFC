@@ -11,9 +11,20 @@
     <%= form.label :method, "Decision", value: "DECISION-#{fight.id}-#{fight.red.id}" %>
   <% end %>
 
-  <% if fight.methodpredictions.exists?(user: current_user, fighter: fight.red) && @event.status == "UPCOMING"%>
-    <%= button_to 'X', delete_method_prediction_path(@event.id, fight.id, fight.red.id), method: :delete %>
-  <%end%>
+    <% if fight.methodpredictions.exists?(user: current_user, fighter: fight.red) && @event.status == "UPCOMING"%>
+      <%= button_to 'X', delete_method_prediction_path(@event.id, fight.id, fight.red.id), method: :delete %>
+    <% end %>
+
+    <%= form_with model: distance_prediction, url: submit_distance_prediction_path(@event.id, fight.id), method: :post, data: {"events-target": "distancePredictionForm"}  do |form| %>
+    <%= form.radio_button :distance, true, { data: {"action": "click->events#distance_submit"}, id: "distanceprediction_distance_yes-#{fight.id}", disabled: (@event.status != "UPCOMING" ) } %>
+    <%= form.label :distance, "YES", value: "yes-#{fight.id}" %>
+    <%= form.radio_button :distance, false, { data: {"action": "click->events#distance_submit"}, id: "distanceprediction_distance_no-#{fight.id}", disabled: (@event.status != "UPCOMING" ) } %>
+    <%= form.label :distance, "NO", value: "no-#{fight.id}" %>
+    <% end %>
+
+    <% if fight.distancepredictions.exists?(user: current_user, fight: fight) && @event.status == "UPCOMING"%>
+      <%= button_to 'X', delete_distance_prediction_path(@event.id, fight.id), method: :delete %>
+    <% end %>
 
   <%= form_with model: blue_prediction, url: submit_method_prediction_path(@event.id, fight.id, fight.blue.id), method: :post, data: {"events-target": "blueMethodPredictionForm"}  do |form| %>
     <%= form.radio_button :method, "ANY", { data: {"action": "click->events#blue_method_submit"}, id: "methodprediction_method_any-#{fight.id}-#{fight.blue.id}", disabled: (@event.status != "UPCOMING" ) } %>
@@ -28,6 +39,6 @@
 
     <% if fight.methodpredictions.exists?(user: current_user, fighter: fight.blue) && @event.status == "UPCOMING"%>
       <%= button_to 'X', delete_method_prediction_path(@event.id, fight.id, fight.red.id), method: :delete %>
-  <%end%>
+    <% end %>
 </div>
 

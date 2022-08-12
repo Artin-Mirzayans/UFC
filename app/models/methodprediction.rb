@@ -5,6 +5,7 @@ class Methodprediction < ApplicationRecord
   belongs_to :event
 
   validates :user_id, presence: true
+  validates :event_id, presence: true
   validates :fighter_id, presence: true
   validates :fight_id, presence: true
   validates :method, presence: true
