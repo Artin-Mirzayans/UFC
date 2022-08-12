@@ -27,8 +27,8 @@
 
 /public/assets
 
-#
-/lib/seed_csv/
+#local html site
+odds_site/
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key

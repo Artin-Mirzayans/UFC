@@ -1,6 +1,6 @@
 # @doc = Nokogiri.HTML(URI.open("ufcodds.html"))
 @doc =
-  File.open("C:/Users/Artin/Desktop/EDU/UFC/lib/ufcodds.html") do |f|
+  File.open("C:/Users/Artin/Desktop/EDU/UFC/lib/odds_site/ufcodds.html") do |f|
     Nokogiri.HTML(f)
   end
 
