@@ -40,15 +40,8 @@ Rails.application.routes.draw do
   post "event/:event_id/fights/:fight_id/fighter/:fighter_id",
        to: "predictions#submit_method",
        as: :submit_method_prediction
-  delete "event/:event_id/fights/:fight_id/fighter/:fighter_id",
-         to: "predictions#delete_method",
-         as: :delete_method_prediction
 
   post "event/:event_id/fights/:fight_id",
        to: "predictions#submit_distance",
        as: :submit_distance_prediction
-
-  delete "event/:event_id/fights/:fight_id",
-         to: "predictions#delete_distance",
-         as: :delete_distance_prediction
 end

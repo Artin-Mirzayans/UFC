@@ -1,15 +1,11 @@
 <%= stylesheet_link_tag params[:controller] %>
-<div>
-<%= @event.name%>
-<br>
-<%= @event.location %>
-<br>
-<%= @event.date %>
-<br><br>
+<div id="event">
+<h1><%= @event.name%></h1>
+<h2><%= @event.location %></h2>
+<h2><%= @event.date %></h2>
 
 <% if is_admin? %>
     <%= button_to('Delete Event', delete_event_path(@event.id), method: "delete") %>
-    <br>
 <% end %>
 
 <% if is_admin_or_mod? %>
@@ -19,16 +15,6 @@
 
 <br>
 
-<%= button_to('MAIN CARD', main_card_path(@event.id), method: "post") %>
-<%= button_to('PRELIMS', prelims_card_path(@event.id), method: "post") %>
-
-<% if @event.category == "PPV" %>
-    <%= button_to('EARLY PRELIMS', early_prelims_card_path(@event.id), method: "post") %>
-<% end %>
-
-
-
-<br>
 
 <%= render partial: "fights/fights"%>
 

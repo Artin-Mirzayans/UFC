@@ -10,9 +10,13 @@ class Distanceprediction < ApplicationRecord
   validates :distance, exclusion: [nil]
   validates :line, presence: true
 
-  validate :prediction_allowed
+  validate :update_timer?
+  validate :event_locked?
 
-  def prediction_allowed
+  def update_timer?
+  end
+
+  def event_locked?
     unless self.event.status == "UPCOMING"
       errors.add(:status, "Predictions are Locked.")
     end

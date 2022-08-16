@@ -11,11 +11,15 @@ class Methodprediction < ApplicationRecord
   validates :method, presence: true
   validates :line, presence: true
 
-  validate :prediction_allowed
+  validate :update_timer?
+  validate :event_locked?
 
   enum method: %i[ANY KNOCKOUT SUBMISSION DECISION]
 
-  def prediction_allowed
+  def update_timer?
+  end
+
+  def event_locked?
     unless self.event.status == "UPCOMING"
       errors.add(:status, "Predictions are Locked.")
     end

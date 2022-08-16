@@ -46,7 +46,9 @@ class FightsController < ApplicationController
 
     @fight.move_higher
 
-    @fights = @event.fights.where(placement: @fight.placement)
+    @card = @fight.placement
+
+    @fights = @event.fights.where(placement: @card)
 
     respond_to { |format| format.turbo_stream }
   end
@@ -57,7 +59,9 @@ class FightsController < ApplicationController
 
     @fight.move_lower
 
-    @fights = @event.fights.where(placement: @fight.placement)
+    @card = @fight.placement
+
+    @fights = @event.fights.where(placement: @card)
 
     respond_to { |format| format.turbo_stream }
   end
@@ -66,7 +70,9 @@ class FightsController < ApplicationController
     @fight = Fight.find(params[:fight_id])
     @event = Event.find(@fight.event_id)
 
-    @fights = @event.fights.where(placement: @fight.placement)
+    @card = @fight.placement
+
+    @fights = @event.fights.where(placement: @card)
 
     @fight.destroy
   end

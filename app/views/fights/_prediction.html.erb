@@ -1,44 +1,32 @@
-
-<div id="predictions" class="predictions">
-  <%= form_with model: red_prediction, url: submit_method_prediction_path(@event.id, fight.id, fight.red.id), method: :post, data: {"events-target": "redMethodPredictionForm"}  do |form| %>
-    <%= form.radio_button :method, "ANY", { data: {"action": "click->events#red_method_submit"}, id: "methodprediction_method_any-#{fight.id}-#{fight.red.id}", disabled: (@event.status != "UPCOMING" )} %>
+  <div id = header> <h3><%= fight.red.name%></h3> <h3>Decision</h3> <h3><%= fight.blue.name %></h3></div>
+  <div id="predictions" class="predictions">
+  <%= form_with class:"prediction", model: red_prediction, url: submit_method_prediction_path(@event.id, fight.id, fight.red.id), method: :post, data: {"fights-target": "redMethodPredictionForm"}  do |form| %>
+    <%= form.radio_button :method, "ANY", { data: {"action": "click->fights#red_method_submit"}, id: "methodprediction_method_any-#{fight.id}-#{fight.red.id}", disabled: (@event.status != "UPCOMING" )} %>
     <%= form.label :method, "Any", value: "ANY-#{fight.id}-#{fight.red.id}" %>
-    <%= form.radio_button :method, "KNOCKOUT", { data: {"action": "click->events#red_method_submit"}, id: "methodprediction_method_knockout-#{fight.id}-#{fight.red.id}", disabled: (@event.status != "UPCOMING" )} %>
+    <%= form.radio_button :method, "KNOCKOUT", { data: {"action": "click->fights#red_method_submit"}, id: "methodprediction_method_knockout-#{fight.id}-#{fight.red.id}", disabled: (@event.status != "UPCOMING" )} %>
     <%= form.label :method, "KO", value: "KNOCKOUT-#{fight.id}-#{fight.red.id}" %>
-    <%= form.radio_button :method, "SUBMISSION", { data: {"action": "click->events#red_method_submit"}, id: "methodprediction_method_submission-#{fight.id}-#{fight.red.id}", disabled: (@event.status != "UPCOMING" )} %>
+    <%= form.radio_button :method, "SUBMISSION", { data: {"action": "click->fights#red_method_submit"}, id: "methodprediction_method_submission-#{fight.id}-#{fight.red.id}", disabled: (@event.status != "UPCOMING" )} %>
     <%= form.label :method, "Sub", value: "SUBMISSION-#{fight.id}-#{fight.red.id}" %>
-    <%= form.radio_button :method, "DECISION", { data: {"action": "click->events#red_method_submit"}, id: "methodprediction_method_decision-#{fight.id}-#{fight.red.id}", disabled: (@event.status != "UPCOMING" )} %>
+    <%= form.radio_button :method, "DECISION", { data: {"action": "click->fights#red_method_submit"}, id: "methodprediction_method_decision-#{fight.id}-#{fight.red.id}", disabled: (@event.status != "UPCOMING" )} %>
     <%= form.label :method, "Decision", value: "DECISION-#{fight.id}-#{fight.red.id}" %>
   <% end %>
 
-    <% if fight.methodpredictions.exists?(user: current_user, fighter: fight.red) && @event.status == "UPCOMING"%>
-      <%= button_to 'X', delete_method_prediction_path(@event.id, fight.id, fight.red.id), method: :delete %>
-    <% end %>
-
-    <%= form_with model: distance_prediction, url: submit_distance_prediction_path(@event.id, fight.id), method: :post, data: {"events-target": "distancePredictionForm"}  do |form| %>
-    <%= form.radio_button :distance, true, { data: {"action": "click->events#distance_submit"}, id: "distanceprediction_distance_yes-#{fight.id}", disabled: (@event.status != "UPCOMING" ) } %>
+    <%= form_with class:"prediction", model: distance_prediction, url: submit_distance_prediction_path(@event.id, fight.id), method: :post, data: {"fights-target": "distancePredictionForm"}  do |form| %>
+    <%= form.radio_button :distance, true, { data: {"action": "click->fights#distance_submit"}, id: "distanceprediction_distance_yes-#{fight.id}", disabled: (@event.status != "UPCOMING" ) } %>
     <%= form.label :distance, "YES", value: "yes-#{fight.id}" %>
-    <%= form.radio_button :distance, false, { data: {"action": "click->events#distance_submit"}, id: "distanceprediction_distance_no-#{fight.id}", disabled: (@event.status != "UPCOMING" ) } %>
+    <%= form.radio_button :distance, false, { data: {"action": "click->fights#distance_submit"}, id: "distanceprediction_distance_no-#{fight.id}", disabled: (@event.status != "UPCOMING" ) } %>
     <%= form.label :distance, "NO", value: "no-#{fight.id}" %>
     <% end %>
 
-    <% if fight.distancepredictions.exists?(user: current_user, fight: fight) && @event.status == "UPCOMING"%>
-      <%= button_to 'X', delete_distance_prediction_path(@event.id, fight.id), method: :delete %>
-    <% end %>
-
-  <%= form_with model: blue_prediction, url: submit_method_prediction_path(@event.id, fight.id, fight.blue.id), method: :post, data: {"events-target": "blueMethodPredictionForm"}  do |form| %>
-    <%= form.radio_button :method, "ANY", { data: {"action": "click->events#blue_method_submit"}, id: "methodprediction_method_any-#{fight.id}-#{fight.blue.id}", disabled: (@event.status != "UPCOMING" ) } %>
+  <%= form_with class:"prediction", model: blue_prediction, url: submit_method_prediction_path(@event.id, fight.id, fight.blue.id), method: :post, data: {"fights-target": "blueMethodPredictionForm"}  do |form| %>
+    <%= form.radio_button :method, "ANY", { data: {"action": "click->fights#blue_method_submit"}, id: "methodprediction_method_any-#{fight.id}-#{fight.blue.id}", disabled: (@event.status != "UPCOMING" ) } %>
     <%= form.label :method, "Any", value: "ANY-#{fight.id}-#{fight.blue.id}" %>
-    <%= form.radio_button :method, "KNOCKOUT", { data: {"action": "click->events#blue_method_submit"}, id: "methodprediction_method_knockout-#{fight.id}-#{fight.blue.id}", disabled: (@event.status != "UPCOMING" ) } %>
+    <%= form.radio_button :method, "KNOCKOUT", { data: {"action": "click->fights#blue_method_submit"}, id: "methodprediction_method_knockout-#{fight.id}-#{fight.blue.id}", disabled: (@event.status != "UPCOMING" ) } %>
     <%= form.label :method, "KO", value: "KNOCKOUT-#{fight.id}-#{fight.blue.id}" %>
-    <%= form.radio_button :method, "SUBMISSION", { data: {"action": "click->events#blue_method_submit"}, id: "methodprediction_method_submission-#{fight.id}-#{fight.blue.id}", disabled: (@event.status != "UPCOMING" ) } %>
+    <%= form.radio_button :method, "SUBMISSION", { data: {"action": "click->fights#blue_method_submit"}, id: "methodprediction_method_submission-#{fight.id}-#{fight.blue.id}", disabled: (@event.status != "UPCOMING" ) } %>
     <%= form.label :method, "Sub", value: "SUBMISSION-#{fight.id}-#{fight.blue.id}" %>
-    <%= form.radio_button :method, "DECISION", { data: {"action": "click->events#blue_method_submit"}, id: "methodprediction_method_decision-#{fight.id}-#{fight.blue.id}", disabled: (@event.status != "UPCOMING" ) } %>
+    <%= form.radio_button :method, "DECISION", { data: {"action": "click->fights#blue_method_submit"}, id: "methodprediction_method_decision-#{fight.id}-#{fight.blue.id}", disabled: (@event.status != "UPCOMING" ) } %>
     <%= form.label :method, "Decision", value: "DECISION-#{fight.id}-#{fight.blue.id}" %>
   <% end %>
-
-    <% if fight.methodpredictions.exists?(user: current_user, fighter: fight.blue) && @event.status == "UPCOMING"%>
-      <%= button_to 'X', delete_method_prediction_path(@event.id, fight.id, fight.red.id), method: :delete %>
-    <% end %>
 </div>
 

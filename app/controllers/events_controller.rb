@@ -26,6 +26,8 @@ class EventsController < ApplicationController
 
     @fights = @event.fights.where(placement: 0)
 
+    @card = "MAIN"
+
     @method = Methodprediction.new
   end
 
@@ -33,6 +35,8 @@ class EventsController < ApplicationController
     @event = Event.find(params[:event_id])
 
     @fights = @event.fights.where(placement: 0)
+
+    @card = "MAIN"
 
     respond_to { |format| format.turbo_stream }
   end
@@ -42,6 +46,8 @@ class EventsController < ApplicationController
 
     @fights = @event.fights.where(placement: 1)
 
+    @card = "PRELIMS"
+
     respond_to { |format| format.turbo_stream }
   end
 
@@ -49,6 +55,8 @@ class EventsController < ApplicationController
     @event = Event.find(params[:event_id])
 
     @fights = @event.fights.where(placement: 2)
+
+    @card = "EARLY"
 
     respond_to { |format| format.turbo_stream }
   end

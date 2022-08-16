@@ -1,14 +1,14 @@
 <h1>Add Fight</h1>
-<div data-controller="fights">
+<div data-controller="fighters">
   <%= form_with model: @fight, url: create_fight_path(@event.id), method: :post do |form| %>
     <%= form.label :red, "Red Corner: "%>
-    <%= form.text_area :red, data: { "fights-target": "red_query", action: "input->fights#search_red" }, size: "35x1" %>
+    <%= form.text_area :red, data: { "fighters-target": "red_query", action: "input->fighters#search_red" }, size: "35x1" %>
     <br>
-    <div data-fights-target="red_results" id="search_results_red"></div>
+    <div data-fighters-target="red_results" id="search_results_red"></div>
     <br>
     <%= form.label :blue, "Blue Corner: "%>
-    <%= form.text_area :blue, data: { "fights-target": "blue_query", action: "input->fights#search_blue" }, size: "35x1" %>
-    <div data-fights-target="blue_results" id="search_results_blue"></div>
+    <%= form.text_area :blue, data: { "fighters-target": "blue_query", action: "input->fighters#search_blue" }, size: "35x1" %>
+    <div data-fighters-target="blue_results" id="search_results_blue"></div>
     <br>
     <%= form.label :placement, "Placement: "%>
     <% if @event.category == "PPV" %>
