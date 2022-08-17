@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_12_191805) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_17_174718) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -64,13 +64,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_12_191805) do
   create_table "odds", force: :cascade do |t|
     t.integer "fight_id"
     t.float "red_any"
-    t.float "red_ko"
-    t.float "red_sub"
-    t.float "red_dec"
+    t.float "red_knockout"
+    t.float "red_submission"
+    t.float "red_decision"
     t.float "blue_any"
-    t.float "blue_ko"
-    t.float "blue_sub"
-    t.float "blue_dec"
+    t.float "blue_knockout"
+    t.float "blue_submission"
+    t.float "blue_decision"
     t.float "yes_decision"
     t.float "no_decision"
     t.datetime "created_at", null: false
