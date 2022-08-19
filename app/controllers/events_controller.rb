@@ -75,6 +75,11 @@ class EventsController < ApplicationController
     end
   end
 
+  def close
+    @event = Event.find(params[:event_id])
+    @fights = @event.fights
+  end
+
   def destroy
     @event = Event.find(params[:event_id])
 

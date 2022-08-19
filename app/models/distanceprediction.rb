@@ -14,6 +14,11 @@ class Distanceprediction < ApplicationRecord
   validate :event_locked?
 
   def update_timer?
+    if !self.new_record? && 5.minute.ago > self.created_at
+      errors.add(:created_at, "You cannot change your prediction anymore.")
+      return false
+    end
+    return true
   end
 
   def event_locked?

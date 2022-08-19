@@ -5,7 +5,7 @@ class Fight < ApplicationRecord
 
   has_many :methodpredictions, dependent: :destroy
   has_many :distancepredictions, dependent: :destroy
-  has_one :odd
+  has_one :odd, dependent: :destroy
 
   acts_as_list scope: [:placement]
   validates :red, presence: true

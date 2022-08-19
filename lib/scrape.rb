@@ -1,10 +1,10 @@
 class Scrape
   def initialize
-    # @doc = Nokogiri.HTML(URI.open("ufcodds.html"))
-    @doc =
-      File.open(
-        "C:/Users/Artin/Desktop/EDU/UFC/lib/odds_site/ufcodds.html"
-      ) { |f| Nokogiri.HTML(f) }
+    @doc = Nokogiri.HTML(URI.open("https://www.bestfightodds.com/"))
+    # @doc =
+    #   File.open(
+    #     "C:/Users/Artin/Desktop/EDU/UFC/lib/odds_site/ufcodds.html"
+    #   ) { |f| Nokogiri.HTML(f) }
   end
 
   def get_tables
@@ -68,22 +68,22 @@ class Scrape
 
           if row_header.text == red_last + " wins by TKO/KO"
             odds = fetch_line(prop_line, row_header)
-            post_line(fight, "red_ko", odds) if odds.between?(1, 100)
+            post_line(fight, "red_knockout", odds) if odds.between?(1, 100)
           elsif row_header.text == red_last + " wins by submission"
             odds = fetch_line(prop_line, row_header)
-            post_line(fight, "red_sub", odds) if odds.between?(1, 100)
+            post_line(fight, "red_submission", odds) if odds.between?(1, 100)
           elsif row_header.text == red_last + " wins by decision"
             odds = fetch_line(prop_line, row_header)
-            post_line(fight, "red_dec", odds) if odds.between?(1, 100)
+            post_line(fight, "red_decision", odds) if odds.between?(1, 100)
           elsif row_header.text == blue_last + " wins by TKO/KO"
             odds = fetch_line(prop_line, row_header)
-            post_line(fight, "blue_ko", odds) if odds.between?(1, 100)
+            post_line(fight, "blue_knockout", odds) if odds.between?(1, 100)
           elsif row_header.text == blue_last + " wins by submission"
             odds = fetch_line(prop_line, row_header)
-            post_line(fight, "blue_sub", odds) if odds.between?(1, 100)
+            post_line(fight, "blue_submission", odds) if odds.between?(1, 100)
           elsif row_header.text == blue_last + " wins by decision"
             odds = fetch_line(prop_line, row_header)
-            post_line(fight, "blue_dec", odds) if odds.between?(1, 100)
+            post_line(fight, "blue_decision", odds) if odds.between?(1, 100)
           elsif row_header.text == "Fight goes to decision"
             odds = fetch_line(prop_line, row_header)
             post_line(fight, "yes_decision", odds) if odds.between?(1, 100)
@@ -126,11 +126,7 @@ class Scrape
   end
 
   def post_line(fight, bet, odds)
-    if fight.odd.present?
-      fight.odd.update("#{bet}": odds)
-    else
-      @odds = fight.create_odd("#{bet}": odds)
-    end
+    fight.odd.update("#{bet}": odds)
   end
 end
 #class

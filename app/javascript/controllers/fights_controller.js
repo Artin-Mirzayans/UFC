@@ -13,21 +13,22 @@ export default class extends Controller {
 
   red_method_submit() {
     this.redMethodPredictionFormTarget.requestSubmit()
-    // Array.from(this.blueMethodPredictionFormTarget.children).forEach(item => item.checked = false)
-    // Array.from(this.distancePredictionFormTarget.children).forEach(item => item.checked = false)
 
   }
 
   blue_method_submit() {
     this.blueMethodPredictionFormTarget.requestSubmit()
-    // Array.from(this.redMethodPredictionFormTarget.children).forEach(item => item.checked = false)
-    // Array.from(this.distancePredictionFormTarget.children).forEach(item => item.checked = false)
   }
 
   distance_submit() {
     this.distancePredictionFormTarget.requestSubmit()
-    // Array.from(this.redMethodPredictionFormTarget.children).forEach(item => item.checked = false)
-    // Array.from(this.blueMethodPredictionFormTarget.children).forEach(item => item.checked = false)
+  }
+
+  form_disable() {
+    console.log("Hello YOU SEE ME!")
+    // Array.from(this.redMethodPredictionFormTarget.children).forEach(item => item.disabled = true)
+    // Array.from(this.distanceMethodPredictionFormTarget.children).forEach(item => item.disabled = true)
+    // Array.from(this.redMethodPredictionFormTarget.children).forEach(item => item.disabled = true)
   }
 
 

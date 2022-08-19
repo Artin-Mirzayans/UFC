@@ -17,6 +17,7 @@ class FightsController < ApplicationController
       )
 
     if @fight.save
+      @fight.create_odd!
       redirect_to @event
     else
       print(@fight.errors.full_messages)

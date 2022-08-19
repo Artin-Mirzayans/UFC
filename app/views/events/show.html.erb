@@ -9,6 +9,9 @@
 <% end %>
 
 <% if is_admin_or_mod? %>
+    <% if in_progress?(@event) %>
+    <%= button_to('Close Event', close_event_path(@event.id), method: "get") %>
+    <% end %>
     <%= button_to('Edit Event', edit_event_path(@event.id), method: "get") %>
     <%= button_to('Add Fight', new_fight_path(@event.id), method: "get") %>
 <% end %>

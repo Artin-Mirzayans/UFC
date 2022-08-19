@@ -34,7 +34,7 @@ h2 {
   justify-content: space-around;
 }
 
-.prediction {
+.prediction form {
   display: flex;
   flex-direction: column;
 }
