@@ -6,6 +6,7 @@ class Fight < ApplicationRecord
   has_many :methodpredictions, dependent: :destroy
   has_many :distancepredictions, dependent: :destroy
   has_one :odd, dependent: :destroy
+  has_one :result
 
   acts_as_list scope: [:placement]
   validates :red, presence: true
@@ -25,5 +26,9 @@ class Fight < ApplicationRecord
   def get_distance_prediction(user, fight)
     # Need an index for the column user_id on the predictions table so this query doesn't take forever
     self.distancepredictions.where(user: user, fight: fight).first_or_initialize
+  end
+
+  def get_result(user, fight)
+    self.result || self.build_result
   end
 end

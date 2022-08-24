@@ -19,4 +19,10 @@ class Event < ApplicationRecord
   def set_default_status
     self.status ||= :UPCOMING
   end
+
+  def received_all_results?
+    @fights = self.fights
+    @fight = @fights.detect { |fight| fight.result.nil? }
+    errors.add(:name, ": Waiting on all fight results") if !@fight.nil?
+  end
 end

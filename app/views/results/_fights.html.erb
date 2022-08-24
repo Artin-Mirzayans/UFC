@@ -1,0 +1,15 @@
+<div id="fights">
+
+<div id="card">
+<%= button_to('MAIN CARD', results_main_card_path(@event.id), method: "post", disabled: (@card == "MAIN")) %>
+<%= button_to('PRELIMS', results_prelims_card_path(@event.id), method: "post", disabled: (@card == "PRELIMS")) %>
+<% if @event.category == "PPV" %>
+    <%= button_to('EARLY PRELIMS', results_early_prelims_card_path(@event.id), method: "post", disabled: (@card == "EARLY")) %>
+<% end %>
+</div>
+
+<% @fights.each do |fight| %>
+  <%= render partial: "results/results", locals: {result: fight.get_result(current_user, fight), fight: fight} %>
+<% end %>
+
+</div>

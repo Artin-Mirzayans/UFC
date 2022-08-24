@@ -4,12 +4,10 @@
 
 <% if current_user %>
   <% @events.each do |event| %>
-    <div class="event-name">
-      <%= link_to event_path(event.id) do %>
-      <%= event.name %>
+    <div class="events">
+      <%= link_to event.name, event_path(event.id)%>
     </div>
   <% end %>
-<% end %>
 
 <% else %>
     <p>You are not signed in.</p>

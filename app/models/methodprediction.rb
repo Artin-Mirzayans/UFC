@@ -14,7 +14,16 @@ class Methodprediction < ApplicationRecord
   validate :update_timer?
   validate :event_locked?
 
-  enum method: %i[ANY KNOCKOUT SUBMISSION DECISION]
+  enum method: %i[
+         red_any
+         red_knockout
+         red_submission
+         red_decision
+         blue_any
+         blue_knockout
+         blue_submission
+         blue_decision
+       ]
 
   def update_timer?
     if !self.new_record? && 5.minute.ago > self.created_at

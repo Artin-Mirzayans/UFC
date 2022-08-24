@@ -1,10 +1,10 @@
 class Scrape
   def initialize
-    @doc = Nokogiri.HTML(URI.open("https://www.bestfightodds.com/"))
-    # @doc =
-    #   File.open(
-    #     "C:/Users/Artin/Desktop/EDU/UFC/lib/odds_site/ufcodds.html"
-    #   ) { |f| Nokogiri.HTML(f) }
+    # @doc = Nokogiri.HTML(URI.open("https://www.bestfightodds.com/"))
+    @doc =
+      File.open(
+        "C:/Users/Artin/Desktop/EDU/UFC/lib/odds_site/ufcodds.html"
+      ) { |f| Nokogiri.HTML(f) }
   end
 
   def get_tables
@@ -12,7 +12,7 @@ class Scrape
     all_tables = @doc.css(".table-div")
     tables =
       all_tables.select do |table|
-        Event.where(name: table.css(".table-header a").text.upcase).exists?
+        @events.where(name: table.css(".table-header a").text.upcase).exists?
       end
     return tables
   end
@@ -54,7 +54,7 @@ class Scrape
             corner = "blue"
           end
           odds = fetch_line(straight_line, row_header)
-          post_line(fight, "#{corner}_any", odds) if odds.between?(1, 100)
+          post_line(fight, "#{corner}_any", odds) if odds.between?(0, 100)
         else
           fighter_bool = false
           puts "Unknown Fighter. -_-"
@@ -68,28 +68,28 @@ class Scrape
 
           if row_header.text == red_last + " wins by TKO/KO"
             odds = fetch_line(prop_line, row_header)
-            post_line(fight, "red_knockout", odds) if odds.between?(1, 100)
+            post_line(fight, "red_knockout", odds) if odds.between?(0, 100)
           elsif row_header.text == red_last + " wins by submission"
             odds = fetch_line(prop_line, row_header)
-            post_line(fight, "red_submission", odds) if odds.between?(1, 100)
+            post_line(fight, "red_submission", odds) if odds.between?(0, 100)
           elsif row_header.text == red_last + " wins by decision"
             odds = fetch_line(prop_line, row_header)
-            post_line(fight, "red_decision", odds) if odds.between?(1, 100)
+            post_line(fight, "red_decision", odds) if odds.between?(0, 100)
           elsif row_header.text == blue_last + " wins by TKO/KO"
             odds = fetch_line(prop_line, row_header)
-            post_line(fight, "blue_knockout", odds) if odds.between?(1, 100)
+            post_line(fight, "blue_knockout", odds) if odds.between?(0, 100)
           elsif row_header.text == blue_last + " wins by submission"
             odds = fetch_line(prop_line, row_header)
-            post_line(fight, "blue_submission", odds) if odds.between?(1, 100)
+            post_line(fight, "blue_submission", odds) if odds.between?(0, 100)
           elsif row_header.text == blue_last + " wins by decision"
             odds = fetch_line(prop_line, row_header)
-            post_line(fight, "blue_decision", odds) if odds.between?(1, 100)
+            post_line(fight, "blue_decision", odds) if odds.between?(0, 100)
           elsif row_header.text == "Fight goes to decision"
             odds = fetch_line(prop_line, row_header)
-            post_line(fight, "yes_decision", odds) if odds.between?(1, 100)
+            post_line(fight, "yes_decision", odds) if odds.between?(0, 100)
           elsif row_header.text == "Fight doesn't go to decision"
             odds = fetch_line(prop_line, row_header)
-            post_line(fight, "no_decision", odds) if odds.between?(1, 100)
+            post_line(fight, "no_decision", odds) if odds.between?(0, 100)
           else
             # We don't care about this prop bet
           end
@@ -108,9 +108,9 @@ class Scrape
         line.slice!(0)
         line = line.to_f
         if sign == "+"
-          line = (line / 100) + 1
+          line = line / 100
         elsif sign == "-"
-          line = (100 / line) + 1
+          line = 100 / line
         else
           puts "What am i looking at? It's not betting odds!"
         end

@@ -7,7 +7,6 @@ Rails.application.routes.draw do
 
   get "/event/add", to: "events#new", as: :new_event
   post "/event/add", to: "events#create", as: :create_event
-  get "/event/:event_id/close", to: "events#close", as: :close_event
 
   get "/event/:event_id", to: "events#show", as: :event
   post "/event/:event_id/main", to: "events#main", as: :main_card
@@ -16,6 +15,24 @@ Rails.application.routes.draw do
 
   get "/event/:event_id/update", to: "events#edit", as: :edit_event
   patch "/event/:event_id/update", to: "events#update", as: :update_event
+
+  get "/event/:event_id/results", to: "results#new", as: :new_result
+  post "/event/:event_id/results/fight/:fight_id",
+       to: "results#create",
+       as: :create_result
+  post "/event/:event_id/results/main",
+       to: "results#main",
+       as: :results_main_card
+  post "/event/:event_id/results/prelims",
+       to: "results#prelims",
+       as: :results_prelims_card
+  post "/event/:event_id/results/early",
+       to: "results#early",
+       as: :results_early_prelims_card
+
+  post "event/:event_id/results/predictions",
+       to: "results#predictions",
+       as: :score_predictions
 
   delete "/event/:event_id/delete", to: "events#destroy", as: :delete_event
 

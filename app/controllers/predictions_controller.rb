@@ -3,25 +3,16 @@ class PredictionsController < ApplicationController
     @event = Event.find(params[:event_id])
     @fight = Fight.find(params[:fight_id])
     @fighter = Fighter.find(params[:fighter_id])
+    @method = methodprediction_params[:method]
 
-    if @fight.red == @fighter
-      corner = "red"
-    elsif corner = "blue"
-    else
-      corner = nil
-    end
     #Odds for method has been posted?
-    if !corner.nil? &&
-         @fight.odd.posted?(
-           "#{corner}_#{methodprediction_params[:method].downcase}"
-         )
+    if @fight.odd.posted?(@method)
       # Method prediction already exists
       if @fight.methodpredictions.exists?(user: current_user)
         @prediction = @fight.methodpredictions.find_by(user: current_user)
 
         # Attempt to delete prediction
-        if @prediction.method == methodprediction_params[:method] &&
-             @prediction.fighter == @fighter
+        if @prediction.method == @method && @prediction.fighter == @fighter
           if @prediction.valid?
             @prediction.destroy
           else
@@ -29,10 +20,12 @@ class PredictionsController < ApplicationController
           end
           # Attempt to Update prediction
         else
+          @line = @fight.odd.retrieve(@method)
           if @prediction.update(
                fighter: @fighter,
                method: methodprediction_params[:method],
-               created_at: @prediction.created_at
+               created_at: @prediction.created_at,
+               line: @line
              )
             puts @prediction.errors.full_messages
           else
@@ -46,13 +39,14 @@ class PredictionsController < ApplicationController
 
         # Check if there is an existing distance prediction
         if @distance_prediction.nil? || @distance_prediction.valid?
+          @line = @fight.odd.retrieve(@method)
           @prediction =
             @fight.methodpredictions.new(
               user: current_user,
               event_id: params[:event_id],
               fighter_id: params[:fighter_id],
               method: methodprediction_params[:method],
-              line: 100
+              line: @line
             )
           if @prediction.save
             @fight.distancepredictions.find_by(user: current_user).try(:delete)
@@ -100,9 +94,11 @@ class PredictionsController < ApplicationController
 
           # see if we can update the method prediction!
         else
+          @odds = @fight.odd.retrieve("#{decision_bool}_decision")
           if @prediction.update(
                distance: distanceprediction_params[:distance],
-               created_at: @prediction.created_at
+               created_at: @prediction.created_at,
+               line: @odds
              )
           end
         end
@@ -113,13 +109,14 @@ class PredictionsController < ApplicationController
           @fight.methodpredictions.find_by(user: current_user)
         # Check if there is an existing method prediction
         if @method_prediction.nil? || @method_prediction.valid?
+          @odds = @fight.odd.retrieve("#{decision_bool}_decision")
           @prediction =
             @fight.distancepredictions.new(
               user: current_user,
               event_id: params[:event_id],
               fight: @fight,
               distance: distanceprediction_params[:distance],
-              line: 100
+              line: @odds
             )
 
           if @prediction.save

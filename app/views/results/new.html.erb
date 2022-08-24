@@ -1,0 +1,8 @@
+<%= stylesheet_link_tag params[:controller] %>
+<div class="header">
+<%= button_to "Score Predictions", score_predictions_path(@event) %>
+<h1><%= link_to @event.name, event_path(@event.id)%></h1>
+<h1>Submit Results</h1>
+</div>
+<%= render partial: "results/fights" %>
+

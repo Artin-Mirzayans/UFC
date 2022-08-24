@@ -1,0 +1,28 @@
+<div class="result">
+<%= form_with model: result, url: create_result_path(@event.id, fight.id), method: :post do |form| %>
+    <fieldset <%=disabled(fight)%>>
+    <%= form.radio_button :fighter_id, fight.red.id%>
+    <%= form.label :"fighter_id_#{fight.red.id}", fight.red.name %>
+    <%= form.radio_button :fighter_id, fight.blue.id %>
+    <%= form.label :"fighter_id_#{fight.blue.id}", fight.blue.name %>
+    <%= form.radio_button :"fighter_id", 1, id:"result_fighter_id_1-#{fight.id}" %>
+    <%= form.label :"fighter_id_1-#{fight.id}", "No Winner" %>
+    <br>
+    <%= form.radio_button :method, "KNOCKOUT", id:"result_method_knockout-#{fight.id}" %>
+    <%= form.label :"method_knockout-#{fight.id}", "KO" %>
+    <%= form.radio_button :method, "SUBMISSION", id:"result_method_submission-#{fight.id}" %>
+    <%= form.label :"method_submission-#{fight.id}", "SUB" %>
+    <%= form.radio_button :method, "DECISION", id:"result_method_decision-#{fight.id}" %>
+    <%= form.label :"method_decision-#{fight.id}", "DEC" %>
+    <%= form.radio_button :method, "DRAW", id:"result_method_draw-#{fight.id}" %>
+    <%= form.label :"method_draw-#{fight.id}", "DRAW" %>
+    <%= form.radio_button :method, "DQ", id:"result_method_dq-#{fight.id}" %>
+    <%= form.label :"method_dq-#{fight.id}", "DQ" %>
+    <%= form.radio_button :method, "NC", id:"result_method_nc-#{fight.id}" %>
+    <%= form.label :"method_nc-#{fight.id}", "NC" %>
+    <br>
+    <%= form.submit "Submit"%>
+    <fieldset disabled>
+<% end %>
+
+</div>

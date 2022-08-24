@@ -1,43 +1,42 @@
-  <div id = header> <h3><%= fight.red.name%></h3> <h3>Decision</h3> <h3><%= fight.blue.name %></h3></div>
-  <div id="predictions" class="predictions">
+
+  <div class="predictions">
+
 
   <div class="prediction">
+  <div class="header"><%= fight.red.name%></div>
   <%= form_with model: red_prediction, url: submit_method_prediction_path(@event.id, fight.id, fight.red.id), method: :post, data: {"fights-target": "redMethodPredictionForm"}  do |form| %>
-    <%= form.radio_button :method, "ANY", { data: {"action": "click->fights#red_method_submit"}, id: "methodprediction_method_any-#{fight.id}-#{fight.red.id}", disabled: !predictions_open?(red_prediction, distance_prediction, blue_prediction, @event)} %>
-    <%= form.label :method, "ANY | " + to_american(fight.odd.red_any), value: "ANY-#{fight.id}-#{fight.red.id}" %>
-    <%= form.radio_button :method, "KNOCKOUT", { data: {"action": "click->fights#red_method_submit"}, id: "methodprediction_method_knockout-#{fight.id}-#{fight.red.id}", disabled: !predictions_open?(red_prediction, distance_prediction, blue_prediction, @event)} %>
-    <%= form.label :method, "KO | " + to_american(fight.odd.red_knockout), value: "KNOCKOUT-#{fight.id}-#{fight.red.id}" %>
-    <%= form.radio_button :method, "SUBMISSION", { data: {"action": "click->fights#red_method_submit"}, id: "methodprediction_method_submission-#{fight.id}-#{fight.red.id}", disabled: !predictions_open?(red_prediction, distance_prediction, blue_prediction, @event)} %>
-    <%= form.label :method, "SUB | " + to_american(fight.odd.red_submission), value: "SUBMISSION-#{fight.id}-#{fight.red.id}" %>
-    <%= form.radio_button :method, "DECISION", { data: {"action": "click->fights#red_method_submit"}, id: "methodprediction_method_decision-#{fight.id}-#{fight.red.id}", disabled: !predictions_open?(red_prediction, distance_prediction, blue_prediction, @event)} %>
-    <%= form.label :method, "DEC | " + to_american(fight.odd.red_decision), value: "DECISION-#{fight.id}-#{fight.red.id}" %>
+    <%= form.radio_button :method, "red_any", { data: {"action": "click->fights#red_method_submit"}, id: "methodprediction_method_red_any-#{fight.id}-#{fight.red.id}", disabled: !predictions_open?(red_prediction, distance_prediction, blue_prediction, @event)} %>
+    <%= form.label :"method_red_any-#{fight.id}-#{fight.red.id}", "ANY | " + to_american(fight.odd.red_any) %>
+    <%= form.radio_button :method, "red_knockout", { data: {"action": "click->fights#red_method_submit"}, id: "methodprediction_method_red_knockout-#{fight.id}-#{fight.red.id}", disabled: !predictions_open?(red_prediction, distance_prediction, blue_prediction, @event)} %>
+    <%= form.label :"method_red_knockout-#{fight.id}-#{fight.red.id}", "KO | " + to_american(fight.odd.red_knockout) %>
+    <%= form.radio_button :method, "red_submission", { data: {"action": "click->fights#red_method_submit"}, id: "methodprediction_method_red_submission-#{fight.id}-#{fight.red.id}", disabled: !predictions_open?(red_prediction, distance_prediction, blue_prediction, @event)} %>
+    <%= form.label :"method_red_submission-#{fight.id}-#{fight.red.id}", "SUB | " + to_american(fight.odd.red_submission) %>
+    <%= form.radio_button :method, "red_decision", { data: {"action": "click->fights#red_method_submit"}, id: "methodprediction_method_red_decision-#{fight.id}-#{fight.red.id}", disabled: !predictions_open?(red_prediction, distance_prediction, blue_prediction, @event)} %>
+    <%= form.label :"method_red_decision-#{fight.id}-#{fight.red.id}", "DEC | " + to_american(fight.odd.red_decision) %>
   <% end %>
   </div>
 
   <div class="prediction">
-    <%= form_with model: distance_prediction, url: submit_distance_prediction_path(@event.id, fight.id), method: :post, data: {"fights-target": "distancePredictionForm"}  do |form| %>
+  <div class="header">Distance</div>
+  <%= form_with model: distance_prediction, url: submit_distance_prediction_path(@event.id, fight.id), method: :post, data: {"fights-target": "distancePredictionForm"}  do |form| %>
     <%= form.radio_button :distance, true, { data: {"action": "click->fights#distance_submit"}, id: "distanceprediction_distance_yes-#{fight.id}", disabled: !predictions_open?(red_prediction, distance_prediction, blue_prediction, @event)} %>
-    <%= form.label :distance, "YES | " + to_american(fight.odd.yes_decision), value: "yes-#{fight.id}" %>
+    <%= form.label :"distance_yes-#{fight.id}", "YES | " + to_american(fight.odd.yes_decision) %>
     <%= form.radio_button :distance, false, { data: {"action": "click->fights#distance_submit"}, id: "distanceprediction_distance_no-#{fight.id}", disabled: !predictions_open?(red_prediction, distance_prediction, blue_prediction, @event)} %>
-    <%= form.label :distance, "NO | " + to_american(fight.odd.no_decision), value: "no-#{fight.id}" %>
-    <% end %>
-
-  <%= form_with do |form| %>
-    <%= form.radio_button :age, "child" %>
-    <%= form.label :age_child, "I am younger than 21" %>
+    <%= form.label :"distance_no-#{fight.id}", "NO | " + to_american(fight.odd.no_decision) %>
   <% end %>
   </div>
 
 <div class="prediction">
+<div class="header"><%= fight.blue.name%></div>
   <%= form_with model: blue_prediction, url: submit_method_prediction_path(@event.id, fight.id, fight.blue.id), method: :post, data: {"fights-target": "blueMethodPredictionForm"}  do |form| %>
-    <%= form.radio_button :method, "ANY", { data: {"action": "click->fights#blue_method_submit"}, id: "methodprediction_method_any-#{fight.id}-#{fight.blue.id}", disabled: !predictions_open?(red_prediction, distance_prediction, blue_prediction, @event)} %>
-    <%= form.label :method, "ANY | " + to_american(fight.odd.blue_any), value: "ANY-#{fight.id}-#{fight.blue.id}" %>
-    <%= form.radio_button :method, "KNOCKOUT", { data: {"action": "click->fights#blue_method_submit"}, id: "methodprediction_method_knockout-#{fight.id}-#{fight.blue.id}", disabled: !predictions_open?(red_prediction, distance_prediction, blue_prediction, @event)} %>
-    <%= form.label :method, "KO | " + to_american(fight.odd.blue_knockout), value: "KNOCKOUT-#{fight.id}-#{fight.blue.id}" %>
-    <%= form.radio_button :method, "SUBMISSION", { data: {"action": "click->fights#blue_method_submit"}, id: "methodprediction_method_submission-#{fight.id}-#{fight.blue.id}", disabled: !predictions_open?(red_prediction, distance_prediction, blue_prediction, @event)} %>
-    <%= form.label :method, "SUB | " + to_american(fight.odd.blue_submission), value: "SUBMISSION-#{fight.id}-#{fight.blue.id}" %>
-    <%= form.radio_button :method, "DECISION", { data: {"action": "click->fights#blue_method_submit"}, id: "methodprediction_method_decision-#{fight.id}-#{fight.blue.id}", disabled: !predictions_open?(red_prediction, distance_prediction, blue_prediction, @event)} %>
-    <%= form.label :method, "DEC | " + to_american(fight.odd.blue_decision), value: "DECISION-#{fight.id}-#{fight.blue.id}" %>
+    <%= form.radio_button :method, "blue_any", { data: {"action": "click->fights#blue_method_submit"}, id: "methodprediction_method_blue_any-#{fight.id}-#{fight.blue.id}", disabled: !predictions_open?(red_prediction, distance_prediction, blue_prediction, @event)} %>
+    <%= form.label :"method_blue_any-#{fight.id}-#{fight.blue.id}", "ANY | " + to_american(fight.odd.blue_any)%>
+    <%= form.radio_button :method, "blue_knockout", { data: {"action": "click->fights#blue_method_submit"}, id: "methodprediction_method_blue_knockout-#{fight.id}-#{fight.blue.id}", disabled: !predictions_open?(red_prediction, distance_prediction, blue_prediction, @event)} %>
+    <%= form.label :"method_blue_knockout-#{fight.id}-#{fight.blue.id}", "KO | " + to_american(fight.odd.blue_knockout) %>
+    <%= form.radio_button :method, "blue_submission", { data: {"action": "click->fights#blue_method_submit"}, id: "methodprediction_method_blue_submission-#{fight.id}-#{fight.blue.id}", disabled: !predictions_open?(red_prediction, distance_prediction, blue_prediction, @event)} %>
+    <%= form.label :"method_blue_submission-#{fight.id}-#{fight.blue.id}", "SUB | " + to_american(fight.odd.blue_submission) %>
+    <%= form.radio_button :method, "blue_decision", { data: {"action": "click->fights#blue_method_submit"}, id: "methodprediction_method_blue_decision-#{fight.id}-#{fight.blue.id}", disabled: !predictions_open?(red_prediction, distance_prediction, blue_prediction, @event)} %>
+    <%= form.label :"method_blue_decision-#{fight.id}-#{fight.blue.id}", "DEC | " + to_american(fight.odd.blue_decision) %>
   <% end %>
 </div>
 
