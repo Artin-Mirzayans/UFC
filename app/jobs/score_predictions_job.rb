@@ -20,9 +20,8 @@ class ScorePredictionsJob < ApplicationJob
 
     @correct_predictions =
       @correct_win_by_any_predictions + @correct_win_by_method_predictions
-    @incorrect_predictions = predictions - @correct_predictions
 
-    score_predictions(@correct_predictions, @incorrect_predictions)
+    score_predictions(@correct_predictions)
   end
 
   def evaluate_distance_predictions(fight, predictions)
@@ -32,28 +31,19 @@ class ScorePredictionsJob < ApplicationJob
       @correct_predictions = predictions.where(distance: false)
     end
 
-    @incorrect_predictions = predictions - @correct_predictions
-
-    score_predictions(@correct_predictions, @incorrect_predictions)
+    score_predictions(@correct_predictions)
   end
 
-  def score_predictions(correct_predictions, incorrect_predictions)
+  def score_predictions(correct_predictions)
     unless correct_predictions.blank?
       correct_predictions.each do |prediction|
-        puts prediction.fighter.name
-        prediction.user.update(points: prediction.user.points + 100)
-      end
-    end
-    unless incorrect_predictions.blank?
-      incorrect_predictions.each do |prediction|
-        puts prediction.fighter.name
-        prediction.user.update(points: prediction.user.points - 100)
+        prediction.update(is_correct: true)
+        prediction
+          .user
+          .user_event_budgets
+          .find_by(event: prediction.event)
+          .update_winnings((prediction.wager * prediction.line).round)
       end
     end
   end
 end
-
-#testing
-# @cp_any = predictions.where(method: "ANY").where(fighter: f.result.fighter)
-# @cp_method = predictions.where(method: f.result.method, fighter: f.result.fighter)
-# @cp = cp_any + cp_method

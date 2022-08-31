@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_21_233043) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_30_042532) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -22,6 +22,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_21_233043) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "event_id"
+    t.integer "wager"
+    t.boolean "is_correct", default: false
   end
 
   create_table "events", force: :cascade do |t|
@@ -59,6 +61,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_21_233043) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "event_id"
+    t.integer "wager"
+    t.boolean "is_correct", default: false
   end
 
   create_table "odds", force: :cascade do |t|
@@ -83,6 +87,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_21_233043) do
     t.integer "method"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "user_event_budgets", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "event_id"
+    t.integer "budget"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "winnings", default: 0
+    t.integer "wagered", default: 0
   end
 
   create_table "users", force: :cascade do |t|

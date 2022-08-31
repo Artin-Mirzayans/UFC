@@ -28,7 +28,8 @@ class EventsController < ApplicationController
 
     @card = "MAIN"
 
-    @method = Methodprediction.new
+    @user_event_budget =
+      UserEventBudget.find_or_create_by(user: current_user, event: @event)
   end
 
   def main

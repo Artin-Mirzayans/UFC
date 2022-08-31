@@ -8,7 +8,8 @@ class Fight < ApplicationRecord
   has_one :odd, dependent: :destroy
   has_one :result
 
-  acts_as_list scope: [:placement]
+  acts_as_list scope: %i[placement event_id]
+
   validates :red, presence: true
   validates :blue, presence: true
   validates :placement, presence: true
@@ -30,5 +31,10 @@ class Fight < ApplicationRecord
 
   def get_result(user, fight)
     self.result || self.build_result
+  end
+
+  def has_user_prediction?(user)
+    self.methodpredictions(user: user).exists? ||
+      self.distancepredictions(user: user).exists?
   end
 end

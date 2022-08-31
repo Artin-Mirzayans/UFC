@@ -1,10 +1,10 @@
 class Scrape
   def initialize
-    # @doc = Nokogiri.HTML(URI.open("https://www.bestfightodds.com/"))
-    @doc =
-      File.open(
-        "C:/Users/Artin/Desktop/EDU/UFC/lib/odds_site/ufcodds.html"
-      ) { |f| Nokogiri.HTML(f) }
+    @doc = Nokogiri.HTML(URI.open("https://www.bestfightodds.com/"))
+    # @doc =
+    #   File.open(
+    #     "C:/Users/Artin/Desktop/EDU/UFC/lib/odds_site/ufcodds.html"
+    #   ) { |f| Nokogiri.HTML(f) }
   end
 
   def get_tables
@@ -12,6 +12,7 @@ class Scrape
     all_tables = @doc.css(".table-div")
     tables =
       all_tables.select do |table|
+        puts table.css(".table-header a")
         @events.where(name: table.css(".table-header a").text.upcase).exists?
       end
     return tables
@@ -99,7 +100,6 @@ class Scrape
   end #function
 
   def fetch_line(betting_line, header)
-    print header.text + ": "
     arr = betting_line.map { |line| line.text.gsub(/[^0-9A-Za-z+-]/, "") }
     if arr.length() > 2
       sum = 0

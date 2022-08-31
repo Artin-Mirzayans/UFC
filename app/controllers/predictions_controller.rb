@@ -1,9 +1,12 @@
 class PredictionsController < ApplicationController
+  skip_before_action :verify_authenticity_token
   def submit_method
     @event = Event.find(params[:event_id])
-    @fight = Fight.find(params[:fight_id])
-    @fighter = Fighter.find(params[:fighter_id])
+    @fight = @event.fights.find(params[:fight_id])
+    @fighter = @event.fighters.find(params[:fighter_id])
     @method = methodprediction_params[:method]
+    @user_event_budget =
+      UserEventBudget.find_by(user: current_user, event: @event)
 
     #Odds for method has been posted?
     if @fight.odd.posted?(@method)
@@ -15,6 +18,8 @@ class PredictionsController < ApplicationController
         if @prediction.method == @method && @prediction.fighter == @fighter
           if @prediction.valid?
             @prediction.destroy
+            @user_event_budget.increase_budget(@prediction.wager)
+            @user_event_budget.decrease_wagered(@prediction.wager)
           else
             puts @prediction.errors.full_messages
           end
@@ -31,25 +36,47 @@ class PredictionsController < ApplicationController
           else
           end
         end
+      elsif @fight.distancepredictions.find_by(user: current_user).nil?
+        # Fresh Method Prediction (Distance prediction does not exist)
+        @line = @fight.odd.retrieve(@method)
+        @wager = @user_event_budget.set_default_wager(current_user, @event)
 
-        # Fresh Method Prediction (Could be trying to change from distance prediction to method prediction OR first prediction made on fight)
+        @prediction =
+          @fight.methodpredictions.new(
+            user: current_user,
+            event: @event,
+            fighter: @fighter,
+            method: @method,
+            line: @line,
+            wager: @wager
+          )
+        if @prediction.save
+          @user_event_budget.decrease_budget(@wager)
+          @user_event_budget.increase_wagered(@wager)
+        else
+          puts @prediction.errors.full_messages
+        end
       else
+        #Attempting to change distance prediction to method prediction
         @distance_prediction =
           @fight.distancepredictions.find_by(user: current_user)
-
-        # Check if there is an existing distance prediction
-        if @distance_prediction.nil? || @distance_prediction.valid?
+        if @distance_prediction.valid?
+          @wager = @distance_prediction.wager
           @line = @fight.odd.retrieve(@method)
+
           @prediction =
             @fight.methodpredictions.new(
               user: current_user,
-              event_id: params[:event_id],
-              fighter_id: params[:fighter_id],
-              method: methodprediction_params[:method],
-              line: @line
+              event: @event,
+              fighter: @fighter,
+              method: @method,
+              line: @line,
+              wager: @wager,
+              created_at: @distance_prediction.created_at
             )
+
           if @prediction.save
-            @fight.distancepredictions.find_by(user: current_user).try(:delete)
+            @distance_prediction.delete
           else
             puts @prediction.errors.full_messages
           end
@@ -68,18 +95,18 @@ class PredictionsController < ApplicationController
   def submit_distance
     @event = Event.find(params[:event_id])
     @fight = Fight.find(params[:fight_id])
+    @user_event_budget =
+      UserEventBudget.find_by(user: current_user, event: @event)
 
     if distanceprediction_params[:distance] == "true"
-      decision_bool = "yes"
+      distance = "yes_decision"
     elsif distanceprediction_params[:distance] == "false"
-      decision_bool = "no"
-    else
-      decision_bool = nil
+      distance = "no_decision"
     end
 
     #Odds for method has been posted?
-    if !decision_bool.nil? && @fight.odd.posted?("#{decision_bool}_decision")
-      # Method prediction already exists
+    if distance.present? && @fight.odd.posted?(distance)
+      # Distance prediction already exists
       if @fight.distancepredictions.exists?(user: current_user)
         @prediction = @fight.distancepredictions.find_by(user: current_user)
 
@@ -88,40 +115,62 @@ class PredictionsController < ApplicationController
              distanceprediction_params[:distance]
           if @prediction.valid?
             @prediction.delete
+            @user_event_budget.increase_budget(@prediction.wager)
+            @user_event_budget.decrease_wagered(@prediction.wager)
           else
             puts @prediction.errors.full_messages
           end
 
           # see if we can update the method prediction!
         else
-          @odds = @fight.odd.retrieve("#{decision_bool}_decision")
+          @line = @fight.odd.retrieve(distance)
           if @prediction.update(
                distance: distanceprediction_params[:distance],
                created_at: @prediction.created_at,
-               line: @odds
+               line: @line
              )
           end
         end
+      elsif @fight.methodpredictions.find_by(user: current_user).nil?
+        # Fresh Distance Prediction (Method prediction does not exist)
+        @line = @fight.odd.retrieve(distance)
+        @wager = @user_event_budget.set_default_wager(current_user, @event)
 
-        # Fresh Distance Prediction (Could be trying to change from distance prediction to method prediction OR first prediction made on fight)
+        @prediction =
+          @fight.distancepredictions.new(
+            user: current_user,
+            event: @event,
+            fight: @fight,
+            distance: distanceprediction_params[:distance],
+            line: @line,
+            wager: @wager
+          )
+        if @prediction.save
+          @user_event_budget.decrease_budget(@wager)
+          @user_event_budget.increase_wagered(@wager)
+        else
+          puts @prediction.errors.full_messages
+        end
       else
+        #Attempting to change method prediction to distance prediction
         @method_prediction =
           @fight.methodpredictions.find_by(user: current_user)
-        # Check if there is an existing method prediction
-        if @method_prediction.nil? || @method_prediction.valid?
-          @odds = @fight.odd.retrieve("#{decision_bool}_decision")
+        if @method_prediction.valid?
+          @wager = @method_prediction.wager
+          @line = @fight.odd.retrieve(distance)
+
           @prediction =
             @fight.distancepredictions.new(
               user: current_user,
-              event_id: params[:event_id],
-              fight: @fight,
+              event: @event,
               distance: distanceprediction_params[:distance],
-              line: @odds
+              line: @line,
+              wager: @wager,
+              created_at: @method_prediction.created_at
             )
 
           if @prediction.save
-            # Delete method prediction if exists when changing to distance prediction
-            @fight.methodpredictions.find_by(user: current_user).try(:delete)
+            @method_prediction.delete
           else
             puts @prediction.errors.full_messages
           end
@@ -133,6 +182,42 @@ class PredictionsController < ApplicationController
       puts "Betting Odds have not been posted!"
     end
 
+    @card = @fight.placement
+    @fights = @event.fights.where(placement: @card)
+
+    respond_to { |format| format.turbo_stream }
+  end
+
+  def wager
+    @event = Event.find(params[:event_id])
+    @fight = @event.fights.find(params[:fight_id])
+    @wager = params[:wager].to_i
+    @user_event_budget =
+      UserEventBudget.find_by(user: current_user, event: @event)
+
+    if @fight.methodpredictions.exists?(user: current_user)
+      @prediction = @fight.methodpredictions.find_by(user: current_user)
+    else
+      @prediction = @fight.distancepredictions.find_by(user: current_user)
+    end
+
+    difference = @prediction.wager - @wager
+    if @user_event_budget.sufficient_funds?(difference) && @prediction.valid? &&
+         @wager.positive?
+      if @prediction.update(wager: @wager)
+        if difference.positive?
+          @user_event_budget.increase_budget(difference)
+          @user_event_budget.decrease_wagered(difference)
+        else
+          @user_event_budget.decrease_budget(-difference)
+          @user_event_budget.increase_wagered(-difference)
+        end
+      else
+        puts @prediction.errors.full_messages
+      end
+    else
+      puts @prediction.errors.full_messages
+    end
     @card = @fight.placement
     @fights = @event.fights.where(placement: @card)
 

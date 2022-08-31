@@ -3,6 +3,7 @@
 <h1><%= @event.name%></h1>
 <h2><%= @event.location %></h2>
 <h2><%= @event.date %></h2>
+<h2>$<%= @user_event_budget.budget %></h2>
 
 <% if is_admin? %>
     <%= button_to('Delete Event', delete_event_path(@event.id), method: "delete") %>

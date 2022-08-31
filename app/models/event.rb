@@ -4,6 +4,8 @@ class Event < ApplicationRecord
   has_many :blues, through: :fights, source: :blue
   has_many :methodpredictions
   has_many :distancepredictions
+  has_many :user_event_budgets
+
   validates :name, presence: true
   validates :location, presence: true
   validates :date, presence: true
@@ -20,9 +22,24 @@ class Event < ApplicationRecord
     self.status ||= :UPCOMING
   end
 
+  def get_user_budget(user)
+    self.user_event_budgets.find_by(user: user)
+  end
+
   def received_all_results?
     @fights = self.fights
     @fight = @fights.detect { |fight| fight.result.nil? }
     errors.add(:name, ": Waiting on all fight results") if !@fight.nil?
+  end
+
+  def user_predicted_fights(user)
+    self
+      .fights
+      .joins(:methodpredictions)
+      .where(methodpredictions: { user: user }) +
+      self
+        .fights
+        .joins(:distancepredictions)
+        .where(distancepredictions: { user: user })
   end
 end

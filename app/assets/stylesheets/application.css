@@ -32,6 +32,10 @@
     text-align: center;
     padding: 14px 16px;
   }
+
+  li.nav-right {
+    float: right;
+  }
   
   li.navbar a {
     display: block;

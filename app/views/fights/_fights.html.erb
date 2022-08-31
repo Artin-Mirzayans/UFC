@@ -10,7 +10,7 @@
 
         <% @fights.each do |fight| %>
         <div id="fight" data-controller="fights">
-            <%= render partial: "fights/prediction", locals: {red_prediction: fight.get_method_prediction(current_user, fight.red), distance_prediction: fight.get_distance_prediction(current_user, fight), blue_prediction: fight.get_method_prediction(current_user, fight.blue), fight: fight} %>
+            <%= render partial: "fights/prediction", locals: {fight: fight, red_prediction: fight.get_method_prediction(current_user, fight.red), distance_prediction: fight.get_distance_prediction(current_user, fight), blue_prediction: fight.get_method_prediction(current_user, fight.blue) } %>
                 <br>
             <% if is_admin_or_mod? %>
                 <%= button_to('Up', fight_up_path(@event.id, fight.id), method: "post") %>

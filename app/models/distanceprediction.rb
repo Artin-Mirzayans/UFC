@@ -9,6 +9,12 @@ class Distanceprediction < ApplicationRecord
   validates :distance, inclusion: [true, false]
   validates :distance, exclusion: [nil]
   validates :line, presence: true
+  validates :wager,
+            presence: true,
+            numericality: {
+              only_integer: true,
+              greater_than_or_equal_to: 20
+            }
 
   validate :update_timer?
   validate :event_locked?

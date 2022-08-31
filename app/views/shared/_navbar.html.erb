@@ -3,6 +3,6 @@
   <% if is_admin_or_mod? %>
   <li class="navbar"><%= link_to 'Add Event', new_event_path %></li>
   <% end %>
-  <li class="navbar"><%=current_user.email%></li>
-  <li class="navbar"><%= link_to "Sign Out", destroy_user_session_path, 'data-turbo-method': :delete %></li>
+  <li class="navbar nav-right"><%= link_to "Sign Out", destroy_user_session_path, 'data-turbo-method': :delete %></li>
+  <li class="navbar nav-right"><%= link_to current_user.email, user_profile_path(current_user.id) %></li>
 </ul> 

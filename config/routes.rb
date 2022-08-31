@@ -16,6 +16,8 @@ Rails.application.routes.draw do
   get "/event/:event_id/update", to: "events#edit", as: :edit_event
   patch "/event/:event_id/update", to: "events#update", as: :update_event
 
+  get "/user/:user_id/profile", to: "users#profile", as: :user_profile
+
   get "/event/:event_id/results", to: "results#new", as: :new_result
   post "/event/:event_id/results/fight/:fight_id",
        to: "results#create",
@@ -62,4 +64,6 @@ Rails.application.routes.draw do
   post "event/:event_id/fights/:fight_id",
        to: "predictions#submit_distance",
        as: :submit_distance_prediction
+
+  patch "event/:event_id/fights/:fight_id/:wager", to: "predictions#wager"
 end

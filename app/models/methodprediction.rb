@@ -10,6 +10,12 @@ class Methodprediction < ApplicationRecord
   validates :fight_id, presence: true
   validates :method, presence: true
   validates :line, presence: true
+  validates :wager,
+            presence: true,
+            numericality: {
+              only_integer: true,
+              greater_than_or_equal_to: 20
+            }
 
   validate :update_timer?
   validate :event_locked?

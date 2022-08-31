@@ -2,9 +2,30 @@
   font-size: 24px;
 }
 
+.wager {
+  position: absolute;
+  background-color: rgb(26, 125, 239);
+  cursor: pointer;
+  right: 0;
+  top: 0;
+  z-index: 1;
+  padding: 6px 14px;
+}
+
+.hidden-wager {
+  display: none;
+}
+
+.option {
+  width: 100%;
+  position: relative;
+}
+
+
 button:disabled {
   background-color: rgb(171, 162, 162);
 }
+
 h1 {
   text-align: center 
 }
@@ -27,12 +48,21 @@ h2 {
   font-size: 30px;
 }
 
+
 .predictions {
   display: flex;
   justify-content: space-around;
 }
 
+.prediction {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 350px;
+}
+
 .prediction form {
+  position: relative;
   display: flex;
   flex-direction: column;
 }
@@ -50,11 +80,13 @@ h2 {
 .prediction label {
     display: inline-block;
     background-color: #ddd;
-    padding: 30px 40px;
     font-family: sans-serif, Arial;
-    font-size: 54px;
+    font-size: 48px;
+    padding: 25px 20px;
     border: 2px solid #444;
     border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .prediction label:hover {
@@ -69,3 +101,4 @@ h2 {
     background-color: rgb(83, 89, 105);
     border-color: rgb(0, 0, 0);
 }
+

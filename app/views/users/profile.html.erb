@@ -1,0 +1,6 @@
+<h1>Profile</h1>
+<div id="events">
+<% @events.each do |event| %>
+<%= render partial: "users/events", locals: {event: event, user: @user, fights: event.user_predicted_fights(@user).sort{ |a,b| a.position <=> b.position}, user_event_budget: event.get_user_budget(@user)}%>
+<% end %>
+</div>
