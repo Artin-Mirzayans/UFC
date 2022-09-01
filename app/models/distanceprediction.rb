@@ -15,6 +15,7 @@ class Distanceprediction < ApplicationRecord
               only_integer: true,
               greater_than_or_equal_to: 20
             }
+  validates :is_correct, inclusion: [true, false]
 
   validate :update_timer?
   validate :event_locked?

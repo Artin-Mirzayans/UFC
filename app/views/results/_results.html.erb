@@ -8,17 +8,17 @@
     <%= form.radio_button :"fighter_id", 1, id:"result_fighter_id_1-#{fight.id}" %>
     <%= form.label :"fighter_id_1-#{fight.id}", "No Winner" %>
     <br>
-    <%= form.radio_button :method, "KNOCKOUT", id:"result_method_knockout-#{fight.id}" %>
+    <%= form.radio_button :method, "knockout", id:"result_method_knockout-#{fight.id}" %>
     <%= form.label :"method_knockout-#{fight.id}", "KO" %>
-    <%= form.radio_button :method, "SUBMISSION", id:"result_method_submission-#{fight.id}" %>
+    <%= form.radio_button :method, "submission", id:"result_method_submission-#{fight.id}" %>
     <%= form.label :"method_submission-#{fight.id}", "SUB" %>
-    <%= form.radio_button :method, "DECISION", id:"result_method_decision-#{fight.id}" %>
+    <%= form.radio_button :method, "decision", id:"result_method_decision-#{fight.id}" %>
     <%= form.label :"method_decision-#{fight.id}", "DEC" %>
-    <%= form.radio_button :method, "DRAW", id:"result_method_draw-#{fight.id}" %>
+    <%= form.radio_button :method, "draw", id:"result_method_draw-#{fight.id}" %>
     <%= form.label :"method_draw-#{fight.id}", "DRAW" %>
-    <%= form.radio_button :method, "DQ", id:"result_method_dq-#{fight.id}" %>
+    <%= form.radio_button :method, "dq", id:"result_method_dq-#{fight.id}" %>
     <%= form.label :"method_dq-#{fight.id}", "DQ" %>
-    <%= form.radio_button :method, "NC", id:"result_method_nc-#{fight.id}" %>
+    <%= form.radio_button :method, "nc", id:"result_method_nc-#{fight.id}" %>
     <%= form.label :"method_nc-#{fight.id}", "NC" %>
     <br>
     <%= form.submit "Submit"%>

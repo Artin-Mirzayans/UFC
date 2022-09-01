@@ -34,7 +34,12 @@ class UserEventBudget < ApplicationRecord
   end
 
   def update_winnings(winnings)
-    self.update(winnings: self.winnings += total_winnings)
+    self.update(winnings: self.winnings += winnings)
+  end
+
+  def refund(wager)
+    self.increase_budget(wager)
+    self.decrease_wagered(wager)
   end
 
   def increase_budget(wager)

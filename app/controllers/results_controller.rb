@@ -57,7 +57,7 @@ class ResultsController < ApplicationController
 
     @event.received_all_results?
 
-    if !@event.errors.added?(:name)
+    if !@event.errors.added? :name, "Waiting on all fight results."
       @fights.each do |fight|
         methodpredictions_ids = fight.methodpredictions.pluck(:id)
         distancepredictions_ids = fight.distancepredictions.pluck(:id)

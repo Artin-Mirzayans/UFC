@@ -5,5 +5,5 @@ class Result < ApplicationRecord
   validates :fighter_id, presence: true
   validates :method, presence: true
 
-  enum method: %i[KNOCKOUT SUBMISSION DECISION DRAW DQ NC]
+  enum method: %i[knockout submission decision draw dq nc]
 end

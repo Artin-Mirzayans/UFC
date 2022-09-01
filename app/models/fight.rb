@@ -10,6 +10,8 @@ class Fight < ApplicationRecord
 
   acts_as_list scope: %i[placement event_id]
 
+  scope :placement_order, -> { order(:placement) }
+
   validates :red, presence: true
   validates :blue, presence: true
   validates :placement, presence: true
@@ -36,5 +38,9 @@ class Fight < ApplicationRecord
   def has_user_prediction?(user)
     self.methodpredictions(user: user).exists? ||
       self.distancepredictions(user: user).exists?
+  end
+
+  def numeric_placement_value
+    self.class.placements[placement]
   end
 end

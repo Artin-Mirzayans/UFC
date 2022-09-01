@@ -29,7 +29,7 @@ class Event < ApplicationRecord
   def received_all_results?
     @fights = self.fights
     @fight = @fights.detect { |fight| fight.result.nil? }
-    errors.add(:name, ": Waiting on all fight results") if !@fight.nil?
+    errors.add(:name, "Waiting on all fight results.") if !@fight.nil?
   end
 
   def user_predicted_fights(user)
