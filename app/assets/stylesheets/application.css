@@ -14,7 +14,7 @@
  */
 
  body {
-    background-color: rgb(165, 163, 163);
+    background-color: rgb(75, 75, 75);
 }
 
   ul.navbar {
@@ -22,7 +22,7 @@
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: rgb(187, 187, 187);
+    background-color: rgb(158, 167, 255);
   }
   
   li.navbar {

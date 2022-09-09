@@ -33,7 +33,7 @@ module ProfileHelper
     end
   end
 
-  def to_hash(fights)
+  def sort_fights(fights)
     fights
       .reduce({ MAIN: [], PRELIMS: [], EARLY: [] }) do |hash, current_fight|
         hash[current_fight.placement.to_sym].push(current_fight)

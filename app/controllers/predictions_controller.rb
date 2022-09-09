@@ -4,7 +4,7 @@ class PredictionsController < ApplicationController
     @event = Event.find(params[:event_id])
     @fight = @event.fights.find(params[:fight_id])
     @fighter = @event.fighters.find(params[:fighter_id])
-    @method = methodprediction_params[:method]
+    @method = params[:method]
     @user_event_budget =
       UserEventBudget.find_by(user: current_user, event: @event)
 
@@ -28,7 +28,7 @@ class PredictionsController < ApplicationController
           @line = @fight.odd.retrieve(@method)
           if @prediction.update(
                fighter: @fighter,
-               method: methodprediction_params[:method],
+               method: @method,
                created_at: @prediction.created_at,
                line: @line
              )
@@ -95,12 +95,13 @@ class PredictionsController < ApplicationController
   def submit_distance
     @event = Event.find(params[:event_id])
     @fight = Fight.find(params[:fight_id])
+    @distance = params[:method]
     @user_event_budget =
       UserEventBudget.find_by(user: current_user, event: @event)
 
-    if distanceprediction_params[:distance] == "true"
+    if @distance == "true"
       distance = "yes_decision"
-    elsif distanceprediction_params[:distance] == "false"
+    elsif @distance == "false"
       distance = "no_decision"
     end
 
@@ -111,8 +112,7 @@ class PredictionsController < ApplicationController
         @prediction = @fight.distancepredictions.find_by(user: current_user)
 
         # User trying to delete prediction
-        if @prediction.distance.to_s.downcase ==
-             distanceprediction_params[:distance]
+        if @prediction.distance.to_s.downcase == @distance
           if @prediction.valid?
             @prediction.delete
             @user_event_budget.increase_budget(@prediction.wager)
@@ -125,7 +125,7 @@ class PredictionsController < ApplicationController
         else
           @line = @fight.odd.retrieve(distance)
           if @prediction.update(
-               distance: distanceprediction_params[:distance],
+               distance: @distance,
                created_at: @prediction.created_at,
                line: @line
              )
@@ -141,7 +141,7 @@ class PredictionsController < ApplicationController
             user: current_user,
             event: @event,
             fight: @fight,
-            distance: distanceprediction_params[:distance],
+            distance: @distance,
             line: @line,
             wager: @wager
           )
@@ -163,7 +163,7 @@ class PredictionsController < ApplicationController
             @fight.distancepredictions.new(
               user: current_user,
               event: @event,
-              distance: distanceprediction_params[:distance],
+              distance: @distance,
               line: @line,
               wager: @wager,
               created_at: @method_prediction.created_at
@@ -222,17 +222,5 @@ class PredictionsController < ApplicationController
     @fights = @event.fights.where(placement: @card)
 
     respond_to { |format| format.turbo_stream }
-  end
-
-  private
-
-  def methodprediction_params
-    params.require(:methodprediction).permit(:method)
-  end
-
-  private
-
-  def distanceprediction_params
-    params.require(:distanceprediction).permit(:distance)
   end
 end

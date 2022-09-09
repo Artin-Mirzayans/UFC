@@ -1,27 +1,33 @@
 import { Controller } from "@hotwired/stimulus"
 
-// Connects to data-controller="fights"
 export default class extends Controller {
-  // DEFINES WHAT HTML TAGS WE NEED TO TARGET SO WE CAN READ/UPDATE/MODIFY THEM
-  static targets = ["redMethodPredictionForm", "blueMethodPredictionForm", "distancePredictionForm"]
 
-  // Initialize method, happens on load
   connect() {
     console.log("Fights Controller Connected")
-
   }
 
-  red_method_submit() {
-    this.redMethodPredictionFormTarget.requestSubmit()
+  method_submit(event) {
+    let event_id = event.target.dataset.event
+    let fight_id = event.target.dataset.fight
+    let fighter_id = event.target.dataset.fighter
+    let method = event.target.dataset.method
 
+    fetch(`${event_id}/fights/${fight_id}/fighter/${fighter_id}/method/${method}`, {
+      headers: { accept: "text/vnd.turbo-stream.html"},
+      method: 'POST'})
+      .then(r => r.text())
+      .then(html => Turbo.renderStreamMessage(html))
   }
 
-  blue_method_submit() {
-    this.blueMethodPredictionFormTarget.requestSubmit()
-  }
-
-  distance_submit() {
-    this.distancePredictionFormTarget.requestSubmit()
+  distance_submit(event) {
+    let event_id = event.target.dataset.event
+    let fight_id = event.target.dataset.fight
+    let method = event.target.dataset.method
+    fetch(`${event_id}/fights/${fight_id}/method/${method}`, {
+      headers: { accept: "text/vnd.turbo-stream.html"},
+      method: 'POST'})
+      .then(r => r.text())
+      .then(html => Turbo.renderStreamMessage(html))
   }
 
   prompt(event) {
@@ -39,13 +45,4 @@ export default class extends Controller {
     }
   }
 
-  // form_disable() {
-  //   console.log("Hello YOU SEE ME!")
-  //   // Array.from(this.redMethodPredictionFormTarget.children).forEach(item => item.disabled = true)
-  //   // Array.from(this.distanceMethodPredictionFormTarget.children).forEach(item => item.disabled = true)
-  //   // Array.from(this.redMethodPredictionFormTarget.children).forEach(item => item.disabled = true)
-  // }
-
-
-  
 }

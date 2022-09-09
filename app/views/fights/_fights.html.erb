@@ -1,17 +1,16 @@
 <div id="fights">
 
     <div id="card">
-    <%= button_to('MAIN CARD', main_card_path(@event.id), method: "post", disabled: (@card == "MAIN")) %>
+    <%= button_to('MAIN', main_card_path(@event.id), method: "post", disabled: (@card == "MAIN")) %>
     <%= button_to('PRELIMS', prelims_card_path(@event.id), method: "post", disabled: (@card == "PRELIMS")) %>
     <% if @event.category == "PPV" %>
-        <%= button_to('EARLY PRELIMS', early_prelims_card_path(@event.id), method: "post", disabled: (@card == "EARLY")) %>
+    <%= button_to('EARLY PRELIMS', early_prelims_card_path(@event.id), method: "post", disabled: (@card == "EARLY")) %>
     <% end %>
     </div>
 
         <% @fights.each do |fight| %>
         <div id="fight" data-controller="fights">
             <%= render partial: "fights/prediction", locals: {fight: fight, red_prediction: fight.get_method_prediction(current_user, fight.red), distance_prediction: fight.get_distance_prediction(current_user, fight), blue_prediction: fight.get_method_prediction(current_user, fight.blue) } %>
-                <br>
             <% if is_admin_or_mod? %>
                 <%= button_to('Up', fight_up_path(@event.id, fight.id), method: "post") %>
                 <%= button_to('Down', fight_down_path(@event.id, fight.id), method: "post") %>
@@ -20,6 +19,5 @@
             <% end %>
         </div>
         <% end %>
-    </div>
     
 </div>

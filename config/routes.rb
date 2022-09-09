@@ -57,13 +57,11 @@ Rails.application.routes.draw do
 
   delete "/fight/:fight_id/delete", to: "fights#destroy", as: :delete_fight
 
-  post "event/:event_id/fights/:fight_id/fighter/:fighter_id",
-       to: "predictions#submit_method",
-       as: :submit_method_prediction
+  post "event/:event_id/fights/:fight_id/fighter/:fighter_id/method/:method",
+       to: "predictions#submit_method"
 
-  post "event/:event_id/fights/:fight_id",
-       to: "predictions#submit_distance",
-       as: :submit_distance_prediction
+  post "event/:event_id/fights/:fight_id/method/:method",
+       to: "predictions#submit_distance"
 
   patch "event/:event_id/fights/:fight_id/:wager", to: "predictions#wager"
 end

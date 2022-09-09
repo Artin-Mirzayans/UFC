@@ -14,7 +14,7 @@ module EventHelper
   end
 
   def distance_is_selected?(prediction, method)
-    !prediction.new_record? && prediction.distance.to_s == method
+    !prediction.new_record? && prediction.distance == method
   end
 
   def get_wager(prediction)
