@@ -5,7 +5,7 @@
 <% if current_user %>
   <% @events.each do |event| %>
     <div class="events">
-      <%= link_to event.name, event_path(event.id)%>
+      <%= link_to "#{event.name}: #{event.red.upcase} vs #{event.blue.upcase}", event_path(event.id)%>
     </div>
   <% end %>
 

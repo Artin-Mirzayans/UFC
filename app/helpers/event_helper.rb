@@ -3,9 +3,9 @@ module EventHelper
     red_prediction,
     distance_prediction,
     blue_prediction,
-    event
+    fight
   )
-    event.status == "UPCOMING" && red_prediction.update_timer? &&
+    !fight.locked? && !fight.event.CONCLUDED? && red_prediction.update_timer? &&
       distance_prediction.update_timer? && blue_prediction.update_timer?
   end
 
@@ -23,9 +23,5 @@ module EventHelper
     else
       return 0
     end
-  end
-
-  def in_progress?(event)
-    event.status == "INPROGRESS"
   end
 end

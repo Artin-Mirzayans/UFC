@@ -43,4 +43,18 @@ module ProfileHelper
       .values
       .flatten
   end
+
+  def valid(prediction)
+    if prediction.event.CONCLUDED?
+      if prediction.is_correct == true
+        "Correct"
+      elsif prediction.is_correct == false
+        "Incorrect"
+      else
+        "NC"
+      end
+    else
+      "-"
+    end
+  end
 end

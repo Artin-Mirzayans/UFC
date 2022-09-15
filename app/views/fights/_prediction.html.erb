@@ -1,22 +1,20 @@
 
-  <div class="predictions <%= predictions_open?(red_prediction, distance_prediction, blue_prediction, @event) ? '' : 'disabled' %>">
-
-
+  <div class="predictions <%= predictions_open?(red_prediction, distance_prediction, blue_prediction, fight) ? '' : 'disabled' %>">
   <div class="prediction">
   <div class="header"><%= fight.red.name%></div>
-    <div class="option <%= method_is_selected?(red_prediction, "red_any") ? 'selected' : '' %>" data-controller="fights" data-action="click->fights#method_submit" data-event=<%=@event.id%> data-fight=<%=fight.id%> data-fighter=<%=fight.red.id%> data-method=<%="red_any"%>>
+    <div class="option <%= fight.odd.red_any.nil? ? 'unavailable': ''%><%= method_is_selected?(red_prediction, "red_any") ? 'selected' : '' %>" data-controller="fights" data-action="click->fights#method_submit" data-event=<%=@event.id%> data-fight=<%=fight.id%> data-fighter=<%=fight.red.id%> data-method=<%="red_any"%>>
     <span>ANY</span><span><%= to_american(fight.odd.red_any)%></span>
     <button data-action="click->fights#prompt" data-event=<%=@event.id%>  data-fight=<%=fight.id%> data-wager=<%=get_wager(red_prediction)%> class="<%= method_is_selected?(red_prediction, "red_any") ? 'wager' : 'hidden-wager' %>" type="button">$<%=get_wager(red_prediction)%></button>
     </div>
-    <div class="option <%= method_is_selected?(red_prediction, "red_knockout") ? 'selected' : '' %>" data-controller="fights" data-action="click->fights#method_submit" data-event=<%=@event.id%> data-fight=<%=fight.id%> data-fighter=<%=fight.red.id%> data-method=<%="red_knockout"%>>
+    <div class="option <%= fight.odd.red_knockout.nil? ? 'unavailable': ''%><%= method_is_selected?(red_prediction, "red_knockout") ? 'selected' : '' %>" data-controller="fights" data-action="click->fights#method_submit" data-event=<%=@event.id%> data-fight=<%=fight.id%> data-fighter=<%=fight.red.id%> data-method=<%="red_knockout"%>>
     <span>KO</span><span><%= to_american(fight.odd.red_knockout) %></span>
     <button data-action="click->fights#prompt" data-event=<%=@event.id%>  data-fight=<%=fight.id%> data-wager=<%=get_wager(red_prediction)%> class="<%= method_is_selected?(red_prediction, "red_knockout") ? 'wager' : 'hidden-wager' %>" type="button">$<%=get_wager(red_prediction)%></button>
     </div>
-    <div class="option <%= method_is_selected?(red_prediction, "red_submission") ? 'selected' : '' %>" data-controller="fights" data-action="click->fights#method_submit" data-event=<%=@event.id%> data-fight=<%=fight.id%> data-fighter=<%=fight.red.id%> data-method=<%="red_submission"%>>
+    <div class="option <%= fight.odd.red_submission.nil? ? 'unavailable': ''%><%= method_is_selected?(red_prediction, "red_submission") ? 'selected' : '' %>" data-controller="fights" data-action="click->fights#method_submit" data-event=<%=@event.id%> data-fight=<%=fight.id%> data-fighter=<%=fight.red.id%> data-method=<%="red_submission"%>>
     <span>SUB</span><span><%= to_american(fight.odd.red_submission) %></span>
     <button data-action="click->fights#prompt" data-event=<%=@event.id%>  data-fight=<%=fight.id%> data-wager=<%=get_wager(red_prediction)%> class="<%= method_is_selected?(red_prediction, "red_submission") ? 'wager' : 'hidden-wager' %>" type="button">$<%=get_wager(red_prediction)%></button>
     </div>
-    <div class="option <%= method_is_selected?(red_prediction, "red_decision") ? 'selected' : '' %>" data-controller="fights" data-action="click->fights#method_submit" data-event=<%=@event.id%> data-fight=<%=fight.id%> data-fighter=<%=fight.red.id%> data-method=<%="red_decision"%>>
+    <div class="option <%= fight.odd.red_decision.nil? ? 'unavailable': ''%><%= method_is_selected?(red_prediction, "red_decision") ? 'selected' : '' %>" data-controller="fights" data-action="click->fights#method_submit" data-event=<%=@event.id%> data-fight=<%=fight.id%> data-fighter=<%=fight.red.id%> data-method=<%="red_decision"%>>
     <span>DEC</span><span><%= to_american(fight.odd.red_decision) %></span>
     <button data-action="click->fights#prompt" data-event=<%=@event.id%>  data-fight=<%=fight.id%> data-wager=<%=get_wager(red_prediction)%> class="<%= method_is_selected?(red_prediction, "red_decision") ? 'wager' : 'hidden-wager' %>" type="button">$<%=get_wager(red_prediction)%></button>
     </div>
@@ -24,37 +22,51 @@
 
   <div class="prediction">
   <div class="header">Go the Distance?</div>
-    <div class="option <%= distance_is_selected?(distance_prediction, true) ? 'selected' : '' %>" data-controller="fights" data-action="click->fights#distance_submit" data-event=<%=@event.id%> data-fight=<%=fight.id%> data-method=true>
+    <div class="option <%= fight.odd.yes_decision.nil? ? 'unavailable': ''%><%= distance_is_selected?(distance_prediction, true) ? 'selected' : '' %>" data-controller="fights" data-action="click->fights#distance_submit" data-event=<%=@event.id%> data-fight=<%=fight.id%> data-method=true>
     <span>YES</span><span><%= to_american(fight.odd.yes_decision)%></span>
     <button data-action="click->fights#prompt" data-event=<%=@event.id%>  data-fight=<%=fight.id%> data-wager=<%=get_wager(distance_prediction)%> class="<%= distance_is_selected?(distance_prediction, true) ? 'wager' : 'hidden-wager' %>" type="button">$<%=get_wager(distance_prediction)%></button>
     </div>
-    <div class="option <%= distance_is_selected?(distance_prediction, false) ? 'selected' : '' %>" data-controller="fights" data-action="click->fights#distance_submit" data-event=<%=@event.id%> data-fight=<%=fight.id%> data-method=false>
+    <div class="option <%= fight.odd.no_decision.nil? ? 'unavailable': ''%><%= distance_is_selected?(distance_prediction, false) ? 'selected' : '' %>" data-controller="fights" data-action="click->fights#distance_submit" data-event=<%=@event.id%> data-fight=<%=fight.id%> data-method=false>
     <span>NO</span><span><%= to_american(fight.odd.no_decision) %></span>
     <button data-action="click->fights#prompt" data-event=<%=@event.id%>  data-fight=<%=fight.id%> data-wager=<%=get_wager(distance_prediction)%> class="<%= distance_is_selected?(distance_prediction, false) ? 'wager' : 'hidden-wager' %>" type="button">$<%=get_wager(distance_prediction)%></button>
     </div>
+  <% if is_admin_or_mod? %>
+    <div id="fight-tools">
+      <%= button_to(fight_up_path(@event.id, fight.id), method: "post") do %>
+      <i class="fa-solid fa-angles-up"></i>
+      <% end %>
+      <%= button_to(fight_down_path(@event.id, fight.id), method: "post") do %>
+      <i class="fa-solid fa-angles-down"></i>
+      <% end %>
+      <%= button_to(edit_fight_path(@event.id, fight.id), method: "get") do %>
+      <i class="fa-solid fa-pen-to-square"></i>
+      <% end %>
+      <%= button_to(delete_fight_path(fight.id), method: "delete") do %>
+      <i class="fa-solid fa-circle-xmark"></i>
+      <% end %>
+    </div>
+  <% end %>
   </div>
 
   <div class="prediction">
   <div class="header"><%= fight.blue.name%></div>
-    <div class="option <%= method_is_selected?(blue_prediction, "blue_any") ? 'selected' : '' %>" data-controller="fights" data-action="click->fights#method_submit" data-event=<%=@event.id%> data-fight=<%=fight.id%> data-fighter=<%=fight.blue.id%> data-method=<%="blue_any"%>>
+    <div class="option <%= fight.odd.blue_any.nil? ? 'unavailable': ''%><%= method_is_selected?(blue_prediction, "blue_any") ? 'selected' : '' %>" data-controller="fights" data-action="click->fights#method_submit" data-event=<%=@event.id%> data-fight=<%=fight.id%> data-fighter=<%=fight.blue.id%> data-method=<%="blue_any"%>>
     <span>ANY</span><span><%= to_american(fight.odd.blue_any)%></span>
      <button data-action="click->fights#prompt" data-event=<%=@event.id%>  data-fight=<%=fight.id%> data-wager=<%=get_wager(blue_prediction)%> class="<%= method_is_selected?(blue_prediction, "blue_any") ? 'wager' : 'hidden-wager' %>" type="button">$<%=get_wager(blue_prediction)%></button>
     </div>
-    <div class="option <%= method_is_selected?(blue_prediction, "blue_knockout") ? 'selected' : '' %>" data-controller="fights" data-action="click->fights#method_submit" data-event=<%=@event.id%> data-fight=<%=fight.id%> data-fighter=<%=fight.blue.id%> data-method=<%="blue_knockout"%>>
+    <div class="option <%= fight.odd.blue_knockout.nil? ? 'unavailable': ''%><%= method_is_selected?(blue_prediction, "blue_knockout") ? 'selected' : '' %>" data-controller="fights" data-action="click->fights#method_submit" data-event=<%=@event.id%> data-fight=<%=fight.id%> data-fighter=<%=fight.blue.id%> data-method=<%="blue_knockout"%>>
     <span>KO</span><span><%= to_american(fight.odd.blue_knockout) %></span>
     <button data-action="click->fights#prompt" data-event=<%=@event.id%>  data-fight=<%=fight.id%> data-wager=<%=get_wager(blue_prediction)%> class="<%= method_is_selected?(blue_prediction, "blue_knockout") ? 'wager' : 'hidden-wager' %>" type="button">$<%=get_wager(blue_prediction)%></button>
     </div>
-    <div class="option <%= method_is_selected?(blue_prediction, "blue_submission") ? 'selected' : '' %>" data-controller="fights" data-action="click->fights#method_submit" data-event=<%=@event.id%> data-fight=<%=fight.id%> data-fighter=<%=fight.blue.id%> data-method=<%="blue_submission"%>>
+    <div class="option <%= fight.odd.blue_submission.nil? ? 'unavailable': ''%><%= method_is_selected?(blue_prediction, "blue_submission") ? 'selected' : '' %>" data-controller="fights" data-action="click->fights#method_submit" data-event=<%=@event.id%> data-fight=<%=fight.id%> data-fighter=<%=fight.blue.id%> data-method=<%="blue_submission"%>>
     <span>SUB</span><span><%= to_american(fight.odd.blue_submission) %></span>
     <button data-action="click->fights#prompt" data-event=<%=@event.id%>  data-fight=<%=fight.id%> data-wager=<%=get_wager(blue_prediction)%> class="<%= method_is_selected?(blue_prediction, "blue_submission") ? 'wager' : 'hidden-wager' %>" type="button">$<%=get_wager(blue_prediction)%></button>
     </div>
-    <div class="option <%= method_is_selected?(blue_prediction, "blue_decision") ? 'selected' : '' %>" data-controller="fights" data-action="click->fights#method_submit" data-event=<%=@event.id%> data-fight=<%=fight.id%> data-fighter=<%=fight.blue.id%> data-method=<%="blue_decision"%>>
+    <div class="option <%= fight.odd.blue_decision.nil? ? 'unavailable': ''%><%= method_is_selected?(blue_prediction, "blue_decision") ? 'selected' : '' %>" data-controller="fights" data-action="click->fights#method_submit" data-event=<%=@event.id%> data-fight=<%=fight.id%> data-fighter=<%=fight.blue.id%> data-method=<%="blue_decision"%>>
     <span>DEC</span><span><%= to_american(fight.odd.blue_decision) %></span>
     <button data-action="click->fights#prompt" data-event=<%=@event.id%>  data-fight=<%=fight.id%> data-wager=<%=get_wager(blue_prediction)%> class="<%= method_is_selected?(blue_prediction, "blue_decision") ? 'wager' : 'hidden-wager' %>" type="button">$<%=get_wager(blue_prediction)%></button>
     </div>
   </div>
-
-</div>
 
 </div>
 

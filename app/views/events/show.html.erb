@@ -1,16 +1,20 @@
 <%= stylesheet_link_tag params[:controller] %>
 <div id="event">
-<h1><%= @event.name%></h1>
-<h2><%= @event.location %></h2>
-<h2><%= @event.date %></h2>
+
+<div id="title">
+<h2><%= @event.name %></h1>
+<h1><%= @event.red %> vs <%= @event.blue %></h1>
+<h3><%= @event.location %></h2>
+<h3><%= @event.date %></h2>
 <h2>$<%= @user_event_budget.budget %></h2>
+</div>
 
 <% if is_admin? %>
     <%= button_to('Delete Event', delete_event_path(@event.id), method: "delete") %>
 <% end %>
 
 <% if is_admin_or_mod? %>
-    <% if in_progress?(@event) %>
+    <% if @event.INPROGRESS? %>
     <%= button_to('Close Event', new_result_path(@event.id), method: "get") %>
     <% end %>
     <%= button_to('Edit Event', edit_event_path(@event.id), method: "get") %>
@@ -18,7 +22,6 @@
 <% end %>
 
 <br>
-
 
 <%= render partial: "fights/fights"%>
 

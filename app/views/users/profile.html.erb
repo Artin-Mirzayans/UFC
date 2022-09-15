@@ -1,8 +1,0 @@
-<%= stylesheet_link_tag params[:controller] %>
-
-<h1>Profile</h1>
-<div id="events">
-<% @events.each do |event| %>
-<%= render partial: "users/events", locals: {event: event, user: @user, fights: sort_fights(event.user_predicted_fights(@user)), user_event_budget: event.get_user_budget(@user)}%>
-<% end %>
-</div>

@@ -19,7 +19,7 @@ class Methodprediction < ApplicationRecord
   validates :is_correct, inclusion: [true, false]
 
   validate :update_timer?
-  validate :event_locked?
+  validate :fight_locked?
 
   enum method: %i[
          red_any
@@ -32,6 +32,8 @@ class Methodprediction < ApplicationRecord
          blue_decision
        ]
 
+  after_destroy :refund_wager
+
   def update_timer?
     if !self.new_record? && 5.minute.ago > self.created_at
       errors.add(:created_at, "You cannot change your prediction anymore.")
@@ -40,9 +42,13 @@ class Methodprediction < ApplicationRecord
     return true
   end
 
-  def event_locked?
-    unless self.event.status == "UPCOMING"
+  def fight_locked?
+    unless !self.fight.locked? && !self.event.CONCLUDED?
       errors.add(:status, "Predictions are Locked.")
     end
+  end
+
+  def refund_wager
+    self.user.user_event_budgets.find_by(event: self.event).refund(self.wager)
   end
 end

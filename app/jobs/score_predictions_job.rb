@@ -5,7 +5,7 @@ class ScorePredictionsJob < ApplicationJob
     fight = Fight.find(fight_id)
     methodpredictions = Methodprediction.where(id: methodpredictions_ids)
     distancepredictions = Distanceprediction.where(id: distancepredictions_ids)
-    if fight.result.method == "dq"
+    if fight.result.method == "nc"
       void_predictions(
         fight,
         fight.event,

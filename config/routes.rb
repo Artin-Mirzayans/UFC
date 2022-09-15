@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   get "/event/:event_id/update", to: "events#edit", as: :edit_event
   patch "/event/:event_id/update", to: "events#update", as: :update_event
 
-  get "/user/:user_id/profile", to: "users#profile", as: :user_profile
+  get "/user/:user_id/profile", to: "profiles#show", as: :user_profile
 
   get "/event/:event_id/results", to: "results#new", as: :new_result
   post "/event/:event_id/results/fight/:fight_id",

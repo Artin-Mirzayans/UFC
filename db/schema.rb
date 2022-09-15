@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_30_042532) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_15_182942) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -24,6 +24,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_30_042532) do
     t.integer "event_id"
     t.integer "wager"
     t.boolean "is_correct", default: false
+    t.index ["user_id"], name: "index_distancepredictions_on_user_id"
   end
 
   create_table "events", force: :cascade do |t|
@@ -34,6 +35,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_30_042532) do
     t.datetime "updated_at", null: false
     t.string "location"
     t.string "category"
+    t.string "apiname"
+    t.string "red"
+    t.string "blue"
+    t.time "main"
+    t.time "prelims"
+    t.time "early"
   end
 
   create_table "fighters", force: :cascade do |t|
@@ -50,6 +57,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_30_042532) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "placement"
+    t.boolean "locked", default: false
   end
 
   create_table "methodpredictions", force: :cascade do |t|
@@ -63,6 +71,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_30_042532) do
     t.integer "event_id"
     t.integer "wager"
     t.boolean "is_correct", default: false
+    t.index ["user_id"], name: "index_methodpredictions_on_user_id"
   end
 
   create_table "odds", force: :cascade do |t|
@@ -97,6 +106,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_30_042532) do
     t.datetime "updated_at", null: false
     t.integer "winnings", default: 0
     t.integer "wagered", default: 0
+    t.index ["user_id"], name: "index_user_event_budgets_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

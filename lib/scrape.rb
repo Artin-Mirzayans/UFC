@@ -1,10 +1,10 @@
 class Scrape
   def initialize
-    @doc = Nokogiri.HTML(URI.open("https://www.bestfightodds.com/"))
-    # @doc =
-    #   File.open(
-    #     "C:/Users/Artin/Desktop/EDU/UFC/lib/odds_site/ufcodds.html"
-    #   ) { |f| Nokogiri.HTML(f) }
+    # @doc = Nokogiri.HTML(URI.open("https://www.bestfightodds.com/"))
+    @doc =
+      File.open(
+        "C:/Users/Artin/Desktop/EDU/UFC/lib/odds_site/ufcodds.html"
+      ) { |f| Nokogiri.HTML(f) }
   end
 
   def get_tables
@@ -13,7 +13,7 @@ class Scrape
     tables =
       all_tables.select do |table|
         puts table.css(".table-header a")
-        @events.where(name: table.css(".table-header a").text.upcase).exists?
+        @events.where(apiname: table.css(".table-header a")).exists?
       end
     return tables
   end

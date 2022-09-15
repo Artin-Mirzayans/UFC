@@ -1,24 +1,38 @@
+<%= stylesheet_link_tag params[:controller] %>
+
+<div id="event-ui">
+
 <h1>Edit Event</h1>
 
 <%= form_with model: @event, url: update_event_path, method: :patch do |form| %>
-
+  <%= form.label :apiname, "API Name: " %>
+  <%= form.text_area :apiname, size: "40x1" %>
+  <br>
   <%= form.label :name, "Name: " %>
   <%= form.text_area :name, size: "35x1" %>
   <br>
   <%= form.label :location, "Location: " %>
   <%= form.text_area :location, size: "35x1" %>
   <br>
-  <%= form.label :date, "Date: " %>
-  <%= form.date_field :date %>
-  <br>
-
   <%= form.radio_button(:category, "PPV") %>
   <%= form.label(:category_ppv, "Pay-Per-View") %>
-
   <%= form.radio_button(:category, "FN") %>
   <%= form.label(:category_fn, "Fight Night") %>
   <br>
-
+  <%= form.label :date, "Date: " %>
+  <%= form.date_field :date %>
+  <br>
+  <%= form.label :main, "Main: "%>
+  <%= form.time_field :main %>
+  <br>
+  <%= form.label :prelims, "Prelims: "%>
+  <%= form.time_field :prelims %>
+  <br>
+  <% if @event.category == "PPV"%>
+  <%= form.label :early, "Early: "%>
+  <%= form.time_field :early %>
+  <br>
+  <% end %>
   <%= form.radio_button(:status, "UPCOMING") %>
   <%= form.label(:status_upcoming, "Upcoming") %>
   <%= form.radio_button(:status, "INPROGRESS") %>
@@ -29,3 +43,5 @@
 <br>
   <%= form.submit "Update Event" %>
 <% end %>
+
+</div>

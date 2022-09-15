@@ -1,0 +1,19 @@
+<div class="event">
+<%= event.name %>
+<span>Wagered: <%= user_event_budget.wagered%></span>
+<span>Winnings: <%= user_event_budget.winnings%></span>
+<div class ="predictions">
+<table>
+  <tr>
+    <th>Fight</th>
+    <th>Prediction</th>
+    <th>Wager</th>
+    <th>Valid</th>
+  </tr>
+<% fights.each do |fight|%>
+<%= render partial: "profiles/fights", locals: {prediction: fight.get_user_prediction(@user, fight), fight: fight}%>
+<% end %>
+</table>
+
+</div>
+</div>
