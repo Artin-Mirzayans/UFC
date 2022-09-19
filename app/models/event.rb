@@ -16,7 +16,6 @@ class Event < ApplicationRecord
 
   enum status: %i[UPCOMING INPROGRESS CONCLUDED]
   after_initialize :set_default_status, if: :new_record?
-  after_update :schedule_cards
 
   def fighters
     Fighter.where(id: self.reds.pluck(:id) + self.blues.pluck(:id))
@@ -47,34 +46,49 @@ class Event < ApplicationRecord
         .where(distancepredictions: { user: user })
   end
 
-  def schedule_cards
-    if self.category == "PPV" && saved_change_to_attribute?(:early)
-      schedule_card(self.id, "EARLY", self.date, self.early)
+  def schedule_cards(event_changes)
+    if self.category == "PPV" && event_changes.has_key?("early")
+      schedule_card(self, "EARLY", self.date, self.early)
     end
-    if saved_change_to_attribute?(:prelims)
-      schedule_card(self.id, "PRELIMS", self.date, self.prelims)
+    if event_changes.has_key?("prelims")
+      schedule_card(self, "PRELIMS", self.date, self.prelims)
     end
-    if saved_change_to_attribute?(:main)
-      schedule_card(self.id, "MAIN", self.date, self.main)
+    if event_changes.has_key?("main")
+      schedule_card(self, "MAIN", self.date, self.main)
+    end
+    if event_changes[:category].present?
+      if event_changes[:category][1] == "FN" && early_job_id.present?
+        DelayedJobs.find(self.early_job_id).destroy
+        self.update(early: nil, early_job_id: nil)
+      end
     end
   end
 
-  def schedule_card(event_id, card, card_date, card_time)
+  def schedule_card(event, card, card_date, card_time)
     @card_datetime =
-      card_date.to_time +
-        Time.parse(card_time.strftime("%H:%M")).seconds_since_midnight.seconds
-    LockCardJob.set(wait_until: @card_datetime).perform_later(event_id, card)
+      Time.zone.parse(
+        "#{card_date.strftime("%F")} #{card_time.strftime("%H:%M")}"
+      )
+    job =
+      LockCardJob.set(wait_until: @card_datetime).perform_later(event.id, card)
+
+    if job.successfully_enqueued?
+      if event.existing_job?(card.downcase)
+        job_to_destroy =
+          DelayedJobs.find_by(id: event.get_job_id(card.downcase))
+        job_to_destroy.destroy unless job_to_destroy.nil?
+      end
+      event.update("#{card.downcase}_job_id": job.provider_job_id)
+    end
   end
 
-  # def started?
-  #   if self.category == "PPV"
-  #     Time.now.strftime("%H:%M") > self.early.strftime("%H:%M")
-  #   else
-  #     Time.now.strftime("%H:%M") > self.prelims.strftime("%H:%M")
-  #   end
-  # end
+  def existing_job?(card)
+    card_job_id = card + "_job_id"
+    self.attributes[card_job_id].present?
+  end
 
-  # def self.get_upcoming_event
-  #   Event.UPCOMING.find_by(date: Date.today)
-  # end
+  def get_job_id(card)
+    card_job_id = card + "_job_id"
+    self.attributes[card_job_id]
+  end
 end

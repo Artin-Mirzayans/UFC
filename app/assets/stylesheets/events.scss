@@ -154,7 +154,6 @@ span {
   font-size: 28px;
   text-align: center;
   line-height: 2.2;
-  border: rgb(255, 255, 255) 10px solid;
 }
 
 #event-ui h1 {
@@ -203,4 +202,21 @@ input[type="submit"] {
 input[type="submit"]:hover {
   background-color: rgb(220, 180, 99);
 } 
+
+#back {
+  font-size: 28px;
+  font-weight: 700;
+  border:rgb(220, 180, 99) solid 4px;
+  border-radius: 8px;
+  padding: 10px;
+  margin-top: 5%;
+  background-color: whitesmoke;
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+#back:hover {
+  background-color: rgb(220, 180, 99);
+}
 

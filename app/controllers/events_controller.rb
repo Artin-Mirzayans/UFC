@@ -70,6 +70,7 @@ class EventsController < ApplicationController
     @event = Event.find(params[:event_id])
 
     if @event.update(event_params)
+      @event.schedule_cards(@event.saved_changes)
       redirect_to @event
     else
       render :edit, status: :unprocessable_entity

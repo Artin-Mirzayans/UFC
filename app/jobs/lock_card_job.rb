@@ -1,5 +1,6 @@
 class LockCardJob < ApplicationJob
   queue_as :default
+
   def perform(event_id, card)
     @event = Event.find(event_id)
     @event.INPROGRESS! if @event.UPCOMING?
