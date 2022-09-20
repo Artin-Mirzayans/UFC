@@ -99,7 +99,9 @@ class EventsController < ApplicationController
       :status,
       :main,
       :prelims,
-      :early
+      :early,
+      :red_image,
+      :blue_image
     )
   end
 end

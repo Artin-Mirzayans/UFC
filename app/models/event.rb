@@ -6,6 +6,9 @@ class Event < ApplicationRecord
   has_many :distancepredictions
   has_many :user_event_budgets, dependent: :destroy
 
+  has_one_attached :red_image
+  has_one_attached :blue_image
+
   validates :apiname, presence: true
   validates :name, presence: true
   validates :location, presence: true

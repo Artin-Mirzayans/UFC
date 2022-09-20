@@ -7,7 +7,6 @@ export default class extends Controller {
 
   // Initialize method, happens on load
   connect() {
-    console.log("Search Fighter Controller Connected")
   }
 
   // STIMULUS CONTROLLER ACTION, CAN BE CALLED FROM THE FRONTEND VIA A FRONTEND EVENT

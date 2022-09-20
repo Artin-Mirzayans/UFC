@@ -4,10 +4,13 @@
 <div id="title">
 <h2><%= @event.name %></h1>
 <h1><%= @event.red %> vs <%= @event.blue %></h1>
+<%= image_tag @event.red_image.variant(resize_to_limit: [400, 400]) %>
+<%= image_tag @event.blue_image.variant(resize_to_limit: [400, 400]) %>
 <h3><%= @event.location %></h2>
 <h3><%= @event.date %></h2>
 <h2>$<%= @user_event_budget.budget %></h2>
 </div>
+
 
 <% if is_admin? %>
     <%= button_to('Delete Event', delete_event_path(@event.id), method: "delete") %>
