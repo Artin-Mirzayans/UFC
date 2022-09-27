@@ -1,30 +1,55 @@
 <%= stylesheet_link_tag params[:controller] %>
+<% if is_admin_or_mod? %>
+  <div id="event-tools">
+
+  <% if @event.INPROGRESS? %>
+    <%= button_to(new_result_path(@event.id), method: "get") do %>
+      <i class="fa-solid fa-lock"></i>
+    <% end %>
+  <% end %>
+    <%= button_to(edit_event_path(@event.id), method: "get") do %>
+      <i class="fa-regular fa-pen-to-square"></i>
+    <% end %>
+    <%= button_to(new_fight_path(@event.id), method: "get", ) do %>
+      <i class="fa-solid fa-square-plus"></i>
+    <% end %>
+
+  <% if is_admin? %>
+    <%= button_to(delete_event_path(@event.id), method: "delete", form: { data: { turbo_confirm: 'Are you sure?' } }) do %>
+    <i class="fa-regular fa-trash-can"></i>
+    <% end %>
+
+  <% end %>
+  </div>
+<% end %>
 <div id="event">
+
 
 <div id="title">
 <h2><%= @event.name %></h1>
-<h1><%= @event.red %> vs <%= @event.blue %></h1>
-<%= image_tag @event.red_image.variant(resize_to_limit: [400, 400]) %>
-<%= image_tag @event.blue_image.variant(resize_to_limit: [400, 400]) %>
+<h3><%= @event.date.strftime("%a, %b #{@event.date.day.ordinalize}") %></h2>
 <h3><%= @event.location %></h2>
-<h3><%= @event.date %></h2>
-<h2>$<%= @user_event_budget.budget %></h2>
+
+<div id="headliner">
+
+<div id ="headliner-red">
+  <h1><%= @event.red %></h1>
+  <div id ="headliner-red-image">
+  <%= image_tag get_red_image_or_default(@event) %>
+  </div>
+</div>
+<div id="headliner-divider"></div>
+<div id ="headliner-blue">
+  <h1><%= @event.blue %></h1>
+  <div id ="headliner-blue-image">
+  <%= image_tag get_blue_image_or_default(@event) %>
+  </div>
 </div>
 
+</div>
 
-<% if is_admin? %>
-    <%= button_to('Delete Event', delete_event_path(@event.id), method: "delete") %>
-<% end %>
-
-<% if is_admin_or_mod? %>
-    <% if @event.INPROGRESS? %>
-    <%= button_to('Close Event', new_result_path(@event.id), method: "get") %>
-    <% end %>
-    <%= button_to('Edit Event', edit_event_path(@event.id), method: "get") %>
-    <%= button_to('Add Fight', new_fight_path(@event.id), method: "get") %>
-<% end %>
-
-<br>
+<h5>Budget: $<%= @user_event_budget.budget %></h5>
+</div>
 
 <%= render partial: "fights/fights"%>
 

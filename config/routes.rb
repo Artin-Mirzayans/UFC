@@ -1,7 +1,15 @@
 Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-  devise_for :users
+  devise_for :users, skip:[:registrations]
+  devise_scope :user do
+     get '/users/cancel', to: 'devise/registrations#cancel', as: :cancel_user_registration
+     get '/users/sign_up', to: 'devise/registrations#new', as: :new_user_registration
+     get '/users/edit', to: 'devise/registrations#edit', as: :edit_user_registration
+     patch '/users', to: 'devise/registrations#update', as: :user_registration
+     put '/users', to: 'devise/registrations#update'
+     post '/users', to: 'devise/registrations#create'
+  end
 
   root "events#index"
 

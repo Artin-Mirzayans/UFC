@@ -1,6 +1,7 @@
   <tr>
     <td><%= fight.red.name %> vs. <%= fight.blue.name%></td>
     <td><%= bet_option(fight, @user)%></td>
-    <td><%= prediction.wager%></td>
-    <td><%= valid(prediction)%></td>
+    <td class="currency">$<%= prediction.wager%></td>
+    <td class="currency">$<%= to_win(prediction.wager, prediction.line)%>
+    <td class><%= valid(prediction)%></td>
   </tr>

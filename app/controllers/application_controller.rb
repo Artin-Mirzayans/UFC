@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except:[:edit_user_registration]
 
   helper_method :is_admin_or_mod?, :is_admin?
 
