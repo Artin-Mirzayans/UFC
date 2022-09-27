@@ -13,8 +13,9 @@ export default class extends Controller {
 
   search_fighter(search_query, corner, results) {
     if(search_query.length > 0) {
+      const csrfToken = document.querySelector("[name='csrf-token']").content
       fetch(`fighter/${corner}/search/${search_query}`, {
-          headers: { accept: "text/vnd.turbo-stream.html"},
+          headers: { accept: "text/vnd.turbo-stream.html", "X-CSRF-Token": csrfToken},
           method: 'POST'})
           .then(r => r.text())
           .then(html => Turbo.renderStreamMessage(html))

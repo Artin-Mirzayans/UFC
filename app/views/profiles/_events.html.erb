@@ -1,19 +1,32 @@
 <div class="event">
-<%= event.name %>
-<span>Wagered: <%= user_event_budget.wagered%></span>
-<span>Winnings: <%= user_event_budget.winnings%></span>
-<div class ="predictions">
-<table>
+<table class="predictions-table">
+<caption>
+<%= link_to event.name + ": " + event.red.upcase + " x " + event.blue.upcase, event_path(event.id)%>
+</caption>
   <tr>
     <th>Fight</th>
     <th>Prediction</th>
     <th>Wager</th>
-    <th>Valid</th>
+    <th>To Win</th>
+    <th>Result</th>
   </tr>
 <% fights.each do |fight|%>
 <%= render partial: "profiles/fights", locals: {prediction: fight.get_user_prediction(@user, fight), fight: fight}%>
 <% end %>
 </table>
-
+<div class="summary">
+ <div class="net-change-container">
+  <div class="net-change">
+    <span>Wagered: <%=get_amount(event, user_event_budget.wagered)%></span>
+    <span>Winnings: <%=get_amount(event, user_event_budget.winnings)%></span>
+    <span>Win/Loss: <%= get_net(event, user_event_budget.winnings, user_event_budget.wagered)%></span>
+  </div>
+ </div>
+ <div class="percent-change-container">
+  <div class="percent-change">
+  <span>Percent Change</span> 
+  <span><%= get_percent_change(event, user_event_budget.winnings, user_event_budget.wagered)%></span>
+  </div>
+ </div>
 </div>
 </div>

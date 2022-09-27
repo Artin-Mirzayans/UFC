@@ -18,7 +18,7 @@ class EventsController < ApplicationController
   end
 
   def index
-    @events = Event.all
+    @events = Event.where(status: "UPCOMING").or(Event.where(status: "INPROGRESS")).order('date')
   end
 
   def show

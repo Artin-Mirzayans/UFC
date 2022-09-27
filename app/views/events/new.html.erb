@@ -21,6 +21,12 @@
   <%= form.label :blue, "Blue: " %>
   <%= form.text_area :blue, size: "10x1" %>
   <br>
+  <div data-controller="events-images">
+    <%= form.file_field :red_image, direct_upload: true, accept: 'image/png, image/jpeg', data: { 'events-images_target': 'input_red', action: "change->events-images#uploadFile" } %>
+  <div data-events-images-target="progress_red"></div>
+    <%= form.file_field :blue_image, direct_upload: true, accept: 'image/png, image/jpeg', data: { 'events-images_target': 'input_blue', action: "change->events-images#uploadFile" } %>
+  <div data-events-images-target="progress_blue"></div>
+  </div>
   <%= form.label :date, "Date: " %>
   <%= form.date_field :date %>
   <br>

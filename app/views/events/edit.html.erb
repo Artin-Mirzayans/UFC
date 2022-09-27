@@ -13,6 +13,12 @@
   <%= form.label :location, "Location: " %>
   <%= form.text_area :location, size: "35x1" %>
   <br>
+  <%= form.label :red, "Red: " %>
+  <%= form.text_area :red, size: "10x1" %>
+  <br>
+  <%= form.label :blue, "Blue: " %>
+  <%= form.text_area :blue, size: "10x1" %>
+  <br>
   <%= form.radio_button(:category, "PPV") %>
   <%= form.label(:category_ppv, "Pay-Per-View") %>
   <%= form.radio_button(:category, "FN") %>

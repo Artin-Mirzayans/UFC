@@ -1,5 +1,5 @@
 class PredictionsController < ApplicationController
-  skip_before_action :verify_authenticity_token
+
   def submit_method
     @event = Event.find(params[:event_id])
     @fight = @event.fights.find(params[:fight_id])
@@ -22,6 +22,7 @@ class PredictionsController < ApplicationController
             @user_event_budget.decrease_wagered(@prediction.wager)
           else
             puts @prediction.errors.full_messages
+            head:ok
           end
           # Attempt to Update prediction
         else
@@ -119,6 +120,7 @@ class PredictionsController < ApplicationController
             @user_event_budget.decrease_wagered(@prediction.wager)
           else
             puts @prediction.errors.full_messages
+            head:ok
           end
 
           # see if we can update the method prediction!

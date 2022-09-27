@@ -1,11 +1,116 @@
+  
+  
+//   #events {
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: center;
+//   }
 
-.event {
+  .event {
+    border: 2px solid rgb(255, 255, 255);
+    border-radius: 8px;
+    width: 75%;
+    margin-left: auto;
+    margin-right: auto;
+    color: whitesmoke;
+  }
+
+  .predictions-table  {
+    width: 100%;
+    border: 1px solid whitesmoke;
+    border-bottom: none;
+    text-align : center;
+  }
+
+  .predictions-table a {
+    font-size: 45px;
+    color: whitesmoke;
+    letter-spacing: .2em;
+    text-decoration: none;
+  }
+  
+  .predictions-table th {
+    font-size: 36px;
+    letter-spacing: .1em;
+    border-right: .5px solid whitesmoke;
+    border-bottom: 1px solid whitesmoke;
+  }
+
+  .predictions-table th:last-child {
+    border-right: none;
+  }
+
+  .predictions-table td {
+    font-size: 28px;
+    letter-spacing: .1em;
+    border-right: .5px solid whitesmoke;
+    border-bottom: .5px solid whitesmoke;
+  }
+
+  .predictions-table td:last-child {
+    border-right: none;
+  }
+
+  .currency {
+    text-decoration: underline;
+  }
+
+  .summary {
+    display: flex;
+  }
+
+  .net-change-container {
+    width: 66%;
+    border-right: 2px solid whitesmoke;
+  }
+
+  .net-change {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    width: 75%;
+    margin:auto;
+    font-size: 26px;
+    letter-spacing: .1em;
+  }
+
+  .percent-change-container {
+    width: 33%;
+  }
+
+  .percent-change {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    letter-spacing: .1em;
+  }
+
+  div#account {
     text-align: center;
-    width: 50%;
-    margin: auto;
-}
+    margin: 3% 0;
+  }
 
-table {
-    border: 1px solid black;
-}
+  a.account-link {
+    font-size: 45px;
+    border: 2px solid whitesmoke;
+    border-radius: 6px;
+    padding: 10px;
+    color: whitesmoke;
+    text-decoration: none;
+  }
+  
+  a.account-link:hover {
+    background-color: rgb(70, 88, 107);
+  }
+  
+  .no-events {
+    text-align: center;
+    font-size: 46px;
+    color: whitesmoke
+
+  }
 

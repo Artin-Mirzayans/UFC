@@ -13,9 +13,9 @@ module ProfileHelper
       elsif @prediction.include? "dec"
         prediction_str = " Wins by Decision"
       else
-        return ""
+       prediction_str = ""
       end
-      return @method_prediction.fighter.name.split()[-1] + prediction_str
+      @method_prediction.fighter.name.split()[-1] + prediction_str
     elsif fight.distancepredictions.exists?(user: user)
       @distance_prediction = fight.distancepredictions.find_by(user: user)
       @prediction = @distance_prediction.distance
@@ -25,11 +25,11 @@ module ProfileHelper
       elsif @prediction == false
         prediction_str = "Fight doesn't go to Decision"
       else
-        return ""
+        prediction_str = ""
       end
-      return prediction_str
+      prediction_str
     else
-      return ""
+      ""
     end
   end
 
@@ -44,17 +44,49 @@ module ProfileHelper
       .flatten
   end
 
+  def to_win(wager, line)
+    wager + (wager * line).round
+  end
+
   def valid(prediction)
     if prediction.event.CONCLUDED?
       if prediction.is_correct == true
-        "Correct"
+        "Win"
       elsif prediction.is_correct == false
-        "Incorrect"
+        "Loss"
       else
         "NC"
       end
     else
       "-"
+    end
+  end
+
+  def get_amount(event, amount)
+    if event.CONCLUDED?
+      "$#{amount}"
+    else
+      "-"
+    end
+  end
+
+  def get_net(event, winnings, wagered)
+    if event.CONCLUDED?
+      "$#{winnings - wagered}"
+    else
+      "-"
+    end
+  end
+
+  def get_percent_change(event, winnings, wagered)
+    if !event.CONCLUDED?
+      "-"
+    elsif winnings == 0
+      "0%"
+    else
+    difference = winnings - wagered
+    percent = (difference/winnings)*100
+    "%#{percent}"
     end
   end
 end
