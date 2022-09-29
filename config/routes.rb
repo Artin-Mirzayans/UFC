@@ -13,6 +13,10 @@ Rails.application.routes.draw do
 
   root "events#index"
 
+  post "/events/upcoming", to: "events#upcoming", as: :upcoming_events
+  post "/events/concluded", to: "events#concluded", as: :concluded_events
+
+
   get "/event/add", to: "events#new", as: :new_event
   post "/event/add", to: "events#create", as: :create_event
 
@@ -25,6 +29,7 @@ Rails.application.routes.draw do
   patch "/event/:event_id/update", to: "events#update", as: :update_event
 
   get "/user/:user_id/profile", to: "profiles#show", as: :user_profile
+  get "/user/profile/search", to: "profiles#search", as: :search
 
   get "/event/:event_id/results", to: "results#new", as: :new_result
   post "/event/:event_id/results/fight/:fight_id",
@@ -39,6 +44,10 @@ Rails.application.routes.draw do
   post "/event/:event_id/results/early",
        to: "results#early",
        as: :results_early_prelims_card
+
+     post "/event/:event_id/results/reset/:card",
+       to: "results#reset",
+       as: :results_reset
 
   post "event/:event_id/results/predictions",
        to: "results#predictions",

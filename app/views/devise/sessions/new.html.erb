@@ -1,13 +1,22 @@
-<h2>Log in</h2>
+<%= stylesheet_link_tag params[:controller] %>
+<h1>Log in</h1>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+<%= form_for(resource, as: resource_name, url: session_path(resource_name), data:{ turbo: false }) do |f| %>
+    <%- flash.each do |name, msg| -%>
+    <ul>
+    <li><%= content_tag :div, msg, :id => "flash_#{name}" if msg.is_a?(String) %></li>
+    </ul>
+  <%- end -%>  
+
   <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <%= f.label :username %>
+    <div></div>
+    <%= f.text_area :username, autocomplete: "username" %>
   </div>
 
   <div class="field">
-    <%= f.label :password %><br />
+    <%= f.label :password %>
+    <div></div>
     <%= f.password_field :password, autocomplete: "current-password" %>
   </div>
 

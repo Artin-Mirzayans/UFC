@@ -45,7 +45,7 @@ module ProfileHelper
   end
 
   def to_win(wager, line)
-    wager + (wager * line).round
+    (wager * line).round
   end
 
   def valid(prediction)
@@ -84,9 +84,9 @@ module ProfileHelper
     elsif winnings == 0
       "0%"
     else
-    difference = winnings - wagered
-    percent = (difference/winnings)*100
-    "%#{percent}"
+      profit = winnings - wagered
+      percent = (profit.to_f/wagered.to_f)*100
+      "%#{percent.round(2)}"
     end
   end
 end

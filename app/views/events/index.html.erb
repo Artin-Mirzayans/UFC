@@ -1,32 +1,3 @@
 <%= stylesheet_link_tag params[:controller] %>
-
-  <div id="events">
-    <% @events.each do |event| %>
-    <%= link_to event_path(event.id) do %>
-    <div class="event">
-     <div class="event-info">
-      <div class="event-name">
-      <span><%= event.name %></span>
-      </div>
-      <div class="event-headliner">
-      <span><%= "#{event.red.upcase} x #{event.blue.upcase}" %></span>
-      </div>
-      <div class="event-location">
-        <span><%= event.location %></span>
-      </div>
-      <div class="event-date">
-        <span><%= event.date.strftime("%A, %B #{event.date.day.ordinalize}") %></span>
-      </div>
-     </div>
-     <div class="event-images">
-      <div class="image-red">
-          <%= image_tag get_red_image_or_default(event) %>
-      </div>
-      <div class="image-blue">
-          <%= image_tag get_blue_image_or_default(event) %>
-      </div>
-     </div>
-    </div>
-    <% end %>
-    <% end %>
-  </div>
+<%= render partial: "events/events"%>
+</div>

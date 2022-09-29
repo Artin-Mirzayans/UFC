@@ -14,19 +14,23 @@
  */
 
  html {
-  overflow-y: scroll;
+    overflow-y: scroll;
 }
 
   body {
-      background-color: rgb(30, 29, 29);
+    background-color: rgb(30, 29, 29);
   }
-
+  
   ul#navbar {
-    width: 33%;
+    width: 40%;
     display: flex;
+    background-color: rgb(56, 77, 123);
+    border-bottom: 3px solid white;
+    border-left: 3px solid white;
+    border-right: 3px solid white;
     gap: 10%;
     justify-content: space-around;
-    margin: 0 auto 1%;
+    margin: 0 auto 2%;
     padding: 0px;
     list-style: none;
     user-select: none; /* Standard syntax */

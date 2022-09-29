@@ -15,10 +15,15 @@ class ResultsController < ApplicationController
       @fight.build_result(fighter: @fighter, method: result_params[:method])
 
     if @result.save
-      redirect_to new_result_path(params[:event_id])
+      puts "Result Saved"
     else
       puts @result.errors.full_messages
     end
+
+    @card = @fight.placement
+    @fights = @event.fights.where(placement: @card)
+
+    respond_to { |format| format.turbo_stream }
   end
 
   def main
@@ -73,6 +78,15 @@ class ResultsController < ApplicationController
     else
       puts @event.errors.full_messages
     end
+  end
+
+  def reset
+    @event = Event.find(params[:event_id])
+    @fight_ids = @event.fights.where(placement: params[:card]).pluck(:id)
+    Result.where(fight_id: @fight_ids).destroy_all
+
+    @fights = @event.fights.where(placement: params[:card])
+    @card = params[:card]
   end
 
   private

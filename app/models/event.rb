@@ -18,6 +18,7 @@ class Event < ApplicationRecord
   validates :category, presence: true
 
   enum status: %i[UPCOMING INPROGRESS CONCLUDED]
+  before_create :strip_newline
   after_initialize :set_default_status, if: :new_record?
 
   def fighters
@@ -30,6 +31,12 @@ class Event < ApplicationRecord
 
   def get_user_budget(user)
     self.user_event_budgets.find_by(user: user)
+  end
+
+  def strip_newline
+    self.apiname = self.apiname.strip
+    self.name = self.name.strip
+    self.location = self.location.strip
   end
 
   def received_all_results?

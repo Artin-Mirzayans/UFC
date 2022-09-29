@@ -8,6 +8,9 @@
 
 require 'csv'
 
+Fighter.create!([
+  name: "Placeholder"
+])
 CSV.foreach(Rails.root.join('lib/seed_csv/fighters.csv'), headers: true, encoding: 'iso-8859-1:utf-8') do |row|
   Fighter.create( {
     name: row["name"]

@@ -20,8 +20,8 @@
     <%= form.label :"method_dq-#{fight.id}", "DQ" %>
     <%= form.radio_button :method, "nc", id:"result_method_nc-#{fight.id}" %>
     <%= form.label :"method_nc-#{fight.id}", "NC" %>
-    <br>
-    <%= form.submit "Submit"%>
+    <div></div>
+    <%= form.submit "Submit", class: "result-button"%>
     <fieldset disabled>
 <% end %>
 

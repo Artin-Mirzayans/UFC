@@ -1,5 +1,7 @@
 <div id="fights">
 
+    <h5 id="budget">Budget: $<%= @user_event_budget.budget %></h5>
+
     <div id="card">
     <%= button_to('MAIN', main_card_path(@event.id), method: "post", disabled: (@card == "MAIN")) %>
     <%= button_to('PRELIMS', prelims_card_path(@event.id), method: "post", disabled: (@card == "PRELIMS")) %>
@@ -9,7 +11,7 @@
     </div>
 
         <% @fights.each do |fight| %>
-        <div id="fight" data-controller="fights">
+        <div class="fight" data-controller="fights">
             <%= render partial: "fights/prediction", locals: {fight: fight, 
             red_prediction: fight.get_method_prediction(current_user, fight.red), 
             distance_prediction: fight.get_distance_prediction(current_user, fight), 

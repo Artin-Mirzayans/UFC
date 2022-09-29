@@ -18,7 +18,20 @@ class EventsController < ApplicationController
   end
 
   def index
+    @events = Event.where(status: "UPCOMING").or(Event.where(status: "INPROGRESS")).order('date') 
+    @event_status = "UPCOMING"
+  end
+
+  def upcoming
     @events = Event.where(status: "UPCOMING").or(Event.where(status: "INPROGRESS")).order('date')
+    @event_status = "UPCOMING"
+    respond_to { |format| format.turbo_stream }
+  end
+
+  def concluded
+    @events = Event.where(status: "CONCLUDED").order('date DESC')
+    @event_status = "CONCLUDED"
+    respond_to { |format| format.turbo_stream }
   end
 
   def show
@@ -39,6 +52,9 @@ class EventsController < ApplicationController
 
     @card = "MAIN"
 
+    @user_event_budget =
+    UserEventBudget.find_or_create_by(user: current_user, event: @event)
+
     respond_to { |format| format.turbo_stream }
   end
 
@@ -49,6 +65,9 @@ class EventsController < ApplicationController
 
     @card = "PRELIMS"
 
+    @user_event_budget =
+    UserEventBudget.find_or_create_by(user: current_user, event: @event)
+
     respond_to { |format| format.turbo_stream }
   end
 
@@ -58,6 +77,9 @@ class EventsController < ApplicationController
     @fights = @event.fights.where(placement: 2)
 
     @card = "EARLY"
+
+    @user_event_budget =
+    UserEventBudget.find_or_create_by(user: current_user, event: @event)
 
     respond_to { |format| format.turbo_stream }
   end

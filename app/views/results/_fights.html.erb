@@ -7,7 +7,10 @@
     <%= button_to('EARLY PRELIMS', results_early_prelims_card_path(@event.id), method: "post", disabled: (@card == "EARLY")) %>
 <% end %>
 </div>
-
+<div id="result-tools">
+<%= button_to "Reset Card Results", results_reset_path(@event.id, @card), method: "post", class: "result-button", form: { data: { turbo_confirm: 'Are you sure?' } }%>
+<%= button_to "Score Predictions", score_predictions_path(@event), class: "result-button", form: { data: { turbo_confirm: 'Are you sure?' } } %>
+</div>
 <% @fights.each do |fight| %>
   <%= render partial: "results/results", locals: {result: fight.get_result(current_user, fight), fight: fight} %>
 <% end %>

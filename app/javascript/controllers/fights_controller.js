@@ -58,7 +58,7 @@ export default class extends Controller {
     let fight_id = event.target.dataset.fight
     let current_wager = event.target.dataset.wager
 
-    if (event.target.parentElement.classList.contains('selected')) {
+    if (!event.target.parentElement.parentElement.parentElement.classList.contains('disabled')) {
   
       let wager = prompt("Enter your wager", current_wager)
       if (wager != null) {

@@ -102,7 +102,9 @@
   font-size: 25px;
 }
 
-#title h5 {
+#budget {
+  text-align: center;
+  color: whitesmoke;
   font-size: 42px;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
@@ -168,9 +170,10 @@
   padding: 35px 24px;
   width: 100%;
   height: 100%;
-  background-color: whitesmoke;
+  background-color: rgb(198, 193, 193);
   color: black;
-  letter-spacing: .08em;
+  letter-spacing: .05em;
+  cursor: pointer;
 }
 
 #card button:disabled {
@@ -225,6 +228,14 @@
   pointer-events: none;
 }
 
+.fight .predictions .prediction .winning {
+  background-color: rgb(129, 244, 129);
+}
+
+.fight .predictions .prediction .losing {
+  background-color: rgb(223, 77, 69);
+}
+
 .predictions .prediction .selected {
   background-color: rgb(68, 132, 221);
   cursor: url(asset-path('fist.svg')), auto;
@@ -234,6 +245,7 @@
 .predictions .prediction .selected:hover {
   opacity: .7;
 }
+
 
 .predictions span {
   width: 50%;
@@ -355,7 +367,7 @@ input[type="file" i] {
 #back {
   font-size: 28px;
   font-weight: 700;
-  border:rgb(220, 180, 99) solid 4px;
+  border:rgb(114, 139, 168) solid 4px;
   border-radius: 8px;
   padding: 10px;
   margin-top: 5%;
@@ -366,6 +378,6 @@ input[type="file" i] {
 }
 
 #back:hover {
-  background-color: rgb(220, 180, 99);
+  background-color: rgb(114, 139, 168);
 }
 
