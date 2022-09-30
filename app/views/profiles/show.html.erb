@@ -2,11 +2,6 @@
 
 <div id="events">
 <%= form_with url: search_path, method: :get, model: @user, id: "profile-search" do |form| %>
-<% flash.each do |type, msg| %>
-  <div>
-    <%= msg %>
-  </div>
-<% end %>
   <%= form.label :username, "Username:" %>
   <%= form.text_field :username, value: "" %>
   <%= button_tag(type: 'submit') do %>
@@ -18,8 +13,11 @@
 <% end %>
 </div>
 <% if @events.blank? %>
-    <h1 class="no-events">Prediction History is Empty</h1>
+  <h1 class="no-events">Prediction History is Empty</h1>
+<% else %>
+  <%== pagy_nav(@pagy) %>
 <% end %>
+
 <% if @user == current_user %>
 <div id="account">
 <%= link_to "Change Password", edit_user_registration_path, class: "account-link" %>

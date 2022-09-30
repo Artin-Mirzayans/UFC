@@ -1,10 +1,15 @@
   <div id="events">
-    <div id="card">
-        <%= button_to('UPCOMING', upcoming_events_path, method: "post", disabled: (@event_status == "UPCOMING")) %>
-        <%= button_to('PAST', concluded_events_path, method: "post", disabled: (@event_status == "CONCLUDED")) %>
+    <div id="event-switch">
+    <%= link_to("/events/?type=upcoming") do %>
+    <button class= <%= @status == "UPCOMING" ? 'selected' : ''%>>UPCOMING</button>
+    <% end %>
+    <%= link_to("/events/?type=past")  do %>
+    <button class= <%= @status == "CONCLUDED" ? 'selected' : ''%>>CONCLUDED</button>
+    <% end %>
     </div>
+    <turbo-frame id="event-list">
     <% @events.each do |event| %>
-    <%= link_to event_path(event.id) do %>
+    <%= link_to event_path(event.id), data: { turbo_frame: "_top" } do %>
     <div class="event">
      <div class="event-info">
       <div class="event-name">
@@ -30,5 +35,9 @@
      </div>
     </div>
     <% end %>
+    <% end %>
+    </turbo-frame>
+        <% if @status == "CONCLUDED"%>
+      <%== pagy_nav(@pagy) %>
     <% end %>
   </div>

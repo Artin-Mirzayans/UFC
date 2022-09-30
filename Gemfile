@@ -47,6 +47,9 @@ gem 'daemons'
 # debugger
 gem 'byebug'
 
+# pagination
+gem 'pagy'
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
 

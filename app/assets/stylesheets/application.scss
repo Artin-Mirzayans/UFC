@@ -19,6 +19,7 @@
 
   body {
     background-color: rgb(30, 29, 29);
+    margin: 0;
   }
   
   ul#navbar {
@@ -43,6 +44,7 @@
     letter-spacing: .06em;
     padding: 6px;
     font-size: 35px;
+    margin-top: 4px;
     border: 2px solid transparent;
     -webkit-transition: all 0.5s ease;                  
     -moz-transition: all 0.5s ease;                 

@@ -7,7 +7,7 @@ class ProfilesController < ApplicationController
         .where.not(wagered: 0)
         .distinct
         .pluck(:event_id)
-    @events = Event.where(id: @event_ids).sort
+    @pagy, @events = pagy(Event.where(id: @event_ids).order(date: :desc), items: 2)
   end
 
   def search

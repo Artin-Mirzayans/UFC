@@ -17,9 +17,10 @@ class Event < ApplicationRecord
   validates :blue, presence: true
   validates :category, presence: true
 
-  enum status: %i[UPCOMING INPROGRESS CONCLUDED]
   before_create :strip_newline
   after_initialize :set_default_status, if: :new_record?
+
+  enum status: %i[UPCOMING INPROGRESS CONCLUDED]
 
   def fighters
     Fighter.where(id: self.reds.pluck(:id) + self.blues.pluck(:id))

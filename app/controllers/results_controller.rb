@@ -1,4 +1,5 @@
 class ResultsController < ApplicationController
+  before_action :authorize_admin_or_mod!
   def new
     @event = Event.find(params[:event_id])
     @fights = @event.fights.where(placement: 0)

@@ -1,16 +1,53 @@
 #events {
+  user-select: none; /* Standard syntax */
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  -moz-user-select: none; /* Firefox */
+}
+
+#event-switch {
+  display: flex;
+  justify-content: center;
+}
+
+#event-switch a {
+  height: 110px;
+  width: 230px;
+}
+
+#event-switch button {
+  height: 100%;
+  width: 100%;
+  font-size: 30px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 550;
+  letter-spacing: .05em;
+  background-color: rgb(174, 177, 178);
+  cursor: pointer;
+}
+
+#event-switch button.selected {
+  background-color: rgb(70, 88, 107);
+  cursor: default;
+}
+
+#event-switch button:hover:not(.selected) {
+  background-color: rgb(122, 134, 147);
+}
+
+#event-list {
   display: flex;
   flex-direction: column;
   justify-content: center;
   font-size: 44px;
-  letter-spacing: .05em;
+  letter-spacing: .04em;
+  width: 75%;
+  margin: 2% auto 0;
 }
 
-#events a {
-  width: 75%;
-  margin: 0 auto;
+#events #event-list a {
+  width: 100%;
   text-decoration: none;
-  margin-bottom: 3%;
 }
 
 .event {
@@ -21,6 +58,7 @@
   color: whitesmoke;
   border: 4px solid rgb(255, 255, 255);
   border-radius: 10px;
+  margin-bottom: 3%;
 }
 
 .event:hover {
@@ -73,6 +111,47 @@
   height: 100%;
 }
 
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pagination span {
+  display: block;
+  font-size: 30px;
+  color: rgb(255, 255, 255);
+  border: 1px solid white;
+  border-radius: 4px;
+  text-decoration: none;
+}
+
+.pagination span.active {
+  background-color: rgb(73, 104, 130);
+  padding: 8px 16px;
+}
+
+.pagination .disabled {
+  padding: 8px 16px;
+}
+
+.pagination span:hover:not(.disabled) {
+  background-color: rgb(73, 104, 130);
+}
+
+.pagination a {
+  display: block;
+  padding: 8px 16px;
+  height: 100%;
+  width: 100%;
+  color: rgb(255, 255, 255);
+  text-decoration: none;
+}
+
+.pagination .disabled {
+  color: rgb(126, 126, 126);
+}
+
 #event {
   user-select: none; /* Standard syntax */
   -webkit-user-select: none; /* Safari */
@@ -81,13 +160,11 @@
 }
 
 #title {
-  // letter-spacing: 0.1em;
   font-family: Helvetica, sans-serif;
   color: whitesmoke;
   text-align: center;
   position: relative;
 }
-
 
 #title h1 {
   font-size: 60px;
@@ -167,13 +244,16 @@
   font-size: 30px;
   font-family: Arial, Helvetica, sans-serif;
   font-weight: 550;
-  padding: 35px 24px;
   width: 100%;
   height: 100%;
   background-color: rgb(198, 193, 193);
   color: black;
   letter-spacing: .05em;
   cursor: pointer;
+}
+
+#card button:hover {
+  background-color: rgb(88, 106, 157);
 }
 
 #card button:disabled {
@@ -232,10 +312,6 @@
   background-color: rgb(129, 244, 129);
 }
 
-.fight .predictions .prediction .losing {
-  background-color: rgb(223, 77, 69);
-}
-
 .predictions .prediction .selected {
   background-color: rgb(68, 132, 221);
   cursor: url(asset-path('fist.svg')), auto;
@@ -280,6 +356,7 @@
   left: 0;
   top: 0;
   display: flex;
+  z-index: 1;
 }
 
 #event-tools button {

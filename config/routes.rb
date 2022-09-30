@@ -3,7 +3,6 @@ Rails.application.routes.draw do
 
   devise_for :users, skip:[:registrations]
   devise_scope :user do
-     get '/users/cancel', to: 'devise/registrations#cancel', as: :cancel_user_registration
      get '/users/sign_up', to: 'devise/registrations#new', as: :new_user_registration
      get '/users/edit', to: 'devise/registrations#edit', as: :edit_user_registration
      patch '/users', to: 'devise/registrations#update', as: :user_registration
@@ -11,11 +10,8 @@ Rails.application.routes.draw do
      post '/users', to: 'devise/registrations#create'
   end
 
-  root "events#index"
-
-  post "/events/upcoming", to: "events#upcoming", as: :upcoming_events
-  post "/events/concluded", to: "events#concluded", as: :concluded_events
-
+  root to:redirect('/events', status: 302)
+  get "/events", to: "events#index"
 
   get "/event/add", to: "events#new", as: :new_event
   post "/event/add", to: "events#create", as: :create_event
@@ -45,7 +41,7 @@ Rails.application.routes.draw do
        to: "results#early",
        as: :results_early_prelims_card
 
-     post "/event/:event_id/results/reset/:card",
+  post "/event/:event_id/results/reset/:card",
        to: "results#reset",
        as: :results_reset
 

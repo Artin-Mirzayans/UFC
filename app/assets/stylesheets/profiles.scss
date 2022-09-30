@@ -157,3 +157,44 @@
     color: whitesmoke
   }
 
+  .pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .pagination span {
+    display: block;
+    font-size: 30px;
+    color: rgb(255, 255, 255);
+    border: 1px solid white;
+    border-radius: 4px;
+    text-decoration: none;
+  }
+  
+  .pagination span.active {
+    background-color: rgb(73, 104, 130);
+    padding: 8px 16px;
+  }
+  
+  .pagination .disabled {
+    padding: 8px 16px;
+  }
+  
+  .pagination span:hover:not(.disabled) {
+    background-color: rgb(73, 104, 130);
+  }
+  
+  .pagination a {
+    display: block;
+    padding: 8px 16px;
+    height: 100%;
+    width: 100%;
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+  }
+  
+  .pagination .disabled {
+    color: rgb(126, 126, 126);
+  }
+

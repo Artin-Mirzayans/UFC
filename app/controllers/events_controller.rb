@@ -18,20 +18,13 @@ class EventsController < ApplicationController
   end
 
   def index
-    @events = Event.where(status: "UPCOMING").or(Event.where(status: "INPROGRESS")).order('date') 
-    @event_status = "UPCOMING"
-  end
-
-  def upcoming
-    @events = Event.where(status: "UPCOMING").or(Event.where(status: "INPROGRESS")).order('date')
-    @event_status = "UPCOMING"
-    respond_to { |format| format.turbo_stream }
-  end
-
-  def concluded
-    @events = Event.where(status: "CONCLUDED").order('date DESC')
-    @event_status = "CONCLUDED"
-    respond_to { |format| format.turbo_stream }
+    if params[:type] == "past"
+      @pagy, @events = pagy(Event.where(status: "CONCLUDED").order(date: :desc), items: 8)
+      @status = "CONCLUDED"
+    else
+      @events = Event.where(status: "UPCOMING").or(Event.where(status: "INPROGRESS")).order('date')
+      @status = "UPCOMING"
+    end
   end
 
   def show
