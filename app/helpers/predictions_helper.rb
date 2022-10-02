@@ -28,7 +28,7 @@ def predictions_open?(
 
   def winning_distance?(event, result, distance)
     if distance == true
-        event.CONCLUDED? && result.method == 'decision' || result.method =='draw'
+        event.CONCLUDED? && (result.method == 'decision' || result.method =='draw')
     elsif distance == false
         event.CONCLUDED? && result.method != 'decision' && result.method != 'draw'
     end

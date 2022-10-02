@@ -1,0 +1,76 @@
+h1 {
+    font-size: 50px;
+    text-align: center;
+    color: whitesmoke;
+}   
+
+#fighter-ui {
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+    font-size: 36px;
+    color: whitesmoke
+}
+
+#fighter-add {
+    width: 50%;
+}
+
+#fighter-edit {
+    width: 50%;
+}
+
+input[type="file" i] {
+    font-size: 25px;
+  }
+
+input[type="submit"] {
+    font-size: 32px;
+    border-radius: 6px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+select {
+    font-size: 26px;
+    border-radius: 6px;
+    padding: 10px;
+}
+
+input[type="submit"]:hover {
+    background-color: rgb(70, 88, 107);
+}
+
+#crud-buttons {
+    display: flex;
+    justify-content: center;
+}
+
+.crud-button {
+  width: 80px;
+  height: 60px;
+  font-size: 35px;
+  background-color: rgb(178, 176, 176);
+  cursor: pointer;
+}
+
+.crud-button:hover {
+    background-color: rgb(70, 88, 107);
+  }
+
+input[type="text"] {
+    height: 30px;
+    width: 450px;
+    font-size: 34px;
+}
+
+textarea {
+    height: 34px;
+    width: 450px;
+    font-size: 30px;
+}
+
+button.fighter {
+    border-radius: 6px;
+    font-size: 28px;
+}

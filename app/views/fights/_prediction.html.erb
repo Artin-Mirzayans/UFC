@@ -41,7 +41,7 @@
       <%= button_to(edit_fight_path(@event.id, fight.id), method: "get") do %>
       <i class="fa-solid fa-pen-to-square"></i>
       <% end %>
-      <%= button_to(delete_fight_path(fight.id), method: "delete") do %>
+      <%= button_to(delete_fight_path(fight.id), method: "delete", form: { data: { turbo_confirm: 'Are you sure?' } }) do %>
       <i class="fa-solid fa-circle-xmark"></i>
       <% end %>
     </div>

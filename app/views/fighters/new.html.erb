@@ -1,0 +1,11 @@
+<turbo-frame id="fighter-add">
+<%= form_with model: @fighter, url: create_fighter_path, method: :post, data: {turbo: false } do |form|%>
+  <h1><%= form.label :name, "Name: " %></h1>
+  <%= form.text_area :name %>
+  <br>
+  <%= form.submit %>
+<% end %>
+<%= button_to fighters_path, method: :get, class: "crud-button" do %>
+  <i class="fa-solid fa-backward"></i>
+<% end %>
+</turbo-frame>

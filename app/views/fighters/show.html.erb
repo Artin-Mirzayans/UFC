@@ -1,0 +1,19 @@
+<%= stylesheet_link_tag params[:controller] %>
+<turbo-frame id="fighter-edit">
+<h1><%= @fighter.name%></h1>
+<%= form_with model: @fighter, url: update_fighter_path do |form|%>
+  <%= form.text_area :name %>
+  <br>
+  <%= form.select :active, [["Inactive", false], ["Active", true]] %>
+  <br><br>
+  <%= form.submit "Update"%>
+<% end %>
+<div id="crud-buttons">
+  <%= button_to fighters_path, method: :get, class: "crud-button" do %>
+    <i class="fa-solid fa-backward"></i>
+  <% end %>
+  <%= button_to delete_fighter_path(@fighter.id), method: "delete", class: "crud-button", form: { data: {turbo_confirm: 'Are you sure?'} } do %>
+    <i class="fa-solid fa-circle-xmark"></i>
+  <% end %>
+</div>
+</turbo-frame>

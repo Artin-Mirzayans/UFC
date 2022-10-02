@@ -51,8 +51,19 @@ Rails.application.routes.draw do
 
   delete "/event/:event_id/delete", to: "events#destroy", as: :delete_event
 
+  get "/fighters", to: "fighters#index", as: :fighters
+  get "/fighter/add", to: "fighters#new", as: :new_fighter
+  post "/fighter/add", to: "fighters#create", as: :create_fighter 
+  get "/fighter/:fighter_id", to: "fighters#show", as: :fighter
+  patch "/fighter/:fighter_id", to: "fighters#update", as: :update_fighter
+  delete "/fighter/:fighter_id", to: "fighters#destroy", as: :delete_fighter
+
   post "event/:event_id/fights/fighter/:corner/search/:name",
        to: "fighters#search"
+
+  post "fighter/:corner/search/:name",
+       to: "fighters#search"
+
   get "/event/:event_id/fights/add", to: "fights#new", as: :new_fight
   post "/event/:event_id/fights/add", to: "fights#create", as: :create_fight
 

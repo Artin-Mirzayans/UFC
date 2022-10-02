@@ -8,11 +8,15 @@
 
 require 'csv'
 
+ActiveRecord::Base.connection.reset_pk_sequence!('fighters')
+
 Fighter.create!([
-  name: "Placeholder"
+  name: "Placeholder",
+  active: false
 ])
 CSV.foreach(Rails.root.join('lib/seed_csv/fighters.csv'), headers: true, encoding: 'iso-8859-1:utf-8') do |row|
   Fighter.create( {
     name: row["name"]
-  } ) 
+  } )
+   
 end

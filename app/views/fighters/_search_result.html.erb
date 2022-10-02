@@ -1,3 +1,9 @@
 <% @fighters.each do |fighter| %>
+  <% if @search_results_target == 'results'%>
+  <%= link_to(fighter_path(fighter.id))  do %>
+    <button class="fighter"><%= fighter.name %></button>
+    <% end %>
+  <% else %>
   <button class="fighter", data-action="fighters#select"><%= fighter.name %></button>
+  <% end %>
 <% end %>

@@ -1,0 +1,17 @@
+<%= stylesheet_link_tag params[:controller] %>
+<h1>Fighter Hub</h1>
+<div id="fighter-ui">
+<turbo-frame id="fighter-add">
+<h1>Add Fighter</h1>
+      <%= button_to(new_fighter_path, method: "get", class: "crud-button") do %>
+      <i class="fa-solid fa-pen-to-square"></i>
+      <% end %>
+</turbo-frame>
+<turbo-frame id ="fighter-edit">
+<div data-controller="fighter">
+    <h1>Edit Fighter</h1>
+    <div id="search"><input type="text" data-fighter-target="query" data-action="input->fighter#search"></div>
+    <div data-fighter-target="results" id="results"></div>
+</div>
+</turbo-frame>
+</div>

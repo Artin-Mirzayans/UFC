@@ -13,17 +13,17 @@
  *= require_self
  */
 
- html {
-    overflow-y: scroll;
-}
+  html {
+      overflow-y: scroll;
+  }
 
   body {
     background-color: rgb(30, 29, 29);
     margin: 0;
   }
   
-  ul#navbar {
-    width: 40%;
+  ul.navbar {
+    width: 35%;
     display: flex;
     background-color: rgb(56, 77, 123);
     border-bottom: 3px solid white;
@@ -38,6 +38,10 @@
     -webkit-user-select: none; /* Safari */
     -ms-user-select: none; /* IE 10 and IE 11 */
     -moz-user-select: none; /* Firefox */
+  }
+
+  ul.navbar.stretched {
+    width: 55%;
   }
   
   li.navbar {
