@@ -1,6 +1,6 @@
 <%= stylesheet_link_tag params[:controller] %>
 
-<h1>Edit <%= resource_name.to_s.humanize %></h1>
+<h1>Edit Password</h1>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), data: { turbo:false },  html: { method: :put }) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
@@ -14,15 +14,16 @@
   <div class="field">
     <%= f.label :password, "New Password" %></i>
       <% if @minimum_password_length %>
-      <br />
+      <div></div>
       <em><%= @minimum_password_length %> characters minimum</em>
     <% end %>
-    <br>
+    <div></div>
     <%= f.password_field :password, autocomplete: "new-password" %>
   </div>
 
   <div class="field">
-    <%= f.label :password_confirmation, "Confirm New Password" %><br />
+    <%= f.label :password_confirmation, "Confirm New Password" %>
+    <div></div>
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
 

@@ -1,32 +1,10 @@
-<div class="event">
-<table class="predictions-table">
-<caption>
-<%= link_to event.name + ": " + event.red.upcase + " x " + event.blue.upcase, event_path(event.id)%>
-</caption>
-  <tr>
-    <th>Fight</th>
-    <th>Prediction</th>
-    <th>Wager</th>
-    <th>To Win</th>
-    <th>Result</th>
-  </tr>
-<% fights.each do |fight|%>
-<%= render partial: "profiles/fights", locals: {prediction: fight.get_user_prediction(@user, fight), fight: fight}%>
+<div id="events">
+<% @events.each do |event| %>
+<%= render partial: "profiles/fights", locals: {event: event, user: @user, fights: sort_fights(event.user_predicted_fights(@user)), user_event_budget: event.get_user_budget(@user)}%>
 <% end %>
-</table>
-<div class="summary">
- <div class="net-change-container">
-  <div class="net-change">
-    <span>Wagered: <%=get_amount(event, user_event_budget.wagered)%></span>
-    <span>Winnings: <%=get_amount(event, user_event_budget.winnings)%></span>
-    <span>Win/Loss: <%= get_net(event, user_event_budget.winnings, user_event_budget.wagered)%></span>
-  </div>
- </div>
- <div class="percent-change-container">
-  <div class="percent-change">
-  <span>Return on Investment (ROI)</span> 
-  <span><%= get_percent_change(event, user_event_budget.winnings, user_event_budget.wagered)%></span>
-  </div>
- </div>
-</div>
+<% if @events.blank? %>
+  <h1 class="no-events">Prediction History is Empty</h1>
+<% else %>
+  <%== pagy_nav(@pagy) %>
+<% end %>
 </div>

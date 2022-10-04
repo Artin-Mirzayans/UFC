@@ -3,11 +3,9 @@
 <h1>Log in</h1>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name), data:{ turbo: false }) do |f| %>
-    <%- flash.each do |name, msg| -%>
-    <ul>
-    <li><%= content_tag :div, msg, :id => "flash_#{name}" if msg.is_a?(String) %></li>
-    </ul>
-  <%- end -%>  
+    <div id="flash" class="flash">
+      <%= render "layouts/flash" %>
+    </div>
 
   <div class="field">
     <%= f.label :username %>

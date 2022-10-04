@@ -58,7 +58,7 @@ class Scrape
           post_line(fight, "#{corner}_any", odds) if odds.between?(0, 100)
         else
           fighter_bool = false
-          puts "Unknown Fighter. -_-"
+          puts "Unknown Fighter: #{row_header.text}"
         end
       else
         if fighter_bool && prop_line

@@ -1,24 +1,42 @@
   
   
-//   #events {
-//     display: flex;
-//     flex-direction: column;
-//     justify-content: center;
-//   }
+  #events {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
 
+  #search {
+    display: flex;
+    position: absolute;
+    color: white;
+    top: 0;
+    right: 0;
+    margin-right: 7px;
+    margin-top: 5px;
+  }
+
+  #search-flash {
+    font-size: 20px;
+    margin-top: 45px;
+    margin-right: 78px;
+    animation: appear-then-fade 4s both;
+  }
 
   form#profile-search {
     display: flex;
     justify-content: center;
     align-items: center;
-    position: fixed;
-    top: 1%;
-    right: 1%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-right: 7px;
+    margin-top: 5px;
     color: whitesmoke;
   }
 
   form#profile-search label {
-    font-size: 28px;
+    font-size: 26px;
   }
 
   form#profile-search input[type="text"] {
@@ -49,7 +67,8 @@
     width: 75%;
     margin-left: auto;
     margin-right: auto;
-    background-color: rgb(70, 88, 107);
+    margin-bottom: 2%;
+    background-color: rgb(100, 126, 154);
     color: rgb(245, 245, 245);
   }
 
@@ -58,6 +77,10 @@
     border: 1px solid whitesmoke;
     border-bottom: none;
     text-align : center;
+  }
+
+  caption{
+    background-color: rgb(104, 103, 103);
   }
 
   .predictions-table a {
@@ -95,6 +118,20 @@
 
   .summary {
     display: flex;
+    background-color: rgb(12, 12, 12);
+    font-weight: 500;
+  }
+
+  .summary.winning {
+    background-color: rgb(76, 154, 76)
+  }
+
+  .summary.losing {
+    background-color: rgb(199, 86, 86);
+  }
+
+  .summary.neutral {
+    background-color: rgb(167, 177, 100);
   }
 
   .net-change-container {
@@ -122,8 +159,8 @@
     height: 100%;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    font-size: 26px;
+    justify-content: space-between;
+    font-size: 24px;
     letter-spacing: .1em;
   }
 

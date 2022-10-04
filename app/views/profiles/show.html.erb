@@ -1,27 +1,13 @@
 <%= stylesheet_link_tag params[:controller] %>
-
-<div id="events">
-<%= form_with url: search_path, method: :get, model: @user, id: "profile-search" do |form| %>
+<div id="search">
+<%= form_with url: search_path, method: :post, model: @user, id: "profile-search" do |form| %>
   <%= form.label :username, "Username:" %>
   <%= form.text_field :username, value: "" %>
   <%= button_tag(type: 'submit') do %>
     <i class="fa-solid fa-magnifying-glass"></i>
   <% end %>
 <% end %>
-<% @events.each do |event| %>
-<%= render partial: "profiles/events", locals: {event: event, user: @user, fights: sort_fights(event.user_predicted_fights(@user)), user_event_budget: event.get_user_budget(@user)}%>
-<% end %>
 </div>
-<% if @events.blank? %>
-  <h1 class="no-events">Prediction History is Empty</h1>
-<% else %>
-  <%== pagy_nav(@pagy) %>
-<% end %>
 
-<% if @user == current_user %>
-<div id="account">
-<%= link_to "Change Password", edit_user_registration_path, class: "account-link" %>
-<%= link_to "Sign Out", destroy_user_session_path, 'data-turbo-method': :delete, class: "account-link" %>
-</div>
-<% end %>
-<h2><%= @user.username %></h2>
+<%= render 'profiles/events' %>
+<%= render 'profiles/user'%>

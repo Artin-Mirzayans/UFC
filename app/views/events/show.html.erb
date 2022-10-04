@@ -1,7 +1,11 @@
 <%= stylesheet_link_tag params[:controller] %>
 <% if is_admin_or_mod? %>
   <div id="event-tools">
-
+  <% if @event.UPCOMING? || @event.INPROGRESS? %>
+      <%= button_to(scrape_odds_path, method: "get") do %>
+      <i class="fa-solid fa-book-atlas"></i>
+    <% end %>
+  <% end %>
   <% if @event.INPROGRESS? %>
     <%= button_to(new_result_path(@event.id), method: "get") do %>
       <i class="fa-solid fa-lock"></i>
@@ -46,7 +50,7 @@
   </div>
 </div>
 </div>
-
+<h5 id="budget">Budget: $<%= @user_event_budget.budget %></h5>
 </div>
 
 <%= render partial: "fights/fights"%>

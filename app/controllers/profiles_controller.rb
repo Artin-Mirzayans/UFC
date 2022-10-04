@@ -7,7 +7,7 @@ class ProfilesController < ApplicationController
         .where.not(wagered: 0)
         .distinct
         .pluck(:event_id)
-    @pagy, @events = pagy(Event.where(id: @event_ids).order(date: :desc), items: 2)
+    @pagy, @events = pagy(Event.where(id: @event_ids).order(date: :desc), items: 5)
   end
 
   def search
@@ -19,13 +19,15 @@ class ProfilesController < ApplicationController
         .where.not(wagered: 0)
         .distinct
         .pluck(:event_id)
-      @events = Event.where(id: @event_ids).sort
-      render :show
+        @pagy, @events = pagy(Event.where(id: @event_ids).order(date: :desc), items: 5)
+        @render = true
+        respond_to { |format| format.turbo_stream }
     else
-      head:ok
+      respond_to { |format| format.turbo_stream { flash.now[:notice] = "User Not Found" } }
     end
   end
 
+  private
   def search_params
     params.require(:user).permit(:username)
   end

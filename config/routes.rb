@@ -15,6 +15,8 @@ Rails.application.routes.draw do
 
   get "/event/add", to: "events#new", as: :new_event
   post "/event/add", to: "events#create", as: :create_event
+  
+  delete "/event/:event_id/delete", to: "events#destroy", as: :delete_event
 
   get "/event/:event_id", to: "events#show", as: :event
   post "/event/:event_id/main", to: "events#main", as: :main_card
@@ -25,7 +27,7 @@ Rails.application.routes.draw do
   patch "/event/:event_id/update", to: "events#update", as: :update_event
 
   get "/user/:user_id/profile", to: "profiles#show", as: :user_profile
-  get "/user/profile/search", to: "profiles#search", as: :search
+  post "/user/profile/search", to: "profiles#search", as: :search
 
   get "/event/:event_id/results", to: "results#new", as: :new_result
   post "/event/:event_id/results/fight/:fight_id",
@@ -48,8 +50,6 @@ Rails.application.routes.draw do
   post "event/:event_id/results/predictions",
        to: "results#predictions",
        as: :score_predictions
-
-  delete "/event/:event_id/delete", to: "events#destroy", as: :delete_event
 
   get "/fighters", to: "fighters#index", as: :fighters
   get "/fighter/add", to: "fighters#new", as: :new_fighter
@@ -88,4 +88,6 @@ Rails.application.routes.draw do
        to: "predictions#submit_distance"
 
   patch "event/:event_id/fights/:fight_id/:wager", to: "predictions#wager"
+
+  get "/odds/scrape", to: "odds#scrape", as: :scrape_odds
 end

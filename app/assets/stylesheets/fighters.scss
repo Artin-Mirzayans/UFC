@@ -62,12 +62,16 @@ input[type="text"] {
     height: 30px;
     width: 450px;
     font-size: 34px;
+    border: 6px solid rgb(70, 88, 107);
+    border-radius: 6px;
 }
 
 textarea {
     height: 34px;
     width: 450px;
     font-size: 30px;
+    border: 6px solid rgb(70, 88, 107);
+    border-radius: 6px;
 }
 
 button.fighter {

@@ -60,7 +60,7 @@ class ScorePredictionsJob < ApplicationJob
           .user
           .user_event_budgets
           .find_by(event: event)
-          .update_winnings((prediction.wager * prediction.line).round)
+          .update_winnings((prediction.wager * prediction.line).round + prediction.wager)
       end
     end
   end

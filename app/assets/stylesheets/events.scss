@@ -79,11 +79,13 @@
 }
 
 .event-name {
+  text-align: center;
   font-size: 44px;
   font-weight: 700;
 }
 
 .event-headliner {
+  text-align: center;
   font-size: 44px;
   font-weight: 700;
 }
@@ -164,19 +166,23 @@
   color: whitesmoke;
   text-align: center;
   position: relative;
+  background-size: cover;
 }
 
 #title h1 {
   font-size: 60px;
   font-weight: 700;
+  letter-spacing: .07em;
 }
 
 #title h2 {
-  font-size: 40px;
+  font-size: 50px;
+  letter-spacing: .05em;
 }
 
 #title h3 {
-  font-size: 25px;
+  font-size: 26px;
+  letter-spacing: .05em;
 }
 
 #budget {

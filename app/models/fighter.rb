@@ -5,6 +5,8 @@ class Fighter < ApplicationRecord
     Fight.where(red_id: self.id).or(Fight.where(blue_id: self.id))
   end
 
+  validates :name, uniqueness: true
+
   def strip_newline
     self.name = self.name.strip
   end

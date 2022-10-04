@@ -1,0 +1,5 @@
+<% if @render %>
+<%= turbo_stream.update "events", partial: "profiles/events"%>
+<%= turbo_stream.update "user", partial: "profiles/user"%>
+<% end %>
+<%= turbo_stream.update "flash", partial: "layouts/flash" %>

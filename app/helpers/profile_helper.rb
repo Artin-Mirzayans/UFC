@@ -45,7 +45,7 @@ module ProfileHelper
   end
 
   def to_win(wager, line)
-    (wager * line).round
+    (wager * line).round + wager
   end
 
   def valid(prediction)
@@ -78,6 +78,20 @@ module ProfileHelper
     end
   end
 
+  def get_net_sign(event, winnings, wagered)
+    if event.CONCLUDED?
+      if (winnings - wagered) > 0
+        " winning"
+      elsif (winnings - wagered) < 0
+        " losing"
+      else
+        " neutral"
+      end
+    else
+      ""
+    end
+  end
+
   def get_percent_change(event, winnings, wagered)
     if !event.CONCLUDED?
       "-"
@@ -86,7 +100,7 @@ module ProfileHelper
     else
       profit = winnings - wagered
       percent = (profit.to_f/wagered.to_f)*100
-      "%#{percent.round(2)}"
+      "% #{percent.round(2)}"
     end
   end
 end

@@ -10,13 +10,10 @@ class Distanceprediction < ApplicationRecord
   validates :distance, exclusion: [nil]
   validates :line, presence: true
   validates :wager,
-            presence: true,
-            numericality: {
-              only_integer: true,
-              greater_than_or_equal_to: 20
-            }
+            presence: true
   validates :is_correct, inclusion: [true, false]
 
+  validate :validate_budget
   validate :update_timer?
   validate :fight_locked?
 
@@ -33,6 +30,12 @@ class Distanceprediction < ApplicationRecord
   def fight_locked?
     unless !self.fight.locked? && !self.event.CONCLUDED?
       errors.add(:status, "Predictions are Locked.")
+    end
+  end
+
+  def validate_budget
+    unless (self.wager.is_a? Integer) && self.wager > 20
+      errors.add(:base, "Check Budget - Minimum Wager is $20")
     end
   end
 
