@@ -37,9 +37,6 @@ gem 'acts_as_list'
 gem 'open-uri'
 gem 'nokogiri'
 
-# runs scraper at specified time interval
-gem 'clockwork'
-
 # job server
 gem 'delayed_job_active_record'
 gem 'daemons'
@@ -67,11 +64,11 @@ gem "tzinfo-data"
 gem "bootsnap", require: false
 
 
-# Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
-gem "image_processing", "~> 1.2"
+# # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
+# gem "image_processing", "~> 1.2"
 
-# resizing/transformations
-gem "ruby-vips"
+# # resizing/transformations
+# gem "ruby-vips"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
