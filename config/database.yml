@@ -83,6 +83,7 @@ test:
 #
 production:
   <<: *default
+  url: <%= ENV["DATABASE_URL"] %>
   database: UFC_production
   username: UFC
   password: <%= ENV["UFC_DATABASE_PASSWORD"] %>
