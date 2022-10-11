@@ -1,6 +1,10 @@
-<%= stylesheet_link_tag params[:controller] %>
-<h1>UFC Bet Simulator</h1>
-<h1>Log in</h1>
+    <% content_for :css do -%>
+      <%= stylesheet_link_tag params[:controller] %>
+    <% end -%>
+<h1 class="login-header">UFC Bet Simulator</h1>
+<h1 class="login-header">Log in</h1>
+
+<div id="login">
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name), data:{ turbo: false }) do |f| %>
     <div id="flash" class="flash">
@@ -32,3 +36,5 @@
 <% end %>
 
 <%= render "devise/shared/links" %>
+
+</div>

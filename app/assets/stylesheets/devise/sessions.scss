@@ -1,4 +1,4 @@
-h1 {
+h1.login-header {
     text-align: center;
     color:whitesmoke;
     font-size: 52px;
@@ -6,13 +6,13 @@ h1 {
 
 }
 
-div#flash_alert {
+#login div#flash_alert {
     color: white;
     font-size: 30px;
     margin-bottom: 2%
   }
 
-form {
+#login form {
     width: 40%;
     text-align: center;
     margin: auto;
@@ -23,15 +23,15 @@ form {
     color: whitesmoke;
 }
 
-form h2 {
+#login form h2 {
     font-size: 34px;
 }
 
-form li {
+#login form li {
     font-size: 28px;
 }
 
-textarea {
+#login textarea {
     height: 37px;
     font-size: 32px;
     border: 3px solid rgb(114, 139, 168);
@@ -39,18 +39,18 @@ textarea {
     resize: none;
 }
 
-input {
+#login input {
     font-size: 32px;
     border: 3px solid rgb(114, 139, 168);
     border-radius: 8px;
 }
 
-input[type="checkbox"] {
+#login input[type="checkbox"] {
     width: 25px;
     height: 25px;
 }
 
-input[type="submit"] {
+#login input[type="submit"] {
     width: 120x;
     margin-top: 8px;
     font-weight: 600;
@@ -63,7 +63,7 @@ input[type="submit"] {
     cursor: pointer;
 }
 
-input[type="submit"]:hover {
+#login input[type="submit"]:hover {
     background-color: rgb(114, 139, 168);
   } 
 

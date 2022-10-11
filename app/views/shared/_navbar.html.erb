@@ -1,5 +1,5 @@
 <ul class="navbar <%= is_admin_or_mod? ? 'stretched' : ''%>">
-  <li class="navbar <%= current_page?(:controller => '/events', :action => 'index') ? "selected" : ""%>"><%= link_to 'Home', root_path %></li>
+  <li class="navbar <%= current_page?(:controller => '/events', :action => 'index') ? "selected" : ""%>"><%= link_to 'Home', events_path %></li>
   <% if is_admin_or_mod? %>
   <li class="navbar <%= current_page?(:controller => '/events', :action => 'new') ? "selected" : ""%>"><%= link_to 'Add Event', new_event_path %></li>
   <li class="navbar <%= current_page?(:controller => '/fighters', :action => 'index') ? "selected" : ""%>"><%= link_to 'Fighters', fighters_path %></li>

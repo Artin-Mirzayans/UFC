@@ -1,36 +1,36 @@
-#event-ui {
+  #fight-ui {
     color: whitesmoke;
     font-size: 28px;
     text-align: center;
     line-height: 2.2;
   }
   
-  #event-ui h1 {
+  #fight-ui h1 {
     display: inline-block;
     text-align: center;
     height: 100px;
     width: 15%
   }
   
-  #event-ui textarea {
+  #fight-ui textarea {
     font-size: 25px;
     border:rgb(114, 139, 168) solid 4px;
     border-radius: 5px;
   }
 
-  #event-ui .fighter {
+  #fight-ui .fighter {
     font-size: 20px;
     font-weight: 500;
     padding: 5px;
     border-radius: 6px;
   }
 
-  select {
+  #fight-ui select {
     font-size: 32px;
     border:rgb(114, 139, 168) solid 4px;
   }
   
-  input[type="submit"] {
+  #fight-ui input[type="submit"] {
     font-size: 28px;
     font-weight: 700;
     border:rgb(114, 139, 168) solid 4px;
@@ -42,11 +42,11 @@
     cursor: pointer;
   }
   
-  input[type="submit"]:hover {
+  #fight-ui input[type="submit"]:hover {
     background-color: rgb(114, 139, 168);
   }
 
-  #back {
+  #fights-back {
     font-size: 28px;
     font-weight: 700;
     border:rgb(114, 139, 168) solid 4px;
@@ -59,7 +59,7 @@
     cursor: pointer;
   }
 
-  #back:hover {
+  #fights-back:hover {
     background-color: rgb(114, 139, 168);
   }
 

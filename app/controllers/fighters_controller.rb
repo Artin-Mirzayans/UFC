@@ -52,6 +52,7 @@ class FightersController < ApplicationController
     @fighter = Fighter.find(params[:fighter_id])
     if @fighter.fights.count == 0
       @fighter.destroy
+      redirect_to fighters_path
     else 
       render :show
     end

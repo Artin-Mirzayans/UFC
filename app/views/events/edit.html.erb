@@ -1,4 +1,6 @@
-<%= stylesheet_link_tag params[:controller] %>
+    <% content_for :css do -%>
+      <%= stylesheet_link_tag params[:controller] %>
+    <% end -%>
 <div id="event-ui">
 
 <h1>Edit Event</h1>
@@ -54,7 +56,7 @@
   
 <br>
   <%= form.submit "Update Event" %>
-  <%= link_to "Back", @event, method: :get, id: "back" %>
+  <%= link_to "Back", @event, method: :get, id: "events-back" %>
 <% end %>
 
 </div>

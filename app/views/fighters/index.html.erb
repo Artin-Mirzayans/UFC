@@ -1,5 +1,7 @@
-<%= stylesheet_link_tag params[:controller] %>
-<h1>Fighter Hub</h1>
+    <% content_for :css do -%>
+      <%= stylesheet_link_tag params[:controller] %>
+    <% end -%>
+<h1 id="fighter-hub">Fighter Hub</h1>
 <div id="fighter-ui">
 <turbo-frame id="fighter-add">
 <h1>Add Fighter</h1>

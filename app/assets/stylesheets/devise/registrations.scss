@@ -1,4 +1,4 @@
-h1 {
+h1.registration-header {
     text-align: center;
     color:whitesmoke;
     font-size: 52px;
@@ -6,7 +6,7 @@ h1 {
 
 }
 
-form {
+#registration form {
     width: 40%;
     text-align: center;
     margin: auto;
@@ -17,16 +17,16 @@ form {
     color: whitesmoke;
 }
 
-form h2 {
+#registration form h2 {
     font-size: 34px;
 }
 
-form li {
+#registration form li {
     font-size: 28px;
     list-style: inside;
 }
 
-textarea {
+#registration textarea {
     height: 37px;
     font-size: 32px;
     border: 3px solid rgb(114, 139, 168);
@@ -34,13 +34,13 @@ textarea {
     resize: none;
 }
 
-input {
+#registration input {
     font-size: 32px;
     border: 3px solid rgb(114, 139, 168);
     border-radius: 8px;
 }
 
-input[type="submit"] {
+#registration input[type="submit"] {
     width: 120x;
     margin-top: 8px;
     font-weight: 600;
@@ -53,11 +53,11 @@ input[type="submit"] {
     cursor: pointer;
 }
 
-input[type="submit"]:hover {
+#registration input[type="submit"]:hover {
     background-color: rgb(114, 139, 168);
   } 
 
-#login-signup {
+#registration #login-signup {
     display: block;
     width: 100px;
     margin: 3% auto;
@@ -73,7 +73,7 @@ input[type="submit"]:hover {
     text-align: center;
 }
 
-#login-signup:hover {
+#registration #login-signup:hover {
     background-color: rgb(114, 139, 168);
 }
 

@@ -1,6 +1,8 @@
-<%= stylesheet_link_tag params[:controller] %>
-<h1>Submit Results</h1>
-<div class="header">
+    <% content_for :css do -%>
+      <%= stylesheet_link_tag params[:controller] %>
+    <% end -%>
+<h1 class="results">Submit Results</h1>
+<div id="results-header">
 <h1><%= link_to @event.name, event_path(@event.id)%></h1>
 </div>
 <%= render partial: "results/fights" %>

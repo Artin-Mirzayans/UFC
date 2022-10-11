@@ -1,12 +1,10 @@
-  
-  
-  #events {
+  #profile-events {
     display: flex;
     flex-direction: column;
     justify-content: center;
   }
 
-  #search {
+  div#profile-search {
     display: flex;
     position: absolute;
     color: white;
@@ -14,13 +12,6 @@
     right: 0;
     margin-right: 7px;
     margin-top: 5px;
-  }
-
-  #search-flash {
-    font-size: 20px;
-    margin-top: 45px;
-    margin-right: 78px;
-    animation: appear-then-fade 4s both;
   }
 
   form#profile-search {
@@ -61,7 +52,7 @@
     width: 25px;
   }
 
-  .event {
+  .profile-event {
     border: 2px solid rgb(255, 255, 255);
     border-radius: 8px;
     width: 75%;
@@ -79,7 +70,7 @@
     text-align : center;
   }
 
-  caption{
+  .predictions-table caption{
     background-color: rgb(104, 103, 103);
   }
 
@@ -182,7 +173,7 @@
     background-color: rgb(70, 88, 107);
   }
 
-  h2 {
+  #user h2 {
     color: whitesmoke;
     text-align: center;
     font-size: 40px;

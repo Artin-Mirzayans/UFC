@@ -1,6 +1,10 @@
-<%= stylesheet_link_tag params[:controller] %>
+    <% content_for :css do -%>
+      <%= stylesheet_link_tag params[:controller] %>
+    <% end -%>
 
-<h1>Edit Password</h1>
+<h1 class="registration-header">Edit Password</h1>
+
+<div id="registration">
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), data: { turbo:false },  html: { method: :put }) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
@@ -31,3 +35,5 @@
     <%= f.submit "Update" %>
   </div>
 <% end %>
+
+</div>

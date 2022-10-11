@@ -1,4 +1,6 @@
-<%= stylesheet_link_tag params[:controller] %>
+    <% content_for :css do -%>
+      <%= stylesheet_link_tag params[:controller] %>
+    <% end -%>
 <% if is_admin_or_mod? %>
   <div id="event-tools">
   <% if @event.UPCOMING? || @event.INPROGRESS? %>

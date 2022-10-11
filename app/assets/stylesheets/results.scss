@@ -1,10 +1,10 @@
-h1 {
+h1#results {
   text-align: center;
   font-size: 40px;
   color: whitesmoke
 }
 
-.header a:link, a:visited {
+#results-header a:link, a:visited {
   background-color: #8f8e8e;
   color: rgb(0, 0, 0);
   padding: 14px 25px;
@@ -13,18 +13,18 @@ h1 {
   display: inline-block;
 }
 
-#card {
+#results-card {
   display: flex;
   justify-content: center;
   margin: 3%;
 }
 
-#card form {
+#results-card form {
   height: 100px;
   width: 220px;
 }
 
-#card button {
+#results-card button {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -40,7 +40,7 @@ h1 {
   cursor: pointer;
 }
 
-#card button:disabled {
+#results-card button:disabled {
   background-color: rgb(74, 97, 162);
 }
 

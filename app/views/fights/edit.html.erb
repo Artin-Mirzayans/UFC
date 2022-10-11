@@ -1,5 +1,7 @@
-<%= stylesheet_link_tag params[:controller] %>
-<div id="event-ui">
+    <% content_for :css do -%>
+      <%= stylesheet_link_tag params[:controller] %>
+    <% end -%>
+<div id="fight-ui">
 <h1>Edit Fight</h1>
   <%= form_with model: @fight, url: update_fight_path(@event.id), method: :patch do |form| %>
     <% if @event.category == "PPV" %>
@@ -11,7 +13,7 @@
     <%= form.select :locked, [["Unlocked", false], ["Locked", true]] %>
     <br>
   <%= form.submit "Update" %>
-  <%= link_to "Back", @event, method: :get, id: "back" %>
+  <%= link_to "Back", @event, method: :get, id: "fights-back" %>
   <% end %>
 
   <div id="event-ui">

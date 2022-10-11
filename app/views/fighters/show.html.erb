@@ -1,4 +1,6 @@
-<%= stylesheet_link_tag params[:controller] %>
+    <% content_for :css do -%>
+      <%= stylesheet_link_tag params[:controller] %>
+    <% end -%>
 <turbo-frame id="fighter-edit">
 <h1><%= @fighter.name%></h1>
 <%= form_with model: @fighter, url: update_fighter_path do |form|%>

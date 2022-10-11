@@ -1,5 +1,7 @@
-<%= stylesheet_link_tag params[:controller] %>
-<div id="event-ui">
+    <% content_for :css do -%>
+      <%= stylesheet_link_tag params[:controller] %>
+    <% end -%>
+<div id="fight-ui">
 <h1>Add Fight</h1>
 <div data-controller="fighters">
   <%= form_with model: @fight, url: create_fight_path(@event.id), method: :post do |form| %>

@@ -1,4 +1,4 @@
-h1 {
+h1#fighter-hub {
     font-size: 50px;
     text-align: center;
     color: whitesmoke;
@@ -20,25 +20,30 @@ h1 {
     width: 50%;
 }
 
-input[type="file" i] {
+#fighter-ui input[type="file" i] {
     font-size: 25px;
   }
 
-input[type="submit"] {
+#fighter-ui input[type="submit"] {
     font-size: 32px;
     border-radius: 6px;
     padding: 10px;
     cursor: pointer;
 }
 
-select {
+#fighter-ui select {
     font-size: 26px;
     border-radius: 6px;
     padding: 10px;
 }
 
-input[type="submit"]:hover {
+#fighter-ui input[type="submit"]:hover {
     background-color: rgb(70, 88, 107);
+}
+
+#fighter-ui a {
+    color: transparent;
+    cursor: defualt;
 }
 
 #crud-buttons {
@@ -58,7 +63,7 @@ input[type="submit"]:hover {
     background-color: rgb(70, 88, 107);
   }
 
-input[type="text"] {
+#fighter-ui input[type="text"] {
     height: 30px;
     width: 450px;
     font-size: 34px;
@@ -66,7 +71,7 @@ input[type="text"] {
     border-radius: 6px;
 }
 
-textarea {
+#fighter-ui textarea {
     height: 34px;
     width: 450px;
     font-size: 30px;
@@ -74,7 +79,8 @@ textarea {
     border-radius: 6px;
 }
 
-button.fighter {
+#fighter-ui button.fighter {
     border-radius: 6px;
     font-size: 28px;
+    cursor: pointer;
 }
