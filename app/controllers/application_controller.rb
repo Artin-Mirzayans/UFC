@@ -20,6 +20,10 @@ class ApplicationController < ActionController::Base
     redirect_to events_path unless is_admin_or_mod?
   end
 
+  def unsupported
+    render 'layouts/unsupported', :layout => false
+  end
+
   private
   # Overwriting the sign_out redirect path method
   def after_sign_out_path_for(resource_or_scope)

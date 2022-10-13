@@ -116,7 +116,8 @@ class EventsController < ApplicationController
       :prelims,
       :early,
       :red_image,
-      :blue_image
+      :blue_image,
+      :budget
     )
   end
 end

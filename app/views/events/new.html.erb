@@ -23,6 +23,9 @@
   <%= form.label :blue, "Blue: " %>
   <%= form.text_area :blue, size: "10x1" %>
   <br>
+  <%= form.label :budget, "Budget: "%>
+  <%= form.text_area :budget, size: "5x1"%>
+  <br>
   <div data-controller="events-images">
     <%= form.file_field :red_image, direct_upload: true, accept: 'image/png, image/jpeg', data: { 'events-images_target': 'input_red', action: "change->events-images#uploadFile" } %>
   <div data-events-images-target="progress_red"></div>

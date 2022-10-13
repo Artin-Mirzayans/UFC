@@ -15,6 +15,7 @@ class Event < ApplicationRecord
   validates :date, presence: true
   validates :red, presence: true
   validates :blue, presence: true
+  validates :budget, presence: true
   validates :category, presence: true
 
   before_create :strip_newline

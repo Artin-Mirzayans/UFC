@@ -3,7 +3,7 @@
     <%= link_to("/events/?type=upcoming") do %>
     <button class= <%= @status == "UPCOMING" ? 'selected' : ''%>>UPCOMING</button>
     <% end %>
-    <%= link_to("/events/?type=past")  do %>
+    <%= link_to("/events/?type=past") do %>
     <button class= <%= @status == "CONCLUDED" ? 'selected' : ''%>>CONCLUDED</button>
     <% end %>
     </div>

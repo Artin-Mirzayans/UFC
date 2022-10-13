@@ -9,15 +9,11 @@ class UserEventBudget < ApplicationRecord
   after_initialize :set_budget, if: :new_record?
 
   def set_budget
-    if self.event.category == "PPV"
-      self.budget = 300
-    else
-      self.budget = 150
-    end
+    self.budget = self.event.budget
   end
 
   def set_default_wager(user, event)
-    if event.category == "PPV"
+    if event.budget >= 250
       default = 50
     else
       default = 30

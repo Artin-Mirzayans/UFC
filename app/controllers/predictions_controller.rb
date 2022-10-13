@@ -224,12 +224,12 @@ class PredictionsController < ApplicationController
           @user_event_budget.increase_wagered(-difference)
         end
       else
-        flash.now[:notice] = "Wager could not be updated"
+        flash.now[:notice] = @prediction.errors.full_messages.to_sentence
       end
     elsif !@user_event_budget.sufficient_funds?(difference)
       flash.now[:notice] = "Insufficient Funds"
     else
-      flash.now[:notice] = @prediction.errors.full_messages.to_sentence
+      flash.now[:notice] = "Invalid Wager"
     end
     @card = @fight.placement
     @fights = @event.fights.where(placement: @card)

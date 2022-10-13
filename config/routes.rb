@@ -90,4 +90,6 @@ Rails.application.routes.draw do
   patch "event/:event_id/fights/:fight_id/:wager", to: "predictions#wager"
 
   get "/odds/scrape", to: "odds#scrape", as: :scrape_odds
+
+  get "/unsupported", to: "application#unsupported", as: :unsupported
 end

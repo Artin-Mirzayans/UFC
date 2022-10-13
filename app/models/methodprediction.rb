@@ -46,7 +46,7 @@ class Methodprediction < ApplicationRecord
   end
 
   def validate_budget
-    unless (self.wager.is_a? Integer) && self.wager > 20
+    unless (self.wager.is_a? Integer) && self.wager >= 20
       errors.add(:base, "Check Budget - Minimum Wager is $20")
     end
   end
