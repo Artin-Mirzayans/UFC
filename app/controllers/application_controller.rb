@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   include Pagy::Backend
   
-  before_action :authenticate_user!, except:[:edit_user_registration]
+  before_action :authenticate_user!, except:[:edit_user_registration, :unsupported]
   helper_method :is_admin_or_mod?, :is_admin?
 
   def is_admin?

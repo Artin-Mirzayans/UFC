@@ -12,6 +12,7 @@ class Event < ApplicationRecord
   validates :apiname, presence: true
   validates :name, presence: true
   validates :location, presence: true
+  validates :venue, presence: true
   validates :date, presence: true
   validates :red, presence: true
   validates :blue, presence: true

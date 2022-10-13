@@ -109,6 +109,7 @@ class EventsController < ApplicationController
       :red,
       :blue,
       :location,
+      :venue,
       :date,
       :category,
       :status,
