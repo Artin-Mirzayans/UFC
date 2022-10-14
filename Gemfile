@@ -50,6 +50,9 @@ gem 'pagy'
 # detect user agent
 gem 'browser'
 
+# store photos in postgres
+gem 'active_storage-postgresql'
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
 

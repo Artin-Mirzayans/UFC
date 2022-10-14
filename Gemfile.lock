@@ -46,6 +46,9 @@ GEM
       erubi (~> 1.4)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.1, >= 1.2.0)
+    active_storage-postgresql (0.3.0)
+      pg (>= 1.0)
+      rails (>= 6.0)
     activejob (7.0.4)
       activesupport (= 7.0.4)
       globalid (>= 0.3.6)
@@ -252,6 +255,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  active_storage-postgresql
   acts_as_list
   bootsnap
   browser

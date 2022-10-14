@@ -14,13 +14,20 @@ class User < ApplicationRecord
   validates_uniqueness_of :username
   validates_presence_of :username
   validates :username, length: { in: 4..16 }
-  validates_format_of :username, :with => /\A[-a-z]+\Z/
+  validate :username_format
 
   enum role: %i[user moderator admin]
   after_initialize :set_default_role, if: :new_record?
 
   def set_default_role
     self.role ||= :user
+  end
+
+  def username_format 
+    regexp = /^[a-zA-Z0-9]*$/
+    if !self.username.match(regexp)
+      errors.add(:base, "Username may only contain letters and numbers")
+    end
   end
 
   def email_required?
